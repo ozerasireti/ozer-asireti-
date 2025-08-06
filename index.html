@@ -2,13 +2,32 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Özer Aşireti | Resmî Sayfa</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
+    }
+    .navbar {
+      background-color: #b71c1c;
+      padding: 10px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .navbar a:hover {
+      text-decoration: underline;
     }
     .background {
       background: linear-gradient(to bottom, #d32f2f 0%, #ffffff 50%, #388e3c 100%);
@@ -18,6 +37,7 @@
     }
     h1, h2 {
       color: #2c3e50;
+      margin-bottom: 20px;
     }
     p {
       font-size: 18px;
@@ -57,12 +77,21 @@
   </style>
 </head>
 <body>
+
+  <nav class="navbar">
+    <a href="#anasayfa">Anasayfa</a>
+    <a href="#reisler">Reisler</a>
+    <a href="#hakkimizda">Hakkımızda</a>
+    <a href="#vasiyet">Vasiyet</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+
   <div class="background">
 
-    <h1>Özer Aşireti Reisleri</h1>
+    <h1 id="anasayfa">Özer Aşireti Reisleri</h1>
     <p><strong>Kurucu’dan Günümüze Soy Sıralaması</strong></p>
 
-    <div class="card">
+    <div class="card" id="reisler">
       <ol>
         <li><strong>Kurucu:</strong> Xale Şeğo</li>
         <li><strong>2.</strong> Hacı Bahri Özer (Xale Şeğo’nun oğlu)</li>
@@ -73,7 +102,7 @@
       </ol>
     </div>
 
-    <div class="about">
+    <div class="about" id="hakkimizda">
       <h2>Hakkımızda</h2>
       <p>Özer Aşireti'nin temelleri, 1900’lü yılların başlarında atılmıştır. Kurucu <strong>Xale Şeğo</strong>, Bismil’e kaçarak Sarı Toprak Köyü’nde kendi aşiretini kurmuştur.</p>
       <p>Aşiret uzun yıllar <strong>Bismil bölgesinde toprak sahibi</strong> olarak yaşamış, 1944 yılında oğlu <strong>Hacı Bahri Özer</strong> devlete iş vererek aşiretin yerini sağlamlaştırmıştır.</p>
@@ -82,7 +111,7 @@
       <p>2025 yılında <strong>Said Özer</strong>, Ekrem Bey’in vasiyetiyle reisliği devralarak aşireti yeniden kurmak için harekete geçmiştir.</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="vasiyet">
       <h2>Ekrem Bey’in Vasiyeti</h2>
       <p><em>“Aşiret unutulmasın, aşiretin izzeti unutulmasın.  
       Herkes birbirine saygılı dursun.  
@@ -91,7 +120,7 @@
       <p style="text-align: right; font-weight: bold; margin-top: 20px;">– Ekrem Özer</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="tahta">
       <h2>Tahta Geçiş Bildirimi</h2>
       <p>Ben, <strong>Said Özer</strong>, Özer Aşireti'nin 6. kuşak temsilcisi olarak, atalarımın izinden yürümeye yemin ederim.</p>
       <p>Ekrem Bey’in vasiyeti ve aile büyüklerinin onayıyla, 2025 yılı itibariyle aşiret reisliğini devralmış bulunmaktayım.</p>
@@ -101,10 +130,17 @@
       <p style="text-align: right; font-weight: bold; margin-top: 20px;">– Said Özer, 6. Reis</p>
     </div>
 
+    <div class="card" id="iletisim">
+      <h2>İletişim</h2>
+      <p>Email: ozerasireti@example.com</p>
+      <p>Telefon: +90 530 959 7498 </p>
+    </div>
+
   </div>
 
   <div class="footer">
     Özer Aşireti 2025 – Tüm Hakları Saklıdır
   </div>
+
 </body>
 </html>
