@@ -108,7 +108,67 @@
     <p>“Aşiret unutulmasın, izzeti korunarak yaşatılsın. Herkes birbirine saygı göstersin, devlete ihanet edilmesin. Ve 2026 yılı gelmeden Said Özer tahta geçsin.”</p>
   </div>
 
-  <div class="card" id="haberler">
+  <div class="card" id="haberler">  <!-- Mevcut “Haberler” kartının hemen içinde -->
+  <div class="haber-controls">
+    <button onclick="sortHaber('desc')">Yeniden Eskiye</button>
+    <button onclick="sortHaber('asc')">Eskiden Yeniye</button>
+  </div>
+  <div id="haber-list">
+    <!-- Her bir haber bloğuna geçilecek -->
+    <div class="haber" data-date="2025-09-12">
+      <h3>12 Eylül Toplantısı</h3>
+      <p>Said Özer, aşiretin tüm beyleri ile yıllık toplantı gerçekleştirdi.</p>
+      <small>12 Eylül 2025</small>
+    </div>
+    <div class="haber" data-date="2025-08-02">
+      <h3>Serkan Yılmaz’ın Ölümü</h3>
+      <p>Serkan Yılmaz, Bismil’de arabasına binerken... öldürüldü.</p>
+      <small>02 Ağustos 2025</small>
+    </div>
+    <!-- Diğer tüm haber içerikleri buraya aynı çerçevede eklenecek -->
+  </div>
+
+  <script>
+    function sortHaber(order) {
+      const list = document.getElementById("haber-list");
+      const items = Array.from(list.getElementsByClassName("haber"));
+      items.sort((a, b) => {
+        const dateA = new Date(a.dataset.date);
+        const dateB = new Date(b.dataset.date);
+        return order === "asc" ? dateA - dateB : dateB - dateA;
+      });
+      items.forEach(item => list.appendChild(item)); // Sıralı ekle
+    }
+  </script>
+
+  <style>
+    .haber-controls {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .haber-controls button {
+      margin: 0 8px;
+      padding: 8px 12px;
+      background-color: #b71c1c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .haber-controls button:hover {
+      background-color: #8a0000;
+    }
+    .haber {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    .haber h3 {
+      margin: 0 0 5px;
+    }
+    .haber small {
+      color: #666;
+    }
+  </style>
     <h2>Haberler</h2>
     <ul>
       <li><strong>2025-08-02:</strong> Serkan Yılmaz, Bismil’de arabasına binerken Hacı Remzi’nin adamları tarafından öldürüldü. Olay cumartesi akşam saat 19:00 civarında gerçekleşti.</li>
