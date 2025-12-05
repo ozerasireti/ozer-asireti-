@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Üyelik Sistemi</title>
+  <style>
+    body {
+      background: #f2f2f2;
+      font-family: Arial;
+      padding: 30px;
+    }
+    .form-box {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    h2 { text-align:center; color:#b30000; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border:1px solid #ccc;
+    }
+    button {
+      width:100%;
+      padding:12px;
+      background:#b30000;
+      border:none;
+      border-radius:8px;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Üye Ol</h2>
+
+  <input type="email" id="email" placeholder="E-posta">
+  <input type="password" id="password" placeholder="Şifre">
+  <button onclick="signup()">Kaydol</button>
+
+  <p id="msg" style="color:red; margin-top:10px;"></p>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } 
+    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDg0aSkbcp1OF-_M4nNohX8p_qKiFCQ4gI",
+    authDomain: "asireti-sitesi.firebaseapp.com",
+    projectId: "asireti-sitesi",
+    storageBucket: "asireti-sitesi.firebasestorage.app",
+    messagingSenderId: "978303666884",
+    appId: "1:978303666884:web:3dfe144e62e5233fcc1791",
+    measurementId: "G-650SV2HKGY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  function signup() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        document.getElementById("msg").style.color = "green";
+        document.getElementById("msg").innerText = "Üyelik başarıyla oluşturuldu!";
+      })
+      .catch(err => {
+        document.getElementById("msg").innerText = err.message;
+      });
+  }
+</script>
+
+</body>
+</html>
