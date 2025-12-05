@@ -1,146 +1,79 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giriş • Özer Aşireti</title>
-
-  <style>
-    body {
-      background: #1f1f1f;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      padding: 40px;
-      text-align: center;
-    }
-    .card {
-      width: 90%;
-      max-width: 380px;
-      background: #2a2a2a;
-      margin: auto;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-    button {
-      width: 95%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      background: #b30000;
-      color: #fff;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #8b0000;
-    }
-    .switch {
-      margin-top: 18px;
-      color: #ccc;
-      font-size: 14px;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Üye Ol</title>
+<style>
+body {
+  font-family: Arial;
+  background:#f2f2f2;
+  padding: 30px;
+}
+form {
+  max-width: 400px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border:1px solid #aaa;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  background:#b30000;
+  color: white;
+  border: none;
+  border-radius:6px;
+  font-size: 16px;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>Özer Aşireti — Üyelik Sistemi</h1>
+<h2 style="text-align:center;">Üye Ol</h2>
 
-  <div class="card">
-    <h2 id="form-title">Giriş Yap</h2>
+<form id="signupForm">
+  <input type="email" id="email" placeholder="E-posta" required />
+  <input type="password" id="password" placeholder="Şifre" required />
+  <button type="submit">Kayıt Ol</button>
+</form>
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Şifre">
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword }
+  from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    <button id="loginBtn">Giriş Yap</button>
-    <button id="registerBtn" style="display:none;">Üye Ol</button>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDg0aSkbcp1OF-_M4nNohX8p_qKiFCQ4gI",
+    authDomain: "asireti-sitesi.firebaseapp.com",
+    projectId: "asireti-sitesi",
+    storageBucket: "asireti-sitesi.firebasestorage.app",
+    messagingSenderId: "978303666884",
+    appId: "1:978303666884:web:3dfe144e62e5233fcc1791"
+  };
 
-    <div class="switch" onclick="toggleForm()">
-      Henüz hesabın yok mu? Üye ol
-    </div>
-  </div>
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-  <!-- Firebase Scripts -->
-  <script type="module">
+  document.getElementById("signupForm").addEventListener("submit", e => {
+    e.preventDefault();
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
-      from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDg0aSkbcp1OF-_M4nNohX8p_qKiFCQ4gI",
-      authDomain: "asireti-sitesi.firebaseapp.com",
-      projectId: "asireti-sitesi",
-      storageBucket: "asireti-sitesi.firebasestorage.app",
-      messagingSenderId: "978303666884",
-      appId: "1:978303666884:web:3dfe144e62e5233fcc1791",
-      measurementId: "G-650SV2HKGY"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Form kontrol
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
-    const formTitle = document.getElementById("form-title");
-
-    function toggleForm() {
-      if (registerBtn.style.display === "none") {
-        formTitle.innerHTML = "Üye Ol";
-        registerBtn.style.display = "block";
-        loginBtn.style.display = "none";
-        document.querySelector(".switch").innerHTML = "Zaten hesabın var mı? Giriş yap";
-      } else {
-        formTitle.innerHTML = "Giriş Yap";
-        registerBtn.style.display = "none";
-        loginBtn.style.display = "block";
-        document.querySelector(".switch").innerHTML = "Henüz hesabın yok mu? Üye ol";
-      }
-    }
-
-    // Giriş yap
-    loginBtn.onclick = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("Giriş başarılı!");
-          window.location.href = "index.html"; // giriş sonrası yönlendirme
-        })
-        .catch((error) => {
-          alert("Hata: " + error.message);
-        });
-    };
-
-    // Üye ol
-    registerBtn.onclick = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("Üyelik başarılı! Şimdi giriş yapabilirsiniz.");
-          toggleForm();
-        })
-        .catch((error) => {
-          alert("Hata: " + error.message);
-        });
-    };
-
-  </script>
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then(() => alert("Kayıt başarılı!"))
+      .catch(err => alert("Hata: " + err.message));
+  });
+</script>
 
 </body>
 </html>
