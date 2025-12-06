@@ -1650,5 +1650,130 @@ Sait Bey’in bu sözleri, dedikoduların yol açtığı tedirginliği gölgede 
 </script>
 <!-- ÇEREZ BİLDİRİMİ BİTİŞ -->
 </body>
+ <!-- ========== ANASAYFA HERO - ANIMASYON ========== -->
+<section id="hero" aria-label="Ana Haber" style="padding:0; margin:0;">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Özer Aşireti — Güncel Haberler</h1>
+      <p class="typewriter" aria-live="polite"></p>
+      <div class="hero-cta">
+        <a href="haberler.html" class="cta">Haberleri Gör</a>
+        <a href="login.html" class="cta ghost">Giriş Yap</a>
+      </div>
+    </div>
+
+    <div class="hero-media" aria-hidden="false">
+      <!-- Eğer Drive iframe tercih ettiyseniz alt satırı kullanabilirsiniz (iframe daha güvenli)
+           <iframe src="https://drive.google.com/file/d/1sDitb5hDT0Nx6SPRwpGhVp9waUA_4Cvf/preview" 
+                   style="border:0; width:100%; height:100%; max-width:none;" allowfullscreen></iframe>
+      -->
+      <!-- HIZLI GÖRÜNTÜ İÇİN (doğrudan gösterme) -->
+      <img src="https://drive.google.com/uc?export=view&id=1sDitb5hDT0Nx6SPRwpGhVp9waUA_4Cvf"
+           alt="Kubbe Görseli" />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Temel sıfırlama / container */
+  #hero { width:100%; }
+  .hero-inner{
+    display:flex;
+    gap:28px;
+    align-items:center;
+    justify-content:space-between;
+    max-width:1200px;
+    margin:28px auto;
+    padding:36px;
+    box-sizing:border-box;
+    border-radius:12px;
+    overflow:hidden;
+    background: linear-gradient(120deg, rgba(179,0,0,0.07), rgba(0,0,0,0.04));
+    position:relative;
+    transition:padding 300ms ease, transform 400ms ease;
+  }
+
+  /* Arka plan kayan gradyan */
+  .hero-inner::before{
+    content:"";
+    position:absolute;
+    inset: -40% -40%;
+    background: linear-gradient(60deg, rgba(179,0,0,0.06), rgba(0,110,70,0.04), rgba(0,0,0,0.02));
+    transform-origin:center;
+    animation: slow-rotate 18s linear infinite;
+    z-index:0;
+    filter: blur(18px) saturate(1.05);
+  }
+  @keyframes slow-rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  .hero-text{ position:relative; z-index:1; flex:1; min-width:260px; }
+  .hero-media{ width:360px; max-width:38%; z-index:1; display:flex; align-items:center; justify-content:center; }
+  .hero-media img{ width:100%; height:auto; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.25); transform-origin:center; animation:float 6s ease-in-out infinite; }
+
+  @keyframes float {
+    0%{ transform: translateY(0px) rotate(-1deg) }
+    50%{ transform: translateY(-10px) rotate(1deg) }
+    100%{ transform: translateY(0px) rotate(-1deg) }
+  }
+
+  h1{ font-size:32px; margin:0 0 12px 0; color:#b30000; text-shadow:0 6px 24px rgba(179,0,0,0.06); }
+  .typewriter{ font-size:17px; color:#222; margin:8px 0 18px 0; min-height:22px; }
+  .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; }
+  .cta{ display:inline-block; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:700; background:#b30000; color:#fff; box-shadow:0 8px 20px rgba(179,0,0,0.18); transition:transform .18s ease; }
+  .cta:hover{ transform: translateY(-3px); }
+  .cta.ghost{ background:transparent; color:#b30000; border:2px solid rgba(179,0,0,0.12); box-shadow:none; }
+
+  /* küçültme (parallax hissi) */
+  .hero-small{ padding:18px !important; }
+  .hero-small h1{ font-size:22px !important; }
+
+  /* okunurluk - beyaz kart stili */
+  @media (max-width:900px){
+    .hero-inner{ flex-direction:column; gap:18px; padding:22px; }
+    .hero-media{ width:90%; max-width:420px; }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce){
+    .hero-inner::before, .hero-media img { animation:none !important; transition:none !important; }
+  }
+</style>
+
+<script>
+  // TYPEWRITER METİN (otomatik) — dilediğin ifadeleri buraya ekle
+  (function(){
+    const lines = [
+      "Bölgeden son gelişmeler, resmi açıklamadır.",
+      "Kubbe altında kritik istişareler. Takip edin.",
+      "Haberler anlık güncelleniyor — Özer Aşireti Basın Ofisi"
+    ];
+    const el = document.querySelector('.typewriter');
+    let i=0, char=0, forward=true;
+
+    function step(){
+      if(!el) return;
+      if(forward){
+        el.textContent = lines[i].slice(0, ++char);
+        if(char === lines[i].length){ forward=false; setTimeout(step,1200); return; }
+      } else {
+        el.textContent = lines[i].slice(0, --char);
+        if(char===0){ forward=true; i=(i+1)%lines.length; }
+      }
+      setTimeout(step, forward?60:30);
+    }
+    step();
+  })();
+
+  // HERO küçültme: sayfa aşağı kaydırıldıkça daha kompakt gözüksün
+  (function(){
+    const hero = document.querySelector('.hero-inner');
+    if(!hero) return;
+    window.addEventListener('scroll', function(){
+      const y = window.scrollY || window.pageYOffset;
+      if(y>60) hero.classList.add('hero-small'); else hero.classList.remove('hero-small');
+    }, {passive:true});
+  })();
+</script>
+<!-- ========== /ANASAYFA HERO - ANIMASYON ========== -->   
 </html>
 
