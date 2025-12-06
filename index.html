@@ -1540,55 +1540,110 @@ Sait Bey’in bu sözleri, dedikoduların yol açtığı tedirginliği gölgede 
   <footer>
     Özer Aşireti 2025 – Tüm Hakları Saklıdır
   </footer>
+<!-- ÇEREZ BİLDİRİMİ BAŞLANGIÇ -->
+<div id="cookie-banner">
+  <div class="cookie-box">
+      <h3>🍪 Çerez Kullanımı</h3>
+      <p>
+        Sitemiz, deneyiminizi geliştirmek için çerezler kullanır.
+        Detaylı bilgi için <a href="cerez-politikasi.html" target="_blank">Çerez Politikası</a> sayfasını ziyaret edebilirsiniz.
+      </p>
 
+      <div class="buttons">
+          <button id="cookie-accept">Kabul Ediyorum</button>
+          <button id="cookie-more">Daha Fazla Bilgi</button>
+      </div>
+  </div>
+</div>
+
+<audio id="cookie-sound">
+  <source src="uyari.mp3" type="audio/mpeg">
+</audio>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: -300px;
+    left: 0;
+    right: 0;
+    background: rgba(20,20,20,0.95);
+    color: white;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    transition: 0.7s ease;
+    z-index: 999999;
+    backdrop-filter: blur(10px);
+  }
+
+  #cookie-banner.show {
+    bottom: 0;
+  }
+
+  .cookie-box {
+    max-width: 650px;
+    font-family: Arial;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    padding: 10px 18px;
+    border: none;
+    font-weight: bold;
+    background: #b30000;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #ff0000;
+  }
+
+  #cookie-more {
+    background: #555;
+  }
+
+  #cookie-more:hover {
+    background: #777;
+  }
+</style>
+
+<script>
+  setTimeout(() => {
+    document.getElementById("cookie-banner").classList.add("show");
+
+    // Uyarı sesi çalsın (isteğe bağlı)
+    const sound = document.getElementById("cookie-sound");
+    if (sound) sound.play();
+    
+  }, 1200);
+
+  document.getElementById("cookie-accept").onclick = () => {
+    localStorage.setItem("cookieAccepted", "yes");
+    document.getElementById("cookie-banner").style.bottom = "-300px";
+  };
+
+  document.getElementById("cookie-more").onclick = () => {
+    window.open("cerez-politikasi.html", "_blank");
+  };
+
+  if (localStorage.getItem("cookieAccepted") === "yes") {
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+</script>
+<!-- ÇEREZ BİLDİRİMİ BİTİŞ -->
 </body>
 </html>
 
-<!-- Çerez Bildirimi Kutusu -->
-<div id="cookieBox" style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #222;
-  color: #fff;
-  padding: 15px;
-  box-shadow: 0 -3px 15px rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: Arial;
-  z-index: 9999;
-">
-
-  <span style="font-size:14px;">
-    Bu site deneyimlerinizi iyileştirmek için çerezler kullanmaktadır.
-  </span>
-
-  <button onclick="acceptCookies()" style="
-    background:#b30000;
-    color:#fff;
-    border:none;
-    padding:10px 14px;
-    border-radius:6px;
-    font-weight:bold;
-    cursor:pointer;
-  ">Kabul Et</button>
-
-</div>
-
-<script>
-  function acceptCookies(){
-    localStorage.setItem("cookies_accepted", "true");
-    document.getElementById("cookieBox").style.display = "none";
-  }
-
-  // Daha önce kabul edilmişse kutuyu gösterme
-  window.onload = function(){
-    if(localStorage.getItem("cookies_accepted") === "true"){
-      document.getElementById("cookieBox").style.display = "none";
-    }
-  }
-</script>
-  
-  
