@@ -1543,8 +1543,52 @@ Sait Bey’in bu sözleri, dedikoduların yol açtığı tedirginliği gölgede 
 
 </body>
 </html>
-</article>
-  </section>
 
+<!-- Çerez Bildirimi Kutusu -->
+<div id="cookieBox" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #222;
+  color: #fff;
+  padding: 15px;
+  box-shadow: 0 -3px 15px rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial;
+  z-index: 9999;
+">
+
+  <span style="font-size:14px;">
+    Bu site deneyimlerinizi iyileştirmek için çerezler kullanmaktadır.
+  </span>
+
+  <button onclick="acceptCookies()" style="
+    background:#b30000;
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+  ">Kabul Et</button>
+
+</div>
+
+<script>
+  function acceptCookies(){
+    localStorage.setItem("cookies_accepted", "true");
+    document.getElementById("cookieBox").style.display = "none";
+  }
+
+  // Daha önce kabul edilmişse kutuyu gösterme
+  window.onload = function(){
+    if(localStorage.getItem("cookies_accepted") === "true"){
+      document.getElementById("cookieBox").style.display = "none";
+    }
+  }
+</script>
   
   
