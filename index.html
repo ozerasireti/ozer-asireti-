@@ -81,51 +81,47 @@
     </div>
   </section>
 
- <section id="iletisim" style="max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+<section id="iletisim" style="max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
     <h2 style="color: #b30000; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 15px;">Bizimle İletişime Geçin</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 30px;">Aşiretimizle ilgili görüş, öneri veya üyelik sorularınız için aşağıdaki formu kullanabilirsiniz.</p>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Mesajlarınız doğrudan aşiret yönetimine iletilecektir.</p>
 
     <div style="display: flex; flex-wrap: wrap; gap: 30px;">
         <div style="flex: 1; min-width: 280px;">
             <h3 style="color: #006400;">İletişim Bilgileri</h3>
             <ul style="list-style: none; padding: 0; line-height: 2;">
-                <li><strong>📍 Merkez:</strong> Bismil / Diyarbakır</li>
-                <li><strong>📧 E-posta:</strong> iletisim@ozerasireti.com</li>
-                <li><strong>📱 Sosyal Medya:</strong> @ozerasireti</li>
+                <li><strong>📍 Konum:</strong> Bismil / Diyarbakır</li>
+                <li><strong>📧 Destek:</strong> iletisim@ozerasireti.com</li>
             </ul>
             <div style="margin-top: 20px; padding: 15px; background: #f9f9f9; border-left: 4px solid #b30000; font-style: italic;">
-                "Birlik ve beraberliğimiz, en büyük gücümüzdür."
+                "Sözümüz bir, özümüz birdir."
             </div>
         </div>
 
         <div style="flex: 1.5; min-width: 300px;">
-            <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
-                <input type="text" name="ad_soyad" placeholder="Adınız Soyadınız" required 
+            <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+                
+                <input type="hidden" name="access_key" value="BURAYA_ACCESS_KEY_YAPISTIR">
+                
+                <input type="hidden" name="subject" value="Özer Aşireti Sitesinden Yeni Mesaj">
+
+                <input type="text" name="name" placeholder="Adınız Soyadınız" required 
                     style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
                 
                 <input type="email" name="email" placeholder="E-posta Adresiniz" required 
                     style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
                 
-                <textarea name="mesaj" rows="5" placeholder="Mesajınız..." required 
+                <textarea name="message" rows="5" placeholder="Mesajınız..." required 
                     style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; resize: vertical;"></textarea>
-                
+
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
                 <button type="submit" style="background: #b30000; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
-                    Gönder
+                    Mesajı Gönder
                 </button>
-            
-              <form action="https://formspree.io/f/XXXXXX" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
-    <input type="text" name="ad_soyad" placeholder="Adınız Soyadınız" required 
-        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-    
-    <input type="email" name="_replyto" placeholder="E-posta Adresiniz" required 
-        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
-    
-    <textarea name="mesaj" rows="5" placeholder="Mesajınız..." required 
-        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; resize: vertical;"></textarea>
-    
-    <button type="submit" style="background: #b30000; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">
-        Gönder
-    </button>
+            </form>
+        </div>
+    </div>
+</section>
 </form>
         </div>
     </div>
