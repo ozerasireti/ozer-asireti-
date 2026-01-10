@@ -112,7 +112,21 @@
                 <button type="submit" style="background: #b30000; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
                     Gönder
                 </button>
-            </form>
+            
+              <form action="https://formspree.io/f/XXXXXX" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+    <input type="text" name="ad_soyad" placeholder="Adınız Soyadınız" required 
+        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+    
+    <input type="email" name="_replyto" placeholder="E-posta Adresiniz" required 
+        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+    
+    <textarea name="mesaj" rows="5" placeholder="Mesajınız..." required 
+        style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; resize: vertical;"></textarea>
+    
+    <button type="submit" style="background: #b30000; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        Gönder
+    </button>
+</form>
         </div>
     </div>
 </section>
