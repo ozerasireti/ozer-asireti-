@@ -281,70 +281,76 @@
     }
 </script>
 
+
 <script>
-    <script>
-    // En güncel ve hatasız yapı
-    const GEMINI_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE; 
+    // 1. ADIM: Google'dan aldığın kodu aşağıdaki tırnakların içine yaz
+    const GEMINI_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
+    
+    // Gemini API'nin adresi (Bunu değiştirme)
     const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
+    // Sohbet penceresini açıp kapatan fonksiyon
     function toggleChat() {
-        var windowDiv = document.getElementById('ai-chat-window');
-        var btn = document.getElementById('chat-toggle-btn');
-        if (windowDiv.style.display === "none" || windowDiv.style.display === "") {
-            windowDiv.style.display = "flex";
-            btn.style.display = "none";
+        const chatWindow = document.getElementById('ai-chat-window');
+        const chatBtn = document.getElementById('chat-toggle-btn');
+        if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+            chatWindow.style.display = "flex";
+            chatBtn.style.display = "none";
         } else {
-            windowDiv.style.display = "none";
-            btn.style.display = "flex";
+            chatWindow.style.display = "none";
+            chatBtn.style.display = "flex";
         }
     }
 
+    // 2. ADIM: Gemini ile bağlantı kuran ana fonksiyon
     async function sendMessage() {
-        var input = document.getElementById('user-input');
-        var messages = document.getElementById('chat-messages');
-        var text = input.value.trim();
+        const input = document.getElementById('user-input');
+        const messages = document.getElementById('chat-messages');
+        const text = input.value.trim();
         
         if (text === "") return;
 
-        // Kullanıcı Mesajı
+        // Kullanıcının yazdığını ekrana bas
         messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${text}</div>`;
         input.value = "";
         messages.scrollTop = messages.scrollHeight;
 
-        // "Gemini cevap yazıyor..." yazısı
+        // Bekleme efekti
         const loadingId = "loading-" + Date.now();
         messages.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px; font-style: italic;">Gemini cevap yazıyor...</div>`;
         messages.scrollTop = messages.scrollHeight;
 
         try {
+            // Google Gemini'ye istek gönderiyoruz
             const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: `Sen Özer Aşireti'nin yardımsever bir asistanısın. Aşiret lideri Said Özer'dir. Soruyu bu kimlikle cevapla: ${text}` }] }]
+                    contents: [{
+                        parts: [{
+                            text: `Sen Özer Aşireti'nin resmi asistanısın. Liderimiz Said Özer'dir. Konumumuz Diyarbakır/Bismil'dir. Çok saygılı ve ağırbaşlı bir dille şu soruyu yanıtla: ${text}`
+                        }]
+                    }]
                 })
             });
 
             const data = await response.json();
-            
-            // Yükleniyor yazısını sil
-            const loadingElement = document.getElementById(loadingId);
-            if(loadingElement) loadingElement.remove();
+            document.getElementById(loadingId).remove();
 
             if (data.candidates && data.candidates[0].content.parts[0].text) {
                 const aiResponse = data.candidates[0].content.parts[0].text;
+                // Gemini'den gelen cevabı ekrana bas
                 messages.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${aiResponse}</div>`;
             } else {
-                throw new Error("API boş döndü");
+                throw new Error("API hatası");
             }
 
         } catch (error) {
+            document.getElementById(loadingId).innerText = "Hata: Bağlantı kurulamadı. Lütfen API anahtarını kontrol edin.";
             console.error(error);
-            const loadingElement = document.getElementById(loadingId);
-            if(loadingElement) loadingElement.innerText = "Hata: Şu an cevap veremiyorum, lütfen internetinizi kontrol edin.";
         }
         messages.scrollTop = messages.scrollHeight;
     }
-</script>
+</script></script>
 </body>
 </html>
