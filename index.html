@@ -241,50 +241,109 @@
                     Mesajı Gönder
                 </button>
             </form>
-        </div>><section id="santral-merkezi" style="max-width: 800px; margin: 40px auto; padding: 30px; background: #1a1a1a; color: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); font-family: 'Segoe UI', sans-serif;">
+        </div>><section id="koordinasyon-merkezi" style="max-width: 1000px; margin: 50px auto; padding: 40px; background: #fff; border-radius: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.1); font-family: 'Segoe UI', Tahoma, sans-serif; border-top: 6px solid #b30000;">
     
-    <div style="text-align: center; margin-bottom: 30px;">
-        <div style="background: #b30000; display: inline-block; padding: 10px 20px; border-radius: 50px; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px;">
-            ÖZER AŞİRETİ MÜŞTERİ HİZMETLERİ
-        </div>
-        <h2 style="margin: 10px 0; font-size: 2rem;">7/24 Dijital Santral Hattı</h2>
-        <p style="color: #aaa;">Lütfen bağlamak istediğiniz birim için aşağıdaki numarayı arayıp ilgili dahili numarayı tuşlayınız.</p>
-    </div>
-
     <div style="text-align: center; margin-bottom: 40px;">
-        <a href="tel:05309597498" style="text-decoration: none; display: inline-block; background: #fff; color: #1a1a1a; padding: 20px 40px; border-radius: 15px; font-size: 1.8rem; font-weight: bold; transition: 0.3s; border: 2px solid #b30000;">
-            📞 0541 534 74 98
-        </a>
-        <p style="margin-top: 10px; color: #ffcc00; font-size: 0.9rem;">(Numaraya tıklayarak direkt arayabilirsiniz)</p>
+        <h2 style="color: #b30000; font-size: 2.5rem; margin-bottom: 10px;">İletişim ve Koordinasyon Merkezi</h2>
+        <p style="color: #666; font-size: 1.1rem;">Özer Aşireti Genel Merkezi ve Said Özer İstişare Heyeti ile doğrudan irtibat kurun.</p>
     </div>
 
-    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
-        <h4 style="margin-top: 0; color: #b30000; border-bottom: 1px solid #333; padding-bottom: 10px;">Santral Yönlendirme Menüsü:</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
         
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #222;">
-                <span>⚙️ Teknik Destek ve Web İşlemleri İçin</span>
-                <span style="background: #b30000; padding: 5px 15px; border-radius: 5px; font-weight: bold;">TUŞLAYIN: 1</span>
+        <div style="background: #f9f9f9; padding: 30px; border-radius: 20px; border: 1px solid #eee;">
+            <h3 style="color: #333; margin-bottom: 20px; border-bottom: 2px solid #b30000; display: inline-block;">Hızlı Bağlantı</h3>
+            
+            <div style="margin-bottom: 25px;">
+                <p id="santral-durum" style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Resmi santral üzerinden sesli bağlantı:</p>
+                <button onclick="dijitalSantralAra()" id="santral-ana-btn" style="width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    📞 Genel Merkezi Ara
+                </button>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #222;">
-                <span>💡 Öneri, Görüş ve Şikayetleriniz İçin</span>
-                <span style="background: #b30000; padding: 5px 15px; border-radius: 5px; font-weight: bold;">TUŞLAYIN: 2</span>
+            <div>
+                <p style="font-size: 0.9rem; color: #777; margin-bottom: 10px;">Hızlı mesaj ve döküman gönderimi:</p>
+                <button onclick="waYonlendir()" style="width: 100%; padding: 18px; background: #25D366; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    💬 WhatsApp Hattı
+                </button>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #222;">
-                <span>🤝 Üyelik ve Aşiret Kayıt İşlemleri İçin</span>
-                <span style="background: #b30000; padding: 5px 15px; border-radius: 5px; font-weight: bold;">TUŞLAYIN: 3</span>
+            <div style="margin-top: 30px; font-size: 0.9rem; color: #888; line-height: 1.6;">
+                <p>📍 <strong>Merkez:</strong> Diyarbakır / Bismil</p>
+                <p>⏰ <strong>Hizmet Saatleri:</strong> 09:00 - 18:00 (Taziye durumlarında 7/24 aktiftir.)</p>
             </div>
-
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
-                <span>👤 Said Özer Özel Kalem ve Randevu İçin</span>
-                <span style="background: #b30000; padding: 5px 15px; border-radius: 5px; font-weight: bold;">TUŞLAYIN: 0</span>
-                <div style="text-align: center; margin-top: 25px; font-size: 0.8rem; color: #666;">
-       
-                    © 2026 Özer Aşireti İletişim Altyapısı - Tüm Hakları Saklıdır
-                </div>
         </div>
+
+        <div style="background: #fff; padding: 30px; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h3 style="color: #333; margin-bottom: 20px; border-bottom: 2px solid #b30000; display: inline-block;">İstişare Meclisi Formu</h3>
+            <div id="istisare-formu">
+                <input type="text" id="ins-ad" placeholder="Adınız Soyadınız" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; outline: none; box-sizing: border-box;">
+                
+                <select id="ins-konu" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; outline: none; background: white;">
+                    <option value="Genel">Konu Seçiniz</option>
+                    <option value="Eğitim">Eğitim ve Gençlik</option>
+                    <option value="Sosyal">Sosyal Yardımlaşma</option>
+                    <option value="Barış">Barış ve Uzlaşı</option>
+                </select>
+
+                <textarea id="ins-mesaj" placeholder="Görüşünüzü detaylıca yazınız..." style="width: 100%; height: 120px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; outline: none; resize: none; box-sizing: border-box;"></textarea>
+
+                <button onclick="istisareGonder()" style="width: 100%; padding: 18px; background: #333; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s;">
+                    Görüşü Meclise İlet
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // --- NUMARA AYARI ---
+    const ASİRET_TEL = "905309597498"; // Kendi numaranı 90 ile başlayarak yaz.
+
+    // 1. DİJİTAL SANTRAL FONKSİYONU
+    function dijitalSantralAra() {
+        const btn = document.getElementById('santral-ana-btn');
+        const durum = document.getElementById('santral-durum');
+        
+        btn.disabled = true;
+        btn.style.background = "#555";
+        durum.innerText = "Dijital santral anonsu okunuyor...";
+
+        const anons = new SpeechSynthesisUtterance();
+        anons.text = "Özer Aşireti Genel Merkezi'ne hoş geldiniz. Said Özer İstişare Heyeti'ne yönlendiriliyorsunuz. Lütfen bekleyiniz.";
+        anons.lang = 'tr-TR';
+        anons.rate = 0.8;
+
+        window.speechSynthesis.speak(anons);
+
+        anons.onend = function() {
+            durum.innerText = "Bağlantı sağlanıyor...";
+            window.location.href = "tel:" + ASİRET_TEL;
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.style.background = "#b30000";
+                durum.innerText = "Resmi santral üzerinden sesli bağlantı:";
+            }, 5000);
+        };
+    }
+
+    // 2. WHATSAPP YÖNLENDİRME
+    function waYonlendir() {
+        window.open(`https://api.whatsapp.com/send?phone=${ASİRET_TEL}&text=Özer Aşireti Koordinasyon Merkezi ile iletişime geçmek istiyorum.`, '_blank');
+    }
+
+    // 3. İSTİŞARE FORMU (WHATSAPP ÜZERİNDEN)
+    function istisareGonder() {
+        const ad = document.getElementById('ins-ad').value;
+        const konu = document.getElementById('ins-konu').value;
+        const mesaj = document.getElementById('ins-mesaj').value;
+
+        if(!ad || !mesaj) { alert("Lütfen gerekli alanları doldurun."); return; }
+
+        const metin = `*Özer Aşireti İstişare Formu*%0A*Gönderen:* ${ad}%0A*Konu:* ${konu}%0A*Görüş:* ${mesaj}`;
+        window.open(`https://api.whatsapp.com/send?phone=${ASİRET_TEL}&text=${metin}`, '_blank');
+    }
+</script>
     </div>
 </section>
 </form>
