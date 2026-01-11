@@ -282,65 +282,53 @@
 </script>
 
 
-<script>
-    // 1. API Anahtarını tırnak içinde, tam haliyle buraya koy:
-    const MY_KEY = "AIzaSyDE5L_tFYcWBKvGhee2068bj0jO4YO08DY"; 
-    
-    // 2. Doğru ve temiz URL adresi:
-    const TARGET_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + MY_KEY;
 
-    function toggleChat() {
-        const win = document.getElementById('ai-chat-window');
-        const btn = document.getElementById('chat-toggle-btn');
-        if (win.style.display === "none" || win.style.display === "") {
-            win.style.display = "flex";
-            btn.style.display = "none";
-        } else {
-            win.style.display = "none";
-            btn.style.display = "flex";
-        }
-    }
+<script>
+    // Ücretli üyeliğinle aldığın anahtarı buraya yaz
+    const MY_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
+    
+    // Üyeliğin sayesinde PRO modelini kullanıyoruz (Daha zekidir)
+    const TARGET_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" + MY_KEY;
 
     async function sendMessage() {
         const input = document.getElementById('user-input');
         const msgDiv = document.getElementById('chat-messages');
         const val = input.value.trim();
-        
         if (!val) return;
 
-        // Kullanıcı mesajını ekle
         msgDiv.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${val}</div>`;
         input.value = "";
         msgDiv.scrollTop = msgDiv.scrollHeight;
 
-        // Yükleniyor mesajı
         const loadId = "id-" + Date.now();
-        msgDiv.innerHTML += `<div id="${loadId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px; font-style: italic;">Gemini cevap yazıyor...</div>`;
-        msgDiv.scrollTop = msgDiv.scrollHeight;
+        msgDiv.innerHTML += `<div id="${loadId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">Özer Asistan düşünüyor...</div>`;
 
         try {
             const resp = await fetch(TARGET_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: "Sen Özer Aşireti asistanısın. Lider Said Özer'dir. Soruyu cevapla: " + val }] }]
+                    contents: [{ 
+                        parts: [{ 
+                            text: `Sen Özer Aşireti'nin en üst düzey yapay zeka asistanısın. Bilgeliğin ve ağırbaşlılığınla tanınırsın. Lider Said Özer'dir. Şu soruyu aşiretin vakarına uygun cevapla: ${val}` 
+                        }] 
+                    }]
                 })
             });
 
             const data = await resp.json();
             const loadingEl = document.getElementById(loadId);
 
-            if (data.candidates && data.candidates[0].content.parts[0].text) {
+            if (data.error) {
+                // Hata alırsan sebebi burada yazar (Kota mı, anahtar mı?)
+                loadingEl.innerText = "Sistem Notu: " + data.error.message;
+            } else if (data.candidates && data.candidates[0]) {
                 const result = data.candidates[0].content.parts[0].text;
-                if(loadingEl) loadingEl.remove();
+                loadingEl.remove();
                 msgDiv.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${result}</div>`;
-            } else {
-                if(loadingEl) loadingEl.innerText = "Hata: Google cevap veremedi.";
             }
         } catch (err) {
-            const loadingEl = document.getElementById(loadId);
-            if(loadingEl) loadingEl.innerText = "Bağlantı hatası oluştu.";
-            console.error(err);
+            document.getElementById(loadId).innerText = "Bağlantı hatası.";
         }
         msgDiv.scrollTop = msgDiv.scrollHeight;
     }
