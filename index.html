@@ -111,59 +111,43 @@
                     <h4 style="margin: 0 0 10px 0; color: #b30000;">Said Bey'e Bağlan</h4>
                     <button onclick="saitBeyBaglan()" id="sait-btn" style="width: 100%; padding: 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">👑 Makama Bağlan</button>
                 </div>
-            </div>
+            </div>const KEY_RAW = "YENI_ALDIĞIN_ANAHTARI_BURAYA_YAPIŞTIR"; // Yeni aldığın anahtarı buraya koy
 
-           
+async function askOzerAI() {
+    const inp = document.getElementById('ai-soru-input');
+    const box = document.getElementById('ai-chat-box');
+    const text = inp.value.trim();
+    if (!text) return;
 
-<div id="ozer-asistan-v4" style="position: fixed; bottom: 25px; right: 25px; z-index: 999999;">
-    <div id="ai-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 10px; font-family: sans-serif;">
-        <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>👑 Said Özer Dijital Asistanı</span>
-            <button onclick="document.getElementById('ai-pencere').style.display='none'; document.getElementById('ai-buton').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
-        </div>
-        <div id="ai-chat-box" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Selamun Aleyküm. Said Özer Reisimizin asistanıyım. Sizi dinliyorum.</div>
-        </div>
-        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
-            <input type="text" id="ai-soru-input" placeholder="Arzınız..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="askOzerAI()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
-        </div>
-    </div>
-    <button id="ai-buton" onclick="document.getElementById('ai-pencere').style.display='flex'; this.style.display='none';" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 3px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 5px 25px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
-</div>
+    box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end;">${text}</div>`;
+    inp.value = "";
 
-<script>
-    // Buradaki tırnak içine yeni anahtarını yapıştır
-    const KEY_RAW = "AIzaSyB5aC0xa8nem1OTkuIY1rRQccvginq_Tvk"; 
+    try {
+        // En basit bağlantı yolu (v1beta yerine doğrudan v1)
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${KEY_RAW}`;
+        
+        const r = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: "Sen Said Özer'in asistanısın. Kısa cevap ver: " + text }] }]
+            })
+        });
 
-    async function askOzerAI() {
-        const inp = document.getElementById('ai-soru-input');
-        const box = document.getElementById('ai-chat-box');
-        const text = inp.value.trim();
-        if (!text) return;
+        const d = await r.json();
 
-        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${text}</div>`;
-        inp.value = "";
-        box.scrollTop = box.scrollHeight;
-
-        try {
-            const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY_RAW}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti reisi Said Özer'in resmi asistanısın. Çok saygılı ve bilgece cevap ver: " + text }] }] })
-            });
-            const d = await r.json();
-            if (d.candidates && d.candidates[0]) {
-                const ans = d.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${ans}</div>`;
-            } else {
-                box.innerHTML += `<div style="color:red; font-size:12px;">Bir hata oluştu, lütfen anahtar yetkisini kontrol edin.</div>`;
-            }
-        } catch (e) {
-            box.innerHTML += `<div style="color:red; font-size:12px;">Bağlantı hatası!</div>`;
+        if (d.candidates && d.candidates[0]) {
+            const ans = d.candidates[0].content.parts[0].text;
+            box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start;">${ans}</div>`;
+            konustur(ans); 
+        } else {
+            // Hata varsa burada ne dediğini gör
+            alert("Hata Mesajı: " + (d.error ? d.error.message : "Bilinmeyen bir hata oluştu"));
         }
-        box.scrollTop = box.scrollHeight;
+    } catch (e) {
+        alert("Bağlantı tamamen reddedildi, internetinizi kontrol edin.");
     }
-</script>
-        </body>
-</html>
+}
+</script>        
+</body></html>
+            
