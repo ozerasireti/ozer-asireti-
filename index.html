@@ -129,78 +129,80 @@
     <div 
     
 
-<div id="ai-asistan-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000000; font-family: 'Segoe UI', sans-serif;">
-    <div id="ai-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; border: 1px solid #eee; margin-bottom: 15px;">
+
+<div id="ai-chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    
+    <div id="ai-chat-window" style="display: none; width: 330px; height: 450px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; border: 1px solid #ddd; margin-bottom: 10px;">
         <div style="background: #b30000; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
-            <span>🤖 Özer Asistan (GPT)</span>
-            <button onclick="asistanKapat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 22px;">×</button>
+            <span>🛡️ Özer Dijital Asistan</span>
+            <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 24px;">×</button>
         </div>
         
-        <div id="asistan-mesajlar" style="flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">
-                Merhaba, ben Özer Aşireti'nin OpenAI destekli asistanıyım. Size nasıl yardımcı olabilirim?
+        <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start; max-width: 85%; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                Selamun Aleyküm. Özer Aşireti dijital merkezine hoş geldiniz. Size nasıl yardımcı olabilirim?
             </div>
         </div>
 
-        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
-            <input type="text" id="asistan-input" placeholder="Sorunuzu buraya yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="soruSorOpenAI()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
+        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
+            <input type="text" id="user-input" placeholder="Sorunuzu buraya yazın..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button onclick="sendMessage()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
 
     <div style="text-align: right;">
-        <button id="asistan-buton" onclick="asistanAc()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(179,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+        <button id="chat-toggle-btn" onclick="toggleChat()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(179,0,0,0.5); display: flex; align-items: center; justify-content: center;">
             🤖
         </button>
     </div>
 </div>
 
 <script>
-    const OPENAI_API_KEY = "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"; // sk-... ile başlayan anahtar
+    // ANAHTAR: Eğer çalışmazsa https://aistudio.google.com/app/apikey adresinden yenisini alıp tırnak içine yapıştır.
+    const GEMINI_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
+    const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" + GEMINI_KEY;
 
-    function asistanAc() { document.getElementById('ai-pencere').style.display = 'flex'; document.getElementById('asistan-buton').style.display = 'none'; }
-    function asistanKapat() { document.getElementById('ai-pencere').style.display = 'none'; document.getElementById('asistan-buton').style.display = 'flex'; }
+    function toggleChat() {
+        const win = document.getElementById('ai-chat-window');
+        win.style.display = (win.style.display === "none" || win.style.display === "") ? "flex" : "none";
+    }
 
-    async function soruSorOpenAI() {
-        const input = document.getElementById('asistan-input');
-        const box = document.getElementById('asistan-mesajlar');
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const box = document.getElementById('chat-messages');
         const text = input.value.trim();
         if (!text) return;
 
+        // Kullanıcı Mesajı
         box.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${text}</div>`;
         input.value = "";
         box.scrollTop = box.scrollHeight;
 
-        const tempId = "loading-" + Date.now();
-        box.innerHTML += `<div id="${tempId}" style="background: #f0f0f0; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic;">Cevap yazılıyor...</div>`;
+        // Yükleniyor Mesajı
+        const loadingId = "msg-" + Date.now();
+        box.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic;">Cevap hazırlanıyor...</div>`;
         box.scrollTop = box.scrollHeight;
 
         try {
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            const resp = await fetch(URL, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${OPENAI_API_KEY}`
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    model: "gpt-3.5-turbo", // Veya "gpt-4"
-                    messages: [
-                        { role: "system", content: "Sen Özer Aşireti'nin asistanısın. Lider Said Özer'dir. Bismil ve Diyarbakır kültürüne hakim, saygılı birisin." },
-                        { role: "user", content: text }
-                    ]
+                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi asistanısın. Lider Said Özer'dir. Soruyu aşiret kültürüne uygun, saygılı ve kısa bir dille cevapla: " + text }] }]
                 })
             });
-            const data = await response.json();
-            document.getElementById(tempId).remove();
 
-            if (data.choices && data.choices[0]) {
-                const answer = data.choices[0].message.content;
-                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">${answer}</div>`;
+            const data = await resp.json();
+            document.getElementById(loadingId).remove();
+
+            if (data.candidates && data.candidates[0]) {
+                const answer = data.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; line-height: 1.6;">${answer}</div>`;
             } else {
-                box.innerHTML += `<div style="color: red; padding: 10px;">Bağlantı hatası: Anahtarınızı kontrol edin.</div>`;
+                throw new Error();
             }
         } catch (e) {
-            document.getElementById(tempId).innerText = "Sistem şu an meşgul.";
+            document.getElementById(loadingId).innerHTML = "<span style='color:red;'>⚠️ Bağlantı hatası. Lütfen API anahtarınızı Google AI Studio üzerinden kontrol edin.</span>";
         }
         box.scrollTop = box.scrollHeight;
     }
