@@ -126,71 +126,88 @@
         <p>&copy; 2026 Özer Aşireti. Tüm Hakları Saklıdır.</p>
     </footer>
 
-    <div id="ai-chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-        <button onclick="toggleChat()" id="chat-toggle-btn" style="width: 60px; height: 60px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">🤖</button>
-        <div id="ai-chat-window" style="display: none; width: 300px; height: 400px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); flex-direction: column; position: absolute; bottom: 70px; right: 0; overflow: hidden; border: 1px solid #ddd;">
-            <div style="background: #b30000; color: white; padding: 10px; font-weight: bold; text-align: center;">Özer Asistan</div>
-            <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; background: #f9f9f9;"></div>
-            <div style="padding: 10px; display: flex; gap: 5px;">
-                <input type="text" id="user-input" placeholder="Sorun..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
-                <button onclick="sendMessage()" style="background: #b30000; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer;">✈️</button>
+    <div 
+    
+<div id="ai-asistan-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000000; font-family: 'Segoe UI', sans-serif;">
+    
+    <div id="ai-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; border: 1px solid #eee; margin-bottom: 15px;">
+        <div style="background: #b30000; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>🤖 Özer Asistan (Yapay Zeka)</span>
+            <button onclick="asistanKapat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 22px;">×</button>
+        </div>
+        
+        <div id="asistan-mesajlar" style="flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">
+                Merhaba, ben Özer Aşireti'nin dijital asistanıyım. Said Özer ve aşiretimiz hakkında size nasıl yardımcı olabilirim?
             </div>
+        </div>
+
+        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
+            <input type="text" id="asistan-input" placeholder="Sorunuzu buraya yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button onclick="soruSor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
 
-    <script>
-        const ASİRET_TEL = "905309597498";
-        const MY_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE";
-        const MY_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + MY_API_KEY;
+    <div style="text-align: right;">
+        <button id="asistan-buton" onclick="asistanAc()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(179,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+            🤖
+        </button>
+    </div>
+</div>
 
-        function dijitalSantralAra() {
-            const anons = new SpeechSynthesisUtterance("Özer Aşireti Genel Merkezi'ne hoş geldiniz. Said Özer İstişare Heyeti'ne yönlendiriliyorsunuz.");
-            anons.lang = 'tr-TR';
-            window.speechSynthesis.speak(anons);
-            anons.onend = () => { window.location.href = "tel:" + ASİRET_TEL; };
+<script>
+    // --- YAPAY ZEKA AYARLARI ---
+    const API_ANAHTARI = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; // Senin anahtarın
+    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_ANAHTARI;
+
+    function asistanAc() {
+        document.getElementById('ai-pencere').style.display = 'flex';
+        document.getElementById('asistan-buton').style.display = 'none';
+    }
+
+    function asistanKapat() {
+        document.getElementById('ai-pencere').style.display = 'none';
+        document.getElementById('asistan-buton').style.display = 'flex';
+    }
+
+    async function soruSor() {
+        const input = document.getElementById('asistan-input');
+        const box = document.getElementById('asistan-mesajlar');
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Kullanıcı mesajını ekle
+        box.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${text}</div>`;
+        input.value = "";
+        box.scrollTop = box.scrollHeight;
+
+        // "Düşünüyor" efekti
+        const tempId = "yükleniyor-" + Date.now();
+        box.innerHTML += `<div id="${tempId}" style="background: #f0f0f0; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic; font-size: 12px;">Yanıt hazırlanıyor...</div>`;
+        box.scrollTop = box.scrollHeight;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi dijital asistanısın. Kurucumuz Xale Şeğo, mevcut reisimiz Said Özer'dir. Nazik ve ağırbaşlı bir dille cevap ver: " + text }] }] 
+                })
+            });
+            const data = await response.json();
+            document.getElementById(tempId).remove();
+
+            if (data.candidates && data.candidates[0]) {
+                const cevap = data.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; line-height: 1.5;">${cevap}</div>`;
+            } else {
+                box.innerHTML += `<div style="color: red;">Üzgünüm, şu an bağlantı kuramıyorum.</div>`;
+            }
+        } catch (e) {
+            document.getElementById(tempId).innerText = "Hata oluştu, lütfen sonra tekrar deneyin.";
         }
-
-        function saitBeyBaglan() {
-            const anons = new SpeechSynthesisUtterance("Özer Aşireti Liderlik Makamı'na hoş geldiniz. Said Özer ile doğrudan görüşme talebiniz işleme alınmıştır. Lütfen bekleyiniz.");
-            anons.lang = 'tr-TR';
-            anons.rate = 0.7;
-            window.speechSynthesis.speak(anons);
-            anons.onend = () => { window.location.href = "tel:" + ASİRET_TEL; };
-        }
-
-        function waYonlendir() { window.open(`https://api.whatsapp.com/send?phone=${ASİRET_TEL}&text=Selamun aleyküm, Özer Aşireti ile iletişime geçmek istiyorum.`, '_blank'); }
-
-        function istisareGonder() {
-            const ad = document.getElementById('ins-ad').value;
-            const mesaj = document.getElementById('ins-mesaj').value;
-            const metin = `*Özer Aşireti İstişare Formu*%0A*Gönderen:* ${ad}%0A*Görüş:* ${mesaj}`;
-            window.open(`https://api.whatsapp.com/send?phone=${ASİRET_TEL}&text=${metin}`, '_blank');
-        }
-
-        function toggleChat() {
-            const win = document.getElementById('ai-chat-window');
-            win.style.display = win.style.display === "none" ? "flex" : "none";
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const box = document.getElementById('chat-messages');
-            if (!input.value.trim()) return;
-            box.innerHTML += `<div><b>Siz:</b> ${input.value}</div>`;
-            const prompt = input.value;
-            input.value = "";
-            try {
-                const r = await fetch(MY_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Özer Aşireti asistanısın. Lider Said Özer'dir. Cevapla: " + prompt }] }] })
-                });
-                const d = await r.json();
-                const ans = d.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="color: #b30000;"><b>Asistan:</b> ${ans}</div>`;
-            } catch (e) { box.innerHTML += `<div>Hata oluştu.</div>`; }
-            box.scrollTop = box.scrollHeight;
-        }
-    </script>
+        box.scrollTop = box.scrollHeight;
+    }
+</script>
 </body>
 </html>
