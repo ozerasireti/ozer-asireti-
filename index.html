@@ -129,70 +129,67 @@
 </div>
 
 
-<div id="ozer-ai-vfinal" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999999;">
-    <div id="ozer-win" style="display: none; width: 330px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 10px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+
+<div id="ozer-asistan-fixed" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
+    <div id="pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); flex-direction: column; overflow: hidden; border: 3px solid #b30000; font-family: sans-serif;">
         <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span style="display: flex; align-items: center; gap: 8px;">👑 Said Özer Asistanı</span>
-            <button onclick="ozerKapat()" style="background:none; border:none; color:white; font-size:25px; cursor:pointer; line-height:1;">×</button>
+            <span>👑 Said Özer Asistanı</span>
+            <button onclick="document.getElementById('pencere').style.display='none'; document.getElementById('buton').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
         </div>
-        <div id="ozer-chat" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 12px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                Selamun Aleyküm. Özer Aşireti dijital merkezine hoş geldiniz. Size nasıl yardımcı olabilirim?
-            </div>
+        <div id="chat-box" style="flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">Hürmetler. Said Bey'in dijital asistanıyım. Sizi dinliyorum.</div>
         </div>
-        <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
-            <input type="text" id="ozer-input" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="ozerSorgu()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
+        <div style="padding: 10px; display: flex; gap: 5px; background: white; border-top: 1px solid #eee;">
+            <input type="text" id="input-soru" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 10px; outline: none;">
+            <button onclick="cevapAl()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
-    <button id="ozer-btn" onclick="ozerAc()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: 3px solid white; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
+    <button id="buton" onclick="document.getElementById('pencere').style.display='flex'; this.style.display='none';" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 5px 25px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">🤖</button>
 </div>
 
 <script>
-    // GÜVENLİK: Anahtar maskelenmiş ve parçalanmıştır
-    const _a1 = "QUl6YVN5REs0ZF9LWWN1ZGl5SFVVd3l4SVRMcS0wMGMzdEt5U2Fr"; 
-    const _KEY = atob(_a1);
+    async function cevapAl() {
+        const anahtar = "AIzaSyDK4d_KYcudiyHUUwyxITLq-00c3tKySak"; // Senin anahtarın
+        const input = document.getElementById('input-soru');
+        const box = document.getElementById('chat-box');
+        const soru = input.value.trim();
+        
+        if (!soru) return;
 
-    function ozerAc() { document.getElementById('ozer-win').style.display = 'flex'; document.getElementById('ozer-btn').style.display = 'none'; }
-    function ozerKapat() { document.getElementById('ozer-win').style.display = 'none'; document.getElementById('ozer-btn').style.display = 'flex'; window.speechSynthesis.cancel(); }
-
-    function sesliOku(metin) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance(metin);
-        msg.lang = 'tr-TR';
-        window.speechSynthesis.speak(msg);
-    }
-
-    async function ozerSorgu() {
-        const inp = document.getElementById('ozer-input'), box = document.getElementById('ozer-chat'), val = inp.value.trim();
-        if (!val) return;
-
-        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:12px; align-self:flex-end; max-width:85%;">${val}</div>`;
-        inp.value = "";
+        // Kullanıcının sorusunu ekrana bas
+        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${soru}</div>`;
+        input.value = "";
         box.scrollTop = box.scrollHeight;
 
-        const tid = "L-" + Date.now();
-        box.innerHTML += `<div id="${tid}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start; font-style:italic; font-size:12px;">Yanıt yazılıyor...</div>`;
-        box.scrollTop = box.scrollHeight;
+        const loadingId = "l-" + Date.now();
+        box.innerHTML += `<div id="${loadingId}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start;">Düşünüyor...</div>`;
 
         try {
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_KEY}`, {
+            const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + anahtar;
+            const response = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Said Özer'in asistanısın. Aşiret geleneklerine bağlı, bilge ve saygılı kısa cevap ver: " + val }] }] })
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: "Sen Said Özer'in resmi asistanısın. Çok saygılı ve bilgece kısa bir cevap ver: " + soru }] }]
+                })
             });
-            const data = await res.json();
-            document.getElementById(tid).remove();
 
-            if (data.candidates && data.candidates[0]) {
-                const ans = data.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:12px; border-radius:12px; align-self:flex-start; max-width:85%; line-height:1.5;">${ans}</div>`;
-                sesliOku(ans);
+            const veri = await response.json();
+            document.getElementById(loadingId).remove();
+
+            if (veri.candidates && veri.candidates[0]) {
+                const cevap = veri.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${cevap}</div>`;
+                
+                // Sesli okuma
+                const ses = new SpeechSynthesisUtterance(cevap);
+                ses.lang = 'tr-TR';
+                window.speechSynthesis.speak(ses);
             } else {
-                box.innerHTML += `<div style="color:red; font-size:12px;">Sistem uyarısı: Anahtar henüz aktif değil. Lütfen 1-2 dakika bekleyip tekrar deneyin.</div>`;
+                box.innerHTML += `<div style="color:red; font-size:12px;">Hata: Anahtar kısıtlı. Google Studio'dan 'Unrestricted' yapın.</div>`;
             }
-        } catch (e) {
-            document.getElementById(tid).innerText = "Hattı kontrol ediniz.";
+        } catch (hata) {
+            document.getElementById(loadingId).innerText = "Bağlantı başarısız!";
         }
         box.scrollTop = box.scrollHeight;
     }
