@@ -279,15 +279,15 @@
             messages.scrollTop = messages.scrollHeight;
         }, 800);
     }
-</script><script>
-    // Sizin verdiğiniz güncel API Anahtarı
-    const GEMINI_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
+</script>
+    <script>
+    // ANAHTAR VE URL HATALARI DÜZELTİLDİ
+    const GEMINI_API_KEY = "AIzaSyDRSmxQRc05A8B56nkeoGEuahK-T7jVshM"; 
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
     function toggleChat() {
         var windowDiv = document.getElementById('ai-chat-window');
         var btn = document.getElementById('chat-toggle-btn');
-        
         if (windowDiv.style.display === "none" || windowDiv.style.display === "") {
             windowDiv.style.display = "flex";
             btn.style.display = "none";
@@ -304,38 +304,37 @@
         
         if (text === "") return;
 
-        // Kullanıcı Mesajını Yaz
-        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${text}</div>`;
+        // Kullanıcı Mesajı
+        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${text}</div>`;
         input.value = "";
         messages.scrollTop = messages.scrollHeight;
 
-        // "Düşünüyor..." mesajı
         const loadingId = "loading-" + Date.now();
-        messages.innerHTML += `<div id="${loadingId}" style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start; max-width: 85%;">Cevap yazılıyor...</div>`;
-        messages.scrollTop = messages.scrollHeight;
+        messages.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">Düşünüyorum...</div>`;
 
         try {
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ 
-                        parts: [{ 
-                            text: `Sen Özer Aşireti'nin resmi dijital asistanısın. Aşiret lideri Said Özer'dir. Sen kibar, bilgili ve aşiret geleneklerine saygılı bir şekilde cevap veriyorsun. Soru: ${text}` 
-                        }] 
-                    }]
+                    contents: [{ parts: [{ text: `Sen Özer Aşireti'nin resmi asistanısın. Said Özer'in liderliğindeki aşiret hakkında kısa ve öz bilgiler ver. Soru: ${text}` }] }]
                 })
             });
 
             const data = await response.json();
-            const aiResponse = data.candidates[0].content.parts[0].text;
+            
+            // Hata kontrolü (API'den dönen veriyi güvenli oku)
+            if (data.candidates && data.candidates[0]) {
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                document.getElementById(loadingId).remove();
+                messages.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${aiResponse}</div>`;
+            } else {
+                throw new Error("Geçersiz yanıt");
+            }
 
-            // Yükleniyor yazısını sil ve Gemini cevabını yaz
-            document.getElementById(loadingId).remove();
-            messages.innerHTML += `<div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start; max-width: 85%;">${aiResponse}</div>`;
         } catch (error) {
-            document.getElementById(loadingId).innerText = "Hata: Bağlantı kurulamadı. Lütfen API anahtarını kontrol edin.";
-            console.error(error);
+            document.getElementById(loadingId).innerText = "Hata: Bağlantı kurulamadı. Lütfen API anahtarınızı kontrol edin.";
+            console.error("Hata detayı:", error);
         }
         messages.scrollTop = messages.scrollHeight;
     }
