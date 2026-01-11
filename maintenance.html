@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özer Aşireti - Bakım Çalışması</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #00BFFF 0%, #00BFFF 33%, #FFFFFF 33%, #FFFFFF 66%, #FFD700 66%, #FFD700 100%); /* Kürt bayrağı renkleri */
+            color: #333;
+            text-align: center;
+            overflow: hidden; /* Taşmaları engelle */
+            position: relative;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95); /* Hafif şeffaf beyaz kutu */
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            width: 150px; /* Logo boyutu */
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 5px solid #b30000; /* Aşiret rengi */
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        h1 {
+            color: #b30000; /* Başlık rengi */
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #008000; /* Yeşil renk */
+            margin-top: 25px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            display: none; /* Şimdilik gizli, istersen sayacı açabiliriz */
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #777;
+        }
+        .contact-info a {
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://drive.google.com/uc?id="1FroO0bh-3fKHGR775l7NSrlXfXN2anLG" alt="Özer Aşireti Logosu" class="logo">
+        
+        <h1>Bakım Çalışması</h1>
+        <p>Değerli ziyaretçilerimiz, sayfamız şu an kapsamlı bir yenileme ve bakım çalışması altındadır. Sizlere daha iyi hizmet verebilmek için geçici bir süre kapalıyız.</p>
+        <p style="font-weight: bold; color: #b30000;">Anlayışınız için teşekkür eder, kısa süre içinde hizmetinizde olmayı umarız.</p>
+        
+        <div class="contact-info">
+            Acil durumlar için: <a href="tel:05XXXXXXXXX">05XX XXX XX XX</a>
+        </div>
+    </div>
+</body>
+</html>
