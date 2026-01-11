@@ -344,7 +344,52 @@
         window.open(`https://api.whatsapp.com/send?phone=${ASİRET_TEL}&text=${metin}`, '_blank');
     }
 </script>
-    </div>
+    </div><div id="lider-baglanti" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #fdf2f2 0%, #ffffff 100%); border: 2px solid #b30000; border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: -10px; right: -10px; opacity: 0.05; font-size: 100px; transform: rotate(15deg);">📜</div>
+
+    <h3 style="color: #b30000; margin-bottom: 10px; font-size: 1.4rem;">Said Özer ile Doğrudan Bağlantı</h3>
+    <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+        Acil durumlar ve doğrudan arz edilecek konular için Liderlik Makamı hattına bağlanabilirsiniz.
+    </p>
+
+    <button onclick="saitBeyBaglan()" id="sait-btn" style="padding: 15px 40px; background: #333; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;">
+        <span>👑</span> Said Bey'e Bağlan
+    </button>
+</div>
+
+<script>
+function saitBeyBaglan() {
+    const btn = document.getElementById('sait-btn');
+    
+    // Buton Efekti
+    btn.disabled = true;
+    btn.style.background = "#b30000";
+    btn.innerText = "Liderlik Makamına Bağlanılıyor...";
+
+    // Özel Anons (Daha resmi ve tok bir ses)
+    const karsilama = new SpeechSynthesisUtterance();
+    karsilama.text = "Özer Aşireti Liderlik Makamı'na hoş geldiniz. Said Özer ile doğrudan görüşme talebiniz işleme alınmıştır. Şimdi makama yönlendiriliyorsunuz. Lütfen saygıyla bekleyiniz.";
+    karsilama.lang = "tr-TR";
+    karsilama.rate = 0.75; // Daha yavaş, daha otoriter
+    karsilama.pitch = 0.8; // Daha kalın/tok bir ses
+
+    window.speechSynthesis.speak(karsilama);
+
+    // Anons biterken arama başlat
+    karsilama.onend = function() {
+        // BURAYA SAİD BEY'İN NUMARASINI YAZIN (90...)
+        const SAID_BEY_TEL = "905309597498"; 
+        window.location.href = "tel:" + SAID_BEY_TEL;
+
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.style.background = "#333";
+            btn.innerHTML = "<span>👑</span> Said Bey'e Bağlan";
+        }, 5000);
+    };
+}
+</script>
 </section>
 </form>
         </div>
