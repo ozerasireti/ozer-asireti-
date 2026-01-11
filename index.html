@@ -128,23 +128,23 @@
 
     <div 
     
+
 <div id="ai-asistan-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000000; font-family: 'Segoe UI', sans-serif;">
-    
     <div id="ai-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; border: 1px solid #eee; margin-bottom: 15px;">
         <div style="background: #b30000; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
-            <span>🤖 Özer Asistan (Yapay Zeka)</span>
+            <span>🤖 Özer Asistan (GPT)</span>
             <button onclick="asistanKapat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 22px;">×</button>
         </div>
         
         <div id="asistan-mesajlar" style="flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
             <div style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">
-                Merhaba, ben Özer Aşireti'nin dijital asistanıyım. Said Özer ve aşiretimiz hakkında size nasıl yardımcı olabilirim?
+                Merhaba, ben Özer Aşireti'nin OpenAI destekli asistanıyım. Size nasıl yardımcı olabilirim?
             </div>
         </div>
 
-        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
+        <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
             <input type="text" id="asistan-input" placeholder="Sorunuzu buraya yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="soruSor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
+            <button onclick="soruSorOpenAI()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
 
@@ -156,55 +156,51 @@
 </div>
 
 <script>
-    // --- YAPAY ZEKA AYARLARI ---
-    const API_ANAHTARI = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; // Senin anahtarın
-    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_ANAHTARI;
+    const OPENAI_API_KEY = "a0ac3b24-a3f7-4997-8c8d-e2ca3be55e2a"; // sk-... ile başlayan anahtar
 
-    function asistanAc() {
-        document.getElementById('ai-pencere').style.display = 'flex';
-        document.getElementById('asistan-buton').style.display = 'none';
-    }
+    function asistanAc() { document.getElementById('ai-pencere').style.display = 'flex'; document.getElementById('asistan-buton').style.display = 'none'; }
+    function asistanKapat() { document.getElementById('ai-pencere').style.display = 'none'; document.getElementById('asistan-buton').style.display = 'flex'; }
 
-    function asistanKapat() {
-        document.getElementById('ai-pencere').style.display = 'none';
-        document.getElementById('asistan-buton').style.display = 'flex';
-    }
-
-    async function soruSor() {
+    async function soruSorOpenAI() {
         const input = document.getElementById('asistan-input');
         const box = document.getElementById('asistan-mesajlar');
         const text = input.value.trim();
         if (!text) return;
 
-        // Kullanıcı mesajını ekle
         box.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${text}</div>`;
         input.value = "";
         box.scrollTop = box.scrollHeight;
 
-        // "Düşünüyor" efekti
-        const tempId = "yükleniyor-" + Date.now();
-        box.innerHTML += `<div id="${tempId}" style="background: #f0f0f0; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic; font-size: 12px;">Yanıt hazırlanıyor...</div>`;
+        const tempId = "loading-" + Date.now();
+        box.innerHTML += `<div id="${tempId}" style="background: #f0f0f0; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic;">Cevap yazılıyor...</div>`;
         box.scrollTop = box.scrollHeight;
 
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi dijital asistanısın. Kurucumuz Xale Şeğo, mevcut reisimiz Said Özer'dir. Nazik ve ağırbaşlı bir dille cevap ver: " + text }] }] 
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${OPENAI_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo", // Veya "gpt-4"
+                    messages: [
+                        { role: "system", content: "Sen Özer Aşireti'nin asistanısın. Lider Said Özer'dir. Bismil ve Diyarbakır kültürüne hakim, saygılı birisin." },
+                        { role: "user", content: text }
+                    ]
                 })
             });
             const data = await response.json();
             document.getElementById(tempId).remove();
 
-            if (data.candidates && data.candidates[0]) {
-                const cevap = data.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; line-height: 1.5;">${cevap}</div>`;
+            if (data.choices && data.choices[0]) {
+                const answer = data.choices[0].message.content;
+                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">${answer}</div>`;
             } else {
-                box.innerHTML += `<div style="color: red;">Üzgünüm, şu an bağlantı kuramıyorum.</div>`;
+                box.innerHTML += `<div style="color: red; padding: 10px;">Bağlantı hatası: Anahtarınızı kontrol edin.</div>`;
             }
         } catch (e) {
-            document.getElementById(tempId).innerText = "Hata oluştu, lütfen sonra tekrar deneyin.";
+            document.getElementById(tempId).innerText = "Sistem şu an meşgul.";
         }
         box.scrollTop = box.scrollHeight;
     }
