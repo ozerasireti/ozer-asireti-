@@ -219,120 +219,79 @@
   <footer>
     <p>&copy; 2025 Özer Aşireti. Tüm Hakları Saklıdır.</p>
   </footer
-</script>
-<div <div id="ai-chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: sans-serif;">
     
-    <div id="ai-chat-window" style="display: none; width: 320px; height: 450px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 1px solid #ddd;">
+<div id="ai-chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div id="ai-chat-window" style="display: none; width: 330px; height: 480px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 1px solid #ddd;">
         <div style="background: #b30000; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: bold;">🤖 Özer Asistan (AI)</span>
-            <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.5rem; line-height: 1;">×</button>
+            <span style="font-weight: bold;">🤖 Özer Asistan</span>
+            <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">×</button>
         </div>
-        
-        <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background: #f4f4f4; font-size: 0.95rem; display: flex; flex-direction: column; gap: 10px;">
+        <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background: #f4f4f4; display: flex; flex-direction: column; gap: 10px;">
             <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start; max-width: 85%;">
-                Merhaba! Ben Özer Aşireti'nin Yapay Zeka asistanıyım. Size nasıl yardımcı olabilirim?
+                Merhaba! Ben Özer Aşireti'nin yapay zeka asistanıyım. Size nasıl yardımcı olabilirim?
             </div>
         </div>
-
         <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
-            <input type="text" id="user-input" placeholder="Sorunuzu yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; outline: none;">
-            <button id="send-btn" onclick="sendMessage()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Gönder</button>
+            <input type="text" id="user-input" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; outline: none;">
+            <button onclick="sendMessage()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
-
-    <button id="chat-toggle-btn" onclick="toggleChat()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 15px rgba(179,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+    <button id="chat-toggle-btn" onclick="toggleChat()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: none; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(179,0,0,0.5); display: flex; align-items: center; justify-content: center;">
         🤖
     </button>
 </div>
 
 <script>
-    // Pencereyi Aç-Kapat Fonksiyonu
+    // Senin verdiğin yeni anahtar buraya işlendi
+    const KEY_VAL = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
+    const URL_VAL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + KEY_VAL;
+
     function toggleChat() {
-        var windowDiv = document.getElementById('ai-chat-window');
-        var btn = document.getElementById('chat-toggle-btn');
-        
-        if (windowDiv.style.display === "none" || windowDiv.style.display === "") {
-            windowDiv.style.display = "flex";
-            btn.style.display = "none";
-        } else {
-            windowDiv.style.display = "none";
-            btn.style.display = "flex";
-        }
+        const win = document.getElementById('ai-chat-window');
+        const btn = document.getElementById('chat-toggle-btn');
+        const isHidden = (win.style.display === "none" || win.style.display === "");
+        win.style.display = isHidden ? "flex" : "none";
+        btn.style.display = isHidden ? "none" : "flex";
     }
-
-    // Mesaj Gönderme Fonksiyonu (Gemini Hazırlığı)
-    async function sendMessage() {
-        var input = document.getElementById('user-input');
-        var messages = document.getElementById('chat-messages');
-        var text = input.value.trim();
-        
-        if (text === "") return;
-
-        // Kullanıcı Mesajı
-        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; shadow: 0 2px 5px rgba(0,0,0,0.1);">${text}</div>`;
-        input.value = "";
-        messages.scrollTop = messages.scrollHeight;
-
-        // Geçici Cevap (Gemini API Anahtarını Ekleyince Değişecek)
-        setTimeout(() => {
-            messages.innerHTML += `<div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start; max-width: 85%;">Mesajınız başarıyla alındı. Gemini bağlantınız kurulduğunda size özel cevaplar vereceğim.</div>`;
-            messages.scrollTop = messages.scrollHeight;
-        }, 800);
-    }
-</script>
-
-
-
-<script>
-    // Ücretli üyeliğinle aldığın anahtarı buraya yaz
-    const MY_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE"; 
-    
-    // Üyeliğin sayesinde PRO modelini kullanıyoruz (Daha zekidir)
-    const TARGET_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" + MY_KEY;
 
     async function sendMessage() {
         const input = document.getElementById('user-input');
-        const msgDiv = document.getElementById('chat-messages');
-        const val = input.value.trim();
-        if (!val) return;
+        const box = document.getElementById('chat-messages');
+        const text = input.value.trim();
+        if (!text) return;
 
-        msgDiv.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${val}</div>`;
+        box.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${text}</div>`;
         input.value = "";
-        msgDiv.scrollTop = msgDiv.scrollHeight;
+        box.scrollTop = box.scrollHeight;
 
-        const loadId = "id-" + Date.now();
-        msgDiv.innerHTML += `<div id="${loadId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">Özer Asistan düşünüyor...</div>`;
+        const id = "loading-" + Date.now();
+        box.innerHTML += `<div id="${id}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; font-style: italic;">Cevap yazılıyor...</div>`;
+        box.scrollTop = box.scrollHeight;
 
         try {
-            const resp = await fetch(TARGET_URL, {
+            const r = await fetch(URL_VAL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ 
-                        parts: [{ 
-                            text: `Sen Özer Aşireti'nin en üst düzey yapay zeka asistanısın. Bilgeliğin ve ağırbaşlılığınla tanınırsın. Lider Said Özer'dir. Şu soruyu aşiretin vakarına uygun cevapla: ${val}` 
-                        }] 
-                    }]
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi asistanısın. Liderimiz Said Özer'dir. Soruları aşiret ağırlığına yakışır şekilde cevapla: " + text }] }] 
                 })
             });
+            const d = await r.json();
+            const loadingEl = document.getElementById(id);
+            if(loadingEl) loadingEl.remove();
 
-            const data = await resp.json();
-            const loadingEl = document.getElementById(loadId);
-
-            if (data.error) {
-                // Hata alırsan sebebi burada yazar (Kota mı, anahtar mı?)
-                loadingEl.innerText = "Sistem Notu: " + data.error.message;
-            } else if (data.candidates && data.candidates[0]) {
-                const result = data.candidates[0].content.parts[0].text;
-                loadingEl.remove();
-                msgDiv.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${result}</div>`;
+            if (d.candidates && d.candidates[0]) {
+                const ans = d.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">${ans}</div>`;
+            } else if (d.error) {
+                box.innerHTML += `<div style="background: #ffdddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%;">Google Hatası: ${d.error.message}</div>`;
             }
-        } catch (err) {
-            document.getElementById(loadId).innerText = "Bağlantı hatası.";
+        } catch (e) {
+            const loadingEl = document.getElementById(id);
+            if(loadingEl) loadingEl.innerText = "Bağlantı hatası oluştu.";
         }
-        msgDiv.scrollTop = msgDiv.scrollHeight;
+        box.scrollTop = box.scrollHeight;
     }
-</script>
 </script>
 </body>
 </html>
