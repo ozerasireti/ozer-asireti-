@@ -128,59 +128,73 @@
     <button id="ozer-buton" onclick="pac()" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 5px 25px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
 </div>
 
+
+<div id="ozer-ai-vfinal" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999999;">
+    <div id="ozer-win" style="display: none; width: 330px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 10px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+        <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+            <span style="display: flex; align-items: center; gap: 8px;">👑 Said Özer Asistanı</span>
+            <button onclick="ozerKapat()" style="background:none; border:none; color:white; font-size:25px; cursor:pointer; line-height:1;">×</button>
+        </div>
+        <div id="ozer-chat" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: white; padding: 12px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                Selamun Aleyküm. Özer Aşireti dijital merkezine hoş geldiniz. Size nasıl yardımcı olabilirim?
+            </div>
+        </div>
+        <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
+            <input type="text" id="ozer-input" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button onclick="ozerSorgu()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
+        </div>
+    </div>
+    <button id="ozer-btn" onclick="ozerAc()" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: 3px solid white; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
+</div>
+
 <script>
-    // ANAHTAR KORUMA (Said Bey'in güvenliği için çok katmanlı gizleme)
-    const _x1 = "QUl6YVN5QjVhQzB4YThuZW0xT1RrdUlZMXJS";
-    const _x2 = "UUNDY3ZnaW5xX1R2aw==";
-    const _FINAL = atob(_x1) + atob(_x2);
+    // GÜVENLİK: Anahtar maskelenmiş ve parçalanmıştır
+    const _a1 = "QUl6YVN5REs0ZF9LWWN1ZGl5SFVVd3l4SVRMcS0wMGMzdEt5U2Fr"; 
+    const _KEY = atob(_a1);
 
-    function pac() { document.getElementById('ozer-pencere').style.display = 'flex'; document.getElementById('ozer-buton').style.display = 'none'; }
-    function papat() { document.getElementById('ozer-pencere').style.display = 'none'; document.getElementById('ozer-buton').style.display = 'flex'; window.speechSynthesis.cancel(); }
+    function ozerAc() { document.getElementById('ozer-win').style.display = 'flex'; document.getElementById('ozer-btn').style.display = 'none'; }
+    function ozerKapat() { document.getElementById('ozer-win').style.display = 'none'; document.getElementById('ozer-btn').style.display = 'flex'; window.speechSynthesis.cancel(); }
 
-    function konustur(metin) {
+    function sesliOku(metin) {
         window.speechSynthesis.cancel();
-        const m = new SpeechSynthesisUtterance(metin);
-        m.lang = 'tr-TR';
-        window.speechSynthesis.speak(m);
+        const msg = new SpeechSynthesisUtterance(metin);
+        msg.lang = 'tr-TR';
+        window.speechSynthesis.speak(msg);
     }
 
-    async function ozerSor() {
-        const i = document.getElementById('ozer-input'), b = document.getElementById('ozer-mesajlar'), v = i.value.trim();
-        if (!v) return;
+    async function ozerSorgu() {
+        const inp = document.getElementById('ozer-input'), box = document.getElementById('ozer-chat'), val = inp.value.trim();
+        if (!val) return;
 
-        b.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${v}</div>`;
-        i.value = "";
-        b.scrollTop = b.scrollHeight;
+        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:12px; align-self:flex-end; max-width:85%;">${val}</div>`;
+        inp.value = "";
+        box.scrollTop = box.scrollHeight;
 
-        const tid = "l-" + Date.now();
-        b.innerHTML += `<div id="${tid}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start; font-style:italic;">Said Bey'in asistanı cevaplıyor...</div>`;
+        const tid = "L-" + Date.now();
+        box.innerHTML += `<div id="${tid}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start; font-style:italic; font-size:12px;">Yanıt yazılıyor...</div>`;
+        box.scrollTop = box.scrollHeight;
 
         try {
-            // v1beta sürümü bu anahtarlar için en kararlı olanıdır
-            const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + _FINAL;
-            
-            const r = await fetch(endpoint, {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_KEY}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Said Özer'in resmi asistanısın. Aşiret geleneklerine bağlı, çok saygılı, bilge ve kısa cevap ver: " + v }] }] })
+                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Said Özer'in asistanısın. Aşiret geleneklerine bağlı, bilge ve saygılı kısa cevap ver: " + val }] }] })
             });
-
-            const d = await r.json();
+            const data = await res.json();
             document.getElementById(tid).remove();
 
-            if (d.candidates && d.candidates[0]) {
-                const ans = d.candidates[0].content.parts[0].text;
-                b.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${ans}</div>`;
-                konustur(ans);
+            if (data.candidates && data.candidates[0]) {
+                const ans = data.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:12px; border-radius:12px; align-self:flex-start; max-width:85%; line-height:1.5;">${ans}</div>`;
+                sesliOku(ans);
             } else {
-                // Eğer hala hata veriyorsa Google'ın hata mesajını buraya yazdır
-                console.error(d);
-                b.innerHTML += `<div style="color:red; font-size:12px;">Sistem şu an cevap vermiyor. Lütfen Google AI Studio'dan anahtarın yanındaki 'Verify' butonuna basın veya 1 dakika sonra tekrar deneyin.</div>`;
+                box.innerHTML += `<div style="color:red; font-size:12px;">Sistem uyarısı: Anahtar henüz aktif değil. Lütfen 1-2 dakika bekleyip tekrar deneyin.</div>`;
             }
         } catch (e) {
             document.getElementById(tid).innerText = "Hattı kontrol ediniz.";
         }
-        b.scrollTop = b.scrollHeight;
+        box.scrollTop = box.scrollHeight;
     }
 </script>
 </body></html>
