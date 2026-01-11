@@ -282,55 +282,69 @@
 </script>
 
 <script>
-    // Buraya Google AI Studio'dan aldığın anahtarı yapıştır
-    const GEMINI_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE";
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    <script>
+    // En güncel ve hatasız yapı
+    const GEMINI_API_KEY = "AIzaSyABx5Mo8aaOroiSCjBNtOFNkr7D7CHGBaE; 
+    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
     function toggleChat() {
-        const chatWindow = document.getElementById('ai-chat-window');
-        const chatBtn = document.getElementById('chat-button');
-        chatWindow.style.display = (chatWindow.style.display === 'none' || chatWindow.style.display === '') ? 'flex' : 'none';
-        if(chatWindow.style.display === 'flex') chatBtn.style.display = 'none';
-        else chatBtn.style.display = 'flex';
+        var windowDiv = document.getElementById('ai-chat-window');
+        var btn = document.getElementById('chat-toggle-btn');
+        if (windowDiv.style.display === "none" || windowDiv.style.display === "") {
+            windowDiv.style.display = "flex";
+            btn.style.display = "none";
+        } else {
+            windowDiv.style.display = "none";
+            btn.style.display = "flex";
+        }
     }
 
     async function sendMessage() {
-        const input = document.getElementById('user-input');
-        const messages = document.getElementById('chat-messages');
-        const userText = input.value.trim();
+        var input = document.getElementById('user-input');
+        var messages = document.getElementById('chat-messages');
+        var text = input.value.trim();
         
-        if (userText === "") return;
+        if (text === "") return;
 
-        // Kullanıcı Mesajını Ekrana Yaz
-        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; margin-left: auto; width: fit-content; max-width: 80%">${userText}</div>`;
+        // Kullanıcı Mesajı
+        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${text}</div>`;
         input.value = "";
         messages.scrollTop = messages.scrollHeight;
 
-        // "Düşünüyor..." yazısı
+        // "Gemini cevap yazıyor..." yazısı
         const loadingId = "loading-" + Date.now();
-        messages.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; margin-bottom: 10px; width: fit-content;">Gemini cevap yazıyor...</div>`;
+        messages.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px; font-style: italic;">Gemini cevap yazıyor...</div>`;
+        messages.scrollTop = messages.scrollHeight;
 
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: `Sen Özer Aşireti'nin resmi asistanısın. Said Özer'in liderliğindeki aşiret hakkında bilgi veriyorsun. Kibar ve saygılı bir dil kullan. Soru şu: ${userText}` }] }]
+                    contents: [{ parts: [{ text: `Sen Özer Aşireti'nin yardımsever bir asistanısın. Aşiret lideri Said Özer'dir. Soruyu bu kimlikle cevapla: ${text}` }] }]
                 })
             });
 
             const data = await response.json();
-            const aiResponse = data.candidates[0].content.parts[0].text;
+            
+            // Yükleniyor yazısını sil
+            const loadingElement = document.getElementById(loadingId);
+            if(loadingElement) loadingElement.remove();
 
-            // Yükleniyor yazısını kaldır ve cevabı yaz
-            document.getElementById(loadingId).remove();
-            messages.innerHTML += `<div style="background: #eee; padding: 10px; border-radius: 10px; margin-bottom: 10px; width: fit-content; max-width: 80%">${aiResponse}</div>`;
+            if (data.candidates && data.candidates[0].content.parts[0].text) {
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                messages.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${aiResponse}</div>`;
+            } else {
+                throw new Error("API boş döndü");
+            }
+
         } catch (error) {
-            document.getElementById(loadingId).innerText = "Hata: Bağlantı kurulamadı.";
+            console.error(error);
+            const loadingElement = document.getElementById(loadingId);
+            if(loadingElement) loadingElement.innerText = "Hata: Şu an cevap veremiyorum, lütfen internetinizi kontrol edin.";
         }
         messages.scrollTop = messages.scrollHeight;
     }
-</script>
 </script>
 </body>
 </html>
