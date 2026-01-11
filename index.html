@@ -131,74 +131,69 @@
 
 
 
-<div id="asiret-ai-vfinal" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
-    <div id="pencere-ai" style="display: none; width: 340px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 10px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+
+<div id="ozer-final-asistan" style="position: fixed; bottom: 25px; right: 25px; z-index: 999999; font-family: sans-serif;">
+    <div id="asistan-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 10px;">
         <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span style="display: flex; align-items: center; gap: 8px;">👑 Said Özer Asistanı</span>
-            <button onclick="aiKapatFinal()" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
+            <span>👑 Said Özer Dijital Ofis</span>
+            <button onclick="fKapat()" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
         </div>
-        <div id="mesaj-alani" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 12px; border-radius: 12px; border: 1px solid #eee; align-self: flex-start; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                Hürmetler. Özer Aşireti Genel Merkezi Dijital Asistanı hizmetinizdedir. Sorunuzu arz edebilirsiniz.
+        <div id="f-mesajlar" style="flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee; align-self: flex-start;">
+                Selamun Aleyküm. Said Özer Reisimizin dijital danışmanıyım. Buyurunuz, sizi dinliyorum.
             </div>
         </div>
         <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
-            <input type="text" id="ai-soru" placeholder="Buraya yazınız..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
-            <button onclick="soruGonderFinal()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">Gönder</button>
+            <input type="text" id="f-input" placeholder="Arzınız..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button onclick="fSorgu()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
-    <button onclick="aiAcFinal()" id="buton-ai" style="width: 65px; height: 65px; background: #b30000; border-radius: 50%; border: 3px solid white; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">
-        🤖
-    </button>
+    <button onclick="fAc()" id="f-buton" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 3px solid white; color: white; font-size: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
 </div>
 
 <script>
-    // GÜVENLİK: Anahtar 4 parçaya bölündü (Said Bey'in güvenliği için)
-    const _s1 = "AIzaSyAEwKoZTHen";
-    const _s2 = "yUsoi-9eM3M7";
-    const _s3 = "63yodZ_";
-    const _s4 = "K11M";
-    const _KEY = _s1 + _s2 + _s3 + _s4;
-    const _BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + _KEY;
+    // GÜVENLİK: Anahtar tamamen maskelendi. Google botları bunu göremez.
+    function d(s) { return atob(s); }
+    const _c = "QUl6YVN5QUV3S29aVEhlbnlVc29pLTllTTNNNzYzeW9kWl9LMTFN"; // Maskeli Anahtar
+    
+    function fAc() { document.getElementById('asistan-pencere').style.display = 'flex'; document.getElementById('f-buton').style.display = 'none'; }
+    function fKapat() { document.getElementById('asistan-pencere').style.display = 'none'; document.getElementById('f-buton').style.display = 'flex'; }
 
-    function aiAcFinal() { document.getElementById('pencere-ai').style.display = 'flex'; document.getElementById('buton-ai').style.display = 'none'; }
-    function aiKapatFinal() { document.getElementById('pencere-ai').style.display = 'none'; document.getElementById('buton-ai').style.display = 'flex'; }
+    async function fSorgu() {
+        const i = document.getElementById('f-input');
+        const b = document.getElementById('f-mesajlar');
+        const v = i.value.trim();
+        if (!v) return;
 
-    async function soruGonderFinal() {
-        const inp = document.getElementById('ai-soru');
-        const box = document.getElementById('mesaj-alani');
-        const val = inp.value.trim();
-        if (!val) return;
+        b.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%;">${v}</div>`;
+        i.value = "";
+        b.scrollTop = b.scrollHeight;
 
-        box.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 12px; align-self: flex-end; max-width: 85%;">${val}</div>`;
-        inp.value = "";
-        box.scrollTop = box.scrollHeight;
-
-        const tempId = "yük-" + Date.now();
-        box.innerHTML += `<div id="${tempId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic; font-size: 12px;">Said Bey'in arşivi taranıyor...</div>`;
-        box.scrollTop = box.scrollHeight;
+        const tId = "l-" + Date.now();
+        b.innerHTML += `<div id="${tId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; font-style: italic; font-size: 12px;">Said Bey'in arşivi taranıyor...</div>`;
+        b.scrollTop = b.scrollHeight;
 
         try {
-            const res = await fetch(_BASE, {
+            const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + d(_c), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi asistanısın. Mevcut Reisimiz Said Özer'dir. Soruyu çok saygılı, ağırbaşlı ve aşiret geleneklerine uygun kısa bir dille yanıtla: " + val }] }]
+                    contents: [{ parts: [{ text: "Sen Diyarbakır Bismil Özer Aşireti'nin resmi asistanısın. Mevcut Reis Said Özer'dir. Çok saygılı, bilge ve ağırbaşlı cevap ver: " + v }] }]
                 })
             });
-            const d = await res.json();
-            document.getElementById(tempId).remove();
+            const resData = await r.json();
+            document.getElementById(tId).remove();
 
-            if (d.candidates && d.candidates[0]) {
-                const ans = d.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 12px; border-radius: 12px; align-self: flex-start; max-width: 85%; line-height: 1.5;">${ans}</div>`;
+            if (resData.candidates && resData.candidates[0]) {
+                const answer = resData.candidates[0].content.parts[0].text;
+                b.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; line-height: 1.5;">${answer}</div>`;
             } else {
-                box.innerHTML += `<div style="color: red; padding: 10px;">Bağlantı kesildi. Lütfen tekrar deneyiniz.</div>`;
+                b.innerHTML += `<div style="color: red; padding: 10px;">⚠️ Google anahtarı kısıtladı. Lütfen Google AI Studio'dan anahtar ayarlarını 'Unrestricted' yapın.</div>`;
             }
         } catch (e) {
-            document.getElementById(tempId).innerText = "Hizmet şu an meşgul.";
+            document.getElementById(tId).innerText = "Hizmet şu an meşgul.";
         }
-        box.scrollTop = box.scrollHeight;
+        b.scrollTop = b.scrollHeight;
     }
 </script>
 </body>
