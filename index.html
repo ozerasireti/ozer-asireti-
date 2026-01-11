@@ -283,74 +283,68 @@
 
 
 <script>
-    // 1. ADIM: Google'dan aldığın kodu aşağıdaki tırnakların içine yaz
-    const GEMINI_API_KEY = "AIzaSyDE5L_tFYcWBKvGhee2068bj0jO4YO08DY"; 
+    // 1. API Anahtarını tırnak içinde, tam haliyle buraya koy:
+    const MY_KEY = "AIzaSyDE5L_tFYcWBKvGhee2068bj0jO4YO08DY"; 
     
-    // Gemini API'nin adresi (Bunu değiştirme)
-    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+    // 2. Doğru ve temiz URL adresi:
+    const TARGET_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + MY_KEY;
 
-    // Sohbet penceresini açıp kapatan fonksiyon
     function toggleChat() {
-        const chatWindow = document.getElementById('ai-chat-window');
-        const chatBtn = document.getElementById('chat-toggle-btn');
-        if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
-            chatWindow.style.display = "flex";
-            chatBtn.style.display = "none";
+        const win = document.getElementById('ai-chat-window');
+        const btn = document.getElementById('chat-toggle-btn');
+        if (win.style.display === "none" || win.style.display === "") {
+            win.style.display = "flex";
+            btn.style.display = "none";
         } else {
-            chatWindow.style.display = "none";
-            chatBtn.style.display = "flex";
+            win.style.display = "none";
+            btn.style.display = "flex";
         }
     }
 
-    // 2. ADIM: Gemini ile bağlantı kuran ana fonksiyon
     async function sendMessage() {
         const input = document.getElementById('user-input');
-        const messages = document.getElementById('chat-messages');
-        const text = input.value.trim();
+        const msgDiv = document.getElementById('chat-messages');
+        const val = input.value.trim();
         
-        if (text === "") return;
+        if (!val) return;
 
-        // Kullanıcının yazdığını ekrana bas
-        messages.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${text}</div>`;
+        // Kullanıcı mesajını ekle
+        msgDiv.innerHTML += `<div style="background: #b30000; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 85%; margin-bottom: 10px;">${val}</div>`;
         input.value = "";
-        messages.scrollTop = messages.scrollHeight;
+        msgDiv.scrollTop = msgDiv.scrollHeight;
 
-        // Bekleme efekti
-        const loadingId = "loading-" + Date.now();
-        messages.innerHTML += `<div id="${loadingId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px; font-style: italic;">Gemini cevap yazıyor...</div>`;
-        messages.scrollTop = messages.scrollHeight;
+        // Yükleniyor mesajı
+        const loadId = "id-" + Date.now();
+        msgDiv.innerHTML += `<div id="${loadId}" style="background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px; font-style: italic;">Gemini cevap yazıyor...</div>`;
+        msgDiv.scrollTop = msgDiv.scrollHeight;
 
         try {
-            // Google Gemini'ye istek gönderiyoruz
-            const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
+            const resp = await fetch(TARGET_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: `Sen Özer Aşireti'nin resmi asistanısın. Liderimiz Said Özer'dir. Konumumuz Diyarbakır/Bismil'dir. Çok saygılı ve ağırbaşlı bir dille şu soruyu yanıtla: ${text}`
-                        }]
-                    }]
+                    contents: [{ parts: [{ text: "Sen Özer Aşireti asistanısın. Lider Said Özer'dir. Soruyu cevapla: " + val }] }]
                 })
             });
 
-            const data = await response.json();
-            document.getElementById(loadingId).remove();
+            const data = await resp.json();
+            const loadingEl = document.getElementById(loadId);
 
             if (data.candidates && data.candidates[0].content.parts[0].text) {
-                const aiResponse = data.candidates[0].content.parts[0].text;
-                // Gemini'den gelen cevabı ekrana bas
-                messages.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${aiResponse}</div>`;
+                const result = data.candidates[0].content.parts[0].text;
+                if(loadingEl) loadingEl.remove();
+                msgDiv.innerHTML += `<div style="background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 85%; margin-bottom: 10px;">${result}</div>`;
             } else {
-                throw new Error("API hatası");
+                if(loadingEl) loadingEl.innerText = "Hata: Google cevap veremedi.";
             }
-
-        } catch (error) {
-            document.getElementById(loadingId).innerText = "Hata: Bağlantı kurulamadı. Lütfen API anahtarını kontrol edin.";
-            console.error(error);
+        } catch (err) {
+            const loadingEl = document.getElementById(loadId);
+            if(loadingEl) loadingEl.innerText = "Bağlantı hatası oluştu.";
+            console.error(err);
         }
-        messages.scrollTop = messages.scrollHeight;
+        msgDiv.scrollTop = msgDiv.scrollHeight;
     }
-</script></script>
+</script>
+</script>
 </body>
 </html>
