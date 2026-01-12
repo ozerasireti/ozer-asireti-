@@ -92,49 +92,60 @@
     </section>
 
     
-                  <div id="koordinasyon-merkezi" style="max-width: 400px; margin: 20px auto; padding: 25px; background: #fdfdfd; border-radius: 20px; border: 2px solid #b30000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;">
+                 
+<div id="koordinasyon-merkezi" style="max-width: 400px; margin: 20px auto; padding: 25px; background: #fff; border-radius: 20px; border: 2px solid #b30000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); font-family: sans-serif; text-align: center;">
     
     <div style="margin-bottom: 20px;">
-        <div style="font-size: 24px; color: #b30000; font-weight: bold; letter-spacing: 1px;">İLETİŞİM MERKEZİ</div>
-        <div style="font-size: 12px; color: #666; text-transform: uppercase;">Stratejik Koordinasyon Hattı</div>
+        <div style="font-size: 22px; color: #b30000; font-weight: bold; letter-spacing: 1px;">İLETİŞİM MERKEZİ</div>
+        <div style="font-size: 11px; color: #888; text-transform: uppercase;">Stratejik Koordinasyon Hattı</div>
     </div>
 
-    <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 25px;">
+    <iframe id="youtube-muzik" width="0" height="0" src="https://www.youtube.com/embed/aMyga4LGCMw?enablejsapi=1&autoplay=0" frameborder="0" style="display:none;"></iframe>
 
-    <button onclick="merkeziAra()" style="width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(179, 0, 0, 0.3);">
+    <button onclick="merkeziAra()" style="width: 100%; padding: 20px; background: #b30000; color: white; border: none; border-radius: 15px; font-size: 17px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;">
         📞 GENEL MERKEZİ BAĞLA
     </button>
 
-    <div id="islem-durumu" style="margin-top: 20px; min-height: 40px; color: #b30000; font-style: italic; font-size: 14px;"></div>
+    <div id="islem-durumu" style="margin-top: 15px; color: #b30000; font-weight: 600; min-height: 45px; line-height: 1.4;"></div>
 </div>
 
 <script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-muzik');
+    }
+
     function merkeziAra() {
         const durum = document.getElementById('islem-durumu');
-        const mesaj = "Sayın Sait Özer, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz...";
+        const iframe = document.getElementById('youtube-muzik');
+        const mesaj = "Sayın bekleyen kişi, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
         
-        // 1. Ekrandaki yazıyı güncelle
-        durum.innerText = "Bağlantı kuruluyor...";
+        // 1. YouTube müziğini başlat (Arka planda "Giz" çalmaya başlar)
+        iframe.src += "&autoplay=1";
 
-        // 2. O yavaş ve kurumsal seslendirmeyi başlat
+        // 2. Vakur Anonsu Başlat
         window.speechSynthesis.cancel();
         const ses = new SpeechSynthesisUtterance(mesaj);
         ses.lang = 'tr-TR';
-        ses.rate = 0.8; // SESİ YAVAŞLATTIK (Kurumsal ve ağır olması için)
-        ses.pitch = 0.9; // Sesi biraz daha toklaştırdık
+        ses.rate = 0.7;  // Daha ağır, daha otoriter bir hız
+        ses.pitch = 0.8; // Daha kalın ve tok bir ses tonu
 
         ses.onstart = function() {
             durum.innerText = "🔊 " + mesaj;
         };
 
         ses.onend = function() {
-            durum.innerText = "📞 Aranıyor...";
-            // Buraya Genel Merkez numarasını yazın (Örn: tel:0532...)
-            window.location.href = "tel:05309597498"; 
+            durum.innerText = "📞 Genel Merkez Aranıyor...";
+            
+            // Müzik biraz çalsın, sonra aramaya geçsin (3 saniye sonra)
+            setTimeout(() => {
+                window.location.href = "tel:05309597498";
+            }, 3000);
         };
 
         window.speechSynthesis.speak(ses);
     }
 </script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
             </html>
