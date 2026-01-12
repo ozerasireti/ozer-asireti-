@@ -112,17 +112,17 @@
                 
                 
                 
-                <div id="ozer-asistan-final" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
+              <div id="ozer-asistan-plus" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
     <div id="pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.4); flex-direction: column; overflow: hidden; border: 3px solid #b30000; font-family: 'Segoe UI', Arial, sans-serif;">
         <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
             <span>👑 Sait Özer Asistanı</span>
             <button onclick="document.getElementById('pencere').style.display='none'; document.getElementById('buton').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
         </div>
         <div id="chat-ekran" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Sistem aktif Mehmet Bey. Sait Bey için hazır bekliyorum.</div>
+            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Plus sistem aktif. Sait Bey, asistanınız emrinizdedir.</div>
         </div>
         <div style="padding: 10px; display: flex; gap: 5px; background: white; border-top: 1px solid #eee;">
-            <input type="text" id="soru-giris" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <input type="text" id="soru-giris" placeholder="Sait Bey'e arzınız..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
             <button onclick="saitBeySor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
@@ -131,7 +131,7 @@
 
 <script>
     async function saitBeySor() {
-        const _k = "AIzaSyDK4d_KYcudiyHUUwyxITLq-00c3tKySak"; 
+        const _k = "AIzaSyC1d0OdyTSTubNg-70xS007H1qLP9lR-_E"; 
         const inp = document.getElementById('soru-giris'), box = document.getElementById('chat-ekran'), v = inp.value.trim();
         if (!v) return;
 
@@ -143,11 +143,11 @@
         box.innerHTML += `<div id="${loading}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start;">Düşünüyor...</div>`;
 
         try {
-            // MODEL İSMİNİ "gemini-pro" OLARAK GÜNCELLEDİK (EN GARANTİ YOL)
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${_k}`, {
+            // Plus hesaplarda en iyi çalışan resmi adres
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_k}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Sait Özer'in asistanısın. Aşiret geleneklerine bağlı, bilgece ve saygılı cevap ver: " + v }] }] })
+                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Sait Özer'in asistanısın. Aşiret liderine yakışır, çok saygılı ve bilgece cevap ver: " + v }] }] })
             });
 
             const data = await res.json();
@@ -156,22 +156,22 @@
             if (data.candidates && data.candidates[0]) {
                 const cevap = data.candidates[0].content.parts[0].text;
                 box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${cevap}</div>`;
+                
                 window.speechSynthesis.cancel();
                 const s = new SpeechSynthesisUtterance(cevap);
                 s.lang = 'tr-TR';
                 window.speechSynthesis.speak(s);
             } else {
-                const msg = "Hata: " + (data.error ? data.error.message : "Sistem cevap vermedi.");
-                box.innerHTML += `<div style="color:red; font-size:11px;">${msg}</div>`;
+                const hataMesaji = "Sistem Hatası: " + (data.error ? data.error.message : "Cevap alınamadı.");
+                box.innerHTML += `<div style="color:red; font-size:11px;">${hataMesaji}</div>`;
                 window.speechSynthesis.cancel();
-                const s = new SpeechSynthesisUtterance(msg);
-                s.lang = 'tr-TR';
-                window.speechSynthesis.speak(s);
+                window.speechSynthesis.speak(new SpeechSynthesisUtterance(hataMesaji));
             }
         } catch (e) {
             document.getElementById(loading).innerText = "Hata!";
         }
         box.scrollTop = box.scrollHeight;
     }
-</script>/body>
+</script>
+                /body>
             </html>
