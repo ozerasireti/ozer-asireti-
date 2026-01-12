@@ -111,84 +111,64 @@
                     <h4 style="margin: 0 0 10px 0; color: #b30000;">Said Bey'e Bağlan</h4>
                     <button onclick="saitBeyBaglan()" id="sait-btn" style="width: 100%; padding: 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">👑 Makama Bağlan</button>
                 </div>
-            </div<div id="ozer-ai-vfinal" style="position: fixed; bottom: 25px; right: 25px; z-index: 9999999; font-family: 'Segoe UI', sans-serif;">
-    <div id="ozer-pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); flex-direction: column; overflow: hidden; border: 2px solid #b30000; margin-bottom: 15px;">
+        
+    
+<div id="ozer-final-asistan" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
+    <div id="pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.4); flex-direction: column; overflow: hidden; border: 3px solid #b30000; font-family: 'Segoe UI', Arial, sans-serif;">
         <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>👑 Said Özer Dijital Asistan</span>
-            <button onclick="papat()" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
+            <span>👑 Sait Özer Asistanı</span>
+            <button onclick="document.getElementById('pencere').style.display='none'; document.getElementById('buton').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
         </div>
-        <div id="ozer-mesajlar" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Hürmetler. Said Özer Reisimizin dijital merkezine hoş geldiniz. Size nasıl yardımcı olabilirim?</div>
-        </div>
-        <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 5px; background: white;">
-            <input type="text" id="ozer-input" placeholder="Arzınızı yazın..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="ozerSor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
-        </div>
-    </div>
-    <button id="ozer-buton" onclick="pac()" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 5px 25px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; margin-left: auto;">🤖</button>
-</div>
-
-
-<div id="ozer-asistan-v7" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
-    <div id="win" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.5); flex-direction: column; overflow: hidden; border: 3px solid #b30000; font-family: 'Segoe UI', sans-serif;">
-        <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>👑 Said Özer Asistanı</span>
-            <button onclick="document.getElementById('win').style.display='none'; document.getElementById('btn').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
-        </div>
-        <div id="chat" style="flex: 1; padding: 15px; overflow-y: auto; background: #fefefe; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Sayın Said Özer, sisteminiz emrinize hazırdır. Buyurun.</div>
+        <div id="chat-ekran" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Sayın Sait Özer, emrinizdeyim. Bugün her şey yolunda, buyurun sorun cevaplayayım.</div>
         </div>
         <div style="padding: 10px; display: flex; gap: 5px; background: white; border-top: 1px solid #eee;">
-            <input type="text" id="soru" placeholder="Arzınız..." style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 10px; outline: none;">
-            <button onclick="sorgula()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
+            <input type="text" id="soru-giris" placeholder="Mesajınızı yazın..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button onclick="saitBeySor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
         </div>
     </div>
-    <button id="btn" onclick="document.getElementById('win').style.display='flex'; this.style.display='none';" style="width: 75px; height: 75px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 8px 30px rgba(179,0,0,0.4); display: flex; align-items: center; justify-content: center;">🤖</button>
+    <button id="buton" onclick="document.getElementById('pencere').style.display='flex'; this.style.display='none';" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 8px 30px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">🤖</button>
 </div>
 
 <script>
-    // ANAHTAR KORUMA (Kısıtlamayı aşmak için parçaladık)
-    const p1 = "AIzaSyDK4d_KYcudiyH";
-    const p2 = "UUwyxITLq-00c3tKySak";
-    const KEY = p1 + p2;
+    async function saitBeySor() {
+        // Senin onaylanmış anahtarın
+        const _k = "AIzaSyDK4d_KYcudiyHUUwyxITLq-00c3tKySak"; 
+        const inp = document.getElementById('soru-giris'), box = document.getElementById('chat-ekran'), v = inp.value.trim();
+        if (!v) return;
 
-    async function sorgula() {
-        const inp = document.getElementById('soru'), box = document.getElementById('chat'), val = inp.value.trim();
-        if (!val) return;
-
-        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${val}</div>`;
+        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${v}</div>`;
         inp.value = "";
         box.scrollTop = box.scrollHeight;
 
-        const tid = "t-" + Date.now();
-        box.innerHTML += `<div id="${tid}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start; font-style:italic;">Said Bey için cevaplanıyor...</div>`;
+        const loading = "L" + Date.now();
+        box.innerHTML += `<div id="${loading}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start;">Düşünüyor...</div>`;
 
         try {
-            // v1beta yerine v1 kullanarak en resmi yolu deniyoruz
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${KEY}`, {
+            // v1beta yerine v1 kullanarak en resmi yoldan gidiyoruz
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${_k}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Said Özer'in asistanısın. Çok bilge ve saygılı cevap ver: " + val }] }] })
+                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Sait Özer'in asistanısın. Aşiret geleneklerine bağlı, çok saygılı ve bilge cevap ver: " + v }] }] })
             });
 
-            const data = await response.json();
-            document.getElementById(tid).remove();
+            const data = await res.json();
+            document.getElementById(loading).remove();
 
-            if (data.candidates) {
-                const ans = data.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:12px; border-radius:12px; align-self:flex-start; max-width:85%;">${ans}</div>`;
+            if (data.candidates && data.candidates[0]) {
+                const cevap = data.candidates[0].content.parts[0].text;
+                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${cevap}</div>`;
                 
-                // Sesli okuma
-                const synth = window.speechSynthesis;
-                const utter = new SpeechSynthesisUtterance(ans);
-                utter.lang = 'tr-TR';
-                synth.speak(utter);
+                // Seslendirme
+                const s = new SpeechSynthesisUtterance(cevap);
+                s.lang = 'tr-TR';
+                window.speechSynthesis.speak(s);
             } else {
-                // Eğer hala kısıtlama varsa burada nedenini göreceğiz
-                box.innerHTML += `<div style="color:red; font-size:12px;">Hata: Google anahtarınızı henüz tam onaylamadı. Lütfen 5 dakika sonra tekrar deneyin.</div>`;
+                // Eğer Google hala "hata" diyorsa sebebi burada yazar
+                box.innerHTML += `<div style="color:red; font-size:11px;">Hata: ${data.error.message}</div>`;
             }
         } catch (e) {
-            document.getElementById(tid).innerText = "Bağlantı kesildi.";
+            document.getElementById(loading).innerText = "Hattı kontrol edin.";
         }
         box.scrollTop = box.scrollHeight;
     }
