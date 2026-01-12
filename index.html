@@ -91,87 +91,50 @@
         </div>
     </section>
 
-    <section id="koordinasyon-merkezi" style="border-top: 6px solid #b30000; border-radius: 20px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <h2 style="border:none;">İletişim ve Koordinasyon Merkezi</h2>
-            <p>Said Özer İstişare Heyeti ile doğrudan irtibat kurun.</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 15px;">
-                <h3>Hızlı Bağlantı</h3>
-                <button onclick="dijitalSantralAra()" id="santral-ana-btn" style="width: 100%; padding: 15px; background: #b30000; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-bottom: 15px;">
-                    📞 Genel Merkezi Ara
-                </button>
-                <button onclick="waYonlendir()" style="width: 100%; padding: 15px; background: #25D366; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
-                    💬 WhatsApp Hattı
-                </button>
-                
-           
-
-                
-                
-                
-              <div id="ozer-asistan-plus" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999;">
-    <div id="pencere" style="display: none; width: 330px; height: 480px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.4); flex-direction: column; overflow: hidden; border: 3px solid #b30000; font-family: 'Segoe UI', Arial, sans-serif;">
-        <div style="background: #b30000; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>👑 Sait Özer Asistanı</span>
-            <button onclick="document.getElementById('pencere').style.display='none'; document.getElementById('buton').style.display='flex';" style="background:none; border:none; color:white; font-size:25px; cursor:pointer;">×</button>
-        </div>
-        <div id="chat-ekran" style="flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-            <div style="background: white; padding: 10px; border-radius: 10px; border: 1px solid #eee;">Plus sistem aktif. Sait Bey, asistanınız emrinizdedir.</div>
-        </div>
-        <div style="padding: 10px; display: flex; gap: 5px; background: white; border-top: 1px solid #eee;">
-            <input type="text" id="soru-giris" placeholder="Sait Bey'e arzınız..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button onclick="saitBeySor()" style="background: #b30000; color: white; border: none; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold;">Gönder</button>
-        </div>
+    
+                  <div id="koordinasyon-merkezi" style="max-width: 400px; margin: 20px auto; padding: 25px; background: #fdfdfd; border-radius: 20px; border: 2px solid #b30000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;">
+    
+    <div style="margin-bottom: 20px;">
+        <div style="font-size: 24px; color: #b30000; font-weight: bold; letter-spacing: 1px;">İLETİŞİM MERKEZİ</div>
+        <div style="font-size: 12px; color: #666; text-transform: uppercase;">Stratejik Koordinasyon Hattı</div>
     </div>
-    <button id="buton" onclick="document.getElementById('pencere').style.display='flex'; this.style.display='none';" style="width: 70px; height: 70px; background: #b30000; border-radius: 50%; border: 4px solid white; color: white; font-size: 35px; cursor: pointer; box-shadow: 0 8px 30px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">🤖</button>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 25px;">
+
+    <button onclick="merkeziAra()" style="width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(179, 0, 0, 0.3);">
+        📞 GENEL MERKEZİ BAĞLA
+    </button>
+
+    <div id="islem-durumu" style="margin-top: 20px; min-height: 40px; color: #b30000; font-style: italic; font-size: 14px;"></div>
 </div>
 
 <script>
-    async function saitBeySor() {
-        const _k = "AIzaSyC1d0OdyTSTubNg-70xS007H1qLP9lR-_E"; 
-        const inp = document.getElementById('soru-giris'), box = document.getElementById('chat-ekran'), v = inp.value.trim();
-        if (!v) return;
+    function merkeziAra() {
+        const durum = document.getElementById('islem-durumu');
+        const mesaj = "Sayın Sait Özer, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz...";
+        
+        // 1. Ekrandaki yazıyı güncelle
+        durum.innerText = "Bağlantı kuruluyor...";
 
-        box.innerHTML += `<div style="background:#b30000; color:white; padding:10px; border-radius:10px; align-self:flex-end; max-width:85%;">${v}</div>`;
-        inp.value = "";
-        box.scrollTop = box.scrollHeight;
+        // 2. O yavaş ve kurumsal seslendirmeyi başlat
+        window.speechSynthesis.cancel();
+        const ses = new SpeechSynthesisUtterance(mesaj);
+        ses.lang = 'tr-TR';
+        ses.rate = 0.8; // SESİ YAVAŞLATTIK (Kurumsal ve ağır olması için)
+        ses.pitch = 0.9; // Sesi biraz daha toklaştırdık
 
-        const loading = "L" + Date.now();
-        box.innerHTML += `<div id="${loading}" style="background:#eee; padding:10px; border-radius:10px; align-self:flex-start;">Düşünüyor...</div>`;
+        ses.onstart = function() {
+            durum.innerText = "🔊 " + mesaj;
+        };
 
-        try {
-            // Plus hesaplarda en iyi çalışan resmi adres
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${_k}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: "Sen Sait Özer'in asistanısın. Aşiret liderine yakışır, çok saygılı ve bilgece cevap ver: " + v }] }] })
-            });
+        ses.onend = function() {
+            durum.innerText = "📞 Aranıyor...";
+            // Buraya Genel Merkez numarasını yazın (Örn: tel:0532...)
+            window.location.href = "tel:05309597498"; 
+        };
 
-            const data = await res.json();
-            document.getElementById(loading).remove();
-
-            if (data.candidates && data.candidates[0]) {
-                const cevap = data.candidates[0].content.parts[0].text;
-                box.innerHTML += `<div style="background:white; border:1px solid #ddd; padding:10px; border-radius:10px; align-self:flex-start; max-width:85%;">${cevap}</div>`;
-                
-                window.speechSynthesis.cancel();
-                const s = new SpeechSynthesisUtterance(cevap);
-                s.lang = 'tr-TR';
-                window.speechSynthesis.speak(s);
-            } else {
-                const hataMesaji = "Sistem Hatası: " + (data.error ? data.error.message : "Cevap alınamadı.");
-                box.innerHTML += `<div style="color:red; font-size:11px;">${hataMesaji}</div>`;
-                window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(new SpeechSynthesisUtterance(hataMesaji));
-            }
-        } catch (e) {
-            document.getElementById(loading).innerText = "Hata!";
-        }
-        box.scrollTop = box.scrollHeight;
+        window.speechSynthesis.speak(ses);
     }
 </script>
-                /body>
+</body>
             </html>
