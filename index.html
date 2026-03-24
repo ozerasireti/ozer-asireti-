@@ -38,6 +38,12 @@
         .tree div::before { content: ""; position: absolute; left: -20px; top: 12px; width: 20px; height: 2px; background: #b30000; }
         .news-card { border-left: 5px solid #006400; padding: 15px; margin-bottom: 20px; background: #f9f9f9; border-radius: 8px; }
         footer { text-align: center; padding: 30px; background: #1a1a1a; color: white; margin-top: 50px; }
+        
+        /* Yeni Eklenen Stiller */
+        .divan-box { border: 2px solid #d4af37; background: #000; color: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .gold-text { color: #d4af37; font-family: 'Georgia', serif; }
+        .belgesel-liste { list-style: none; padding: 0; }
+        .belgesel-liste li { padding: 10px; border-bottom: 1px dashed #ddd; }
     </style>
 </head>
 <body><div id="sayac-nav" style="position: fixed; top: 85px; right: 20px; z-index: 10001; font-family: 'Segoe UI', Tahoma, sans-serif;">
@@ -56,7 +62,6 @@
     function sayaciGuncelle() {
         var sayacElement = document.getElementById('canli-rakam');
         
-        // 1. Hafızada kayıtlı rakam var mı bak, yoksa 1.000.482'den başlat
         var kayitliRakam = localStorage.getItem('ozer_sayac_verisi');
         if (!kayitliRakam) {
             kayitliRakam = 1000482;
@@ -64,18 +69,14 @@
             kayitliRakam = parseInt(kayitliRakam);
         }
 
-        // 2. Ekrana yazdır
         sayacElement.innerText = kayitliRakam.toLocaleString('tr-TR');
 
-        // 3. Her 5 saniyede bir rakamı artır ve hafızaya kaydet
         setInterval(function() {
             kayitliRakam += Math.floor(Math.random() * 2) + 1;
             sayacElement.innerText = kayitliRakam.toLocaleString('tr-TR');
             localStorage.setItem('ozer_sayac_verisi', kayitliRakam);
         }, 5000);
     }
-
-    // Sayfa açıldığında çalıştır
     sayaciGuncelle();
 </script>
     
@@ -107,7 +108,7 @@
     <nav>
         <a href="#hakkimizda">Hakkımızda</a>
         <a href="#liderler">Liderler</a>
-        <a href="#soyagaci">Soy Ağacı</a>
+        <a href="#dijital-divan">Dijital Divan</a> <a href="#belgesel">Kültür & Belgesel</a> <a href="#soyagaci">Soy Ağacı</a>
         <a href="#haberler">Haberler</a>
         <a href="#koordinasyon-merkezi">İletişim</a>
         <a href="news-kasim-sonrasi.html" class="btn-news">🔥 Yeni Haberler</a>
@@ -119,6 +120,31 @@
         <p>2025 yılında Ekrem Bey’in vasiyeti üzerine 6. Reis olarak <strong>Said Özer</strong> aşiretin başına geçmiş ve yeniden canlanma sürecini başlatmıştır.</p>
     </section>
 
+    <section id="dijital-divan">
+        <h2>Dijital Divan</h2>
+        <div class="divan-box">
+            <h3 class="gold-text">⚖️ Reis Said Özer'in Beyannamesi</h3>
+            <p style="font-style: italic; font-size: 1.1em; line-height: 1.7;">
+                "Özer Aşireti'nin sarsılmaz birliği, adalet ve vakar üzerine kurulmuştur. Bizim divanımızda her ferdin sesi duyulur, her karar aşiretin izzeti için alınır. Geçmişin mirası, geleceğin teknolojisiyle buluşarak yolumuzu aydınlatacaktır."
+            </p>
+            <hr style="border: 0; border-top: 1px solid #d4af37; margin: 15px 0;">
+            <div style="text-align: right; font-weight: bold; color: #d4af37;">- SAİD ÖZER</div>
+        </div>
+    </section>
+
+    <section id="belgesel">
+        <h2>Bismil ve Sarıtoprak Belgesel Köşesi</h2>
+        <p>Sarıtoprak (Ulam) köyünden yükselen bu ses, tarihin derinliklerinden süzülüp gelen bir mirastır.</p>
+        <ul class="belgesel-liste">
+            <li><strong>🎙️ Hafıza Kayıtları:</strong> Xale Şeğo'nun Savur'dan Sarıtoprak'a uzanan destansı göç hikayesi.</li>
+            <li><strong>🌾 Toprağın Bereketi:</strong> Bismil ovalarında bir asırdır süren tarım ve kardeşlik geleneği.</li>
+            <li><strong>🎶 Dengbêj Arşivi:</strong> Özer Aşireti'nin yiğitliği üzerine söylenmiş kadim kılamlar ve türküler.</li>
+        </ul>
+        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border-left: 5px solid #b30000;">
+             📜 <i>"Bu topraklar, sadece bir coğrafya değil; sönmeyecek bir ocağın kalbidir."</i>
+        </div>
+    </section>
+
     <section id="haberler">
         <h2>Son Haberler</h2>
         <div class="news-card" style="border-left: 5px solid #ff8c00; background: #fffcf5;">
@@ -128,8 +154,7 @@
             </div>
             <p>Sarıtoprak (Ulam) köyünde Ekrem Bey'in görüldüğüne dair iddialar bölgede büyük heyecan yarattı.</p>
             <p style="font-size: 0.8rem; color: #777;">📅 11 Ocak 2026 | 📍 Bismil</p>
-        
-</div>
+        </div>
     </section>
 
     <section id="soyagaci">
@@ -145,7 +170,7 @@
                 </div>
             </div>
         </div>
-    </section 
+    </section>
 
     <div id="koordinasyon-merkezi" style="max-width: 400px; margin: 20px auto; padding: 25px; background: #fff; border-radius: 20px; border: 2px solid #b30000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); font-family: sans-serif; text-align: center;">
     
@@ -169,18 +194,16 @@
     function merkeziAra() {
         const durum = document.getElementById('islem-durumu');
         const muzik = document.getElementById('santral-muzik');
-        const mesaj = "Sayın bekleyen kişi, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
+        const mesaj = "Sayın bekleyen kişi, Özer Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
         
-        // 1. Müziği Başlat (Tarayıcı engeline takılmaz)
         muzik.volume = 0.4;
         muzik.play().catch(e => console.log("Müzik başlatılamadı: " + e));
 
-        // 2. Vakur Anonsu Başlat
         window.speechSynthesis.cancel();
         const ses = new SpeechSynthesisUtterance(mesaj);
         ses.lang = 'tr-TR';
-        ses.rate = 0.7;  // Ağırbaşlı hız
-        ses.pitch = 0.8; // Tok ses
+        ses.rate = 0.7;
+        ses.pitch = 0.8;
 
         ses.onstart = function() {
             durum.innerText = "🔊 " + mesaj;
@@ -188,8 +211,6 @@
 
         ses.onend = function() {
             durum.innerText = "📞 Genel Merkez Aranıyor...";
-            
-            // Anons bitince 2 saniye daha müzik çalsın, sonra ara
             setTimeout(() => {
                 window.location.href = "tel:05309597498";
             }, 2000);
@@ -198,6 +219,7 @@
         window.speechSynthesis.speak(ses);
     }
 </script>
+
 <div id="dijital-kimlik" style="max-width: 300px; margin: 40px auto; padding: 20px; background: #fff; border: 2px solid #b30000; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); font-family: sans-serif;">
     <div style="font-size: 14px; color: #b30000; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px;">ÖZEL AŞİRETİ DİJİTAL KARTVİZİT</div>
     
@@ -209,6 +231,7 @@
     
     <div style="margin-top: 10px; font-size: 10px; color: #aaa;">Güvenli Dijital Erişim</div>
 </div>
+
 <div id="ozel-kalem-destek" style="position: fixed; bottom: 25px; right: 25px; z-index: 10001; font-family: 'Segoe UI', sans-serif;">
     <a href="https://wa.me/905415341819" target="_blank" style="text-decoration: none;">
         <div style="background: #25d366; color: white; padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); border: 2px solid #fff; transition: 0.3s;">
@@ -221,5 +244,11 @@
             </div>
         </div>
     </a>
-</div></body>
-            </html>
+</div>
+
+<footer>
+    <p>© 2026 ÖZER AŞİRETİ STRATEJİK İLETİŞİM MERKEZİ. Tüm Hakları Saklıdır.</p>
+</footer>
+
+</body>
+</html>
