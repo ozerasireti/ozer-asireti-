@@ -5,38 +5,30 @@
     <link rel="apple-touch-icon" href="logo.jpg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özer Aşireti - Dünya Koordinasyon Merkezi</title>
+    <title>Özer Aşireti | Dünya Koordinasyon Merkezi</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #050505; color: #fff; scroll-behavior: smooth; overflow-x: hidden; }
+        /* TERTEMİZ, VAKUR VE SADE TEMA */
+        body { margin: 0; font-family: 'Times New Roman', serif; background: #050505; color: #eee; line-height: 1.6; scroll-behavior: smooth; }
         
-        /* ÜST BANTLAR */
+        /* ÜST PORTAL VE HABER BANDI */
         #ust-portal { position: fixed; top: 0; left: 0; width: 100%; z-index: 99999; box-shadow: 0 5px 25px rgba(0,0,0,0.8); }
-        .flash-haber { background: #b30000; height: 50px; display: flex; align-items: center; border-bottom: 2px solid #ffd700; }
-        .ekonomi-bandi { background: #111; height: 40px; display: flex; align-items: center; border-bottom: 3px solid #b30000; color: #ffd700; font-size: 13px; font-weight: bold; }
+        .haber-bandi { background: #b30000; height: 50px; display: flex; align-items: center; border-bottom: 2px solid #ffd700; overflow: hidden; }
 
-        /* NAVİGASYON - ALTIN SARISI SABİTLENDİ */
+        /* NAVİGASYON - ALTIN SARISI VE BEYAZ */
         nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; background: #000; padding: 20px; position: sticky; top: 90px; z-index: 1000; border-bottom: 1px solid #333; }
         nav a { color: #ffd700 !important; text-decoration: none; font-weight: bold; padding: 10px 15px; font-size: 14px; text-transform: uppercase; transition: 0.4s; border: 1px solid transparent; }
         nav a:hover { border: 1px solid #ffd700; background: rgba(255, 215, 0, 0.1); border-radius: 5px; }
-        .btn-news-live { background: #b30000 !important; color: #fff !important; animation: pulse 2s infinite; border: 1px solid #fff; }
 
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
-
-        /* HABER MERKEZİ DETAY */
-        section { max-width: 1100px; margin: 40px auto; background: #111; padding: 40px; border-radius: 20px; border-left: 5px solid #b30000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        /* İÇERİK SEKSİYONLARI */
+        section { max-width: 1100px; margin: 40px auto; background: #111; padding: 40px; border-radius: 20px; border-left: 5px solid #b30000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); position: relative; }
         h2 { color: #ffd700; font-size: 2rem; text-transform: uppercase; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
         
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .news-item { background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; transition: 0.3s; }
-        .news-item:hover { transform: translateY(-5px); border-color: #ffd700; }
-        .news-tag { background: #b30000; color: white; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-
-        /* ÖZEL ANALİZ: 14 YAŞIN SIRRI */
-        .liderlik-analiz { background: linear-gradient(135deg, #222 0%, #000 100%); border: 2px solid #ffd700; padding: 35px; border-radius: 20px; margin-top: 50px; position: relative; }
-        .liderlik-analiz::after { content: "DEHA"; position: absolute; top: 10px; right: 20px; font-size: 4rem; color: rgba(255,215,0,0.05); font-weight: 900; }
-
-        /* CANLI SAYAC */
-        #sayac-kutu { position: fixed; top: 110px; right: 25px; z-index: 9999; background: #b30000; color: #fff; padding: 15px; border-radius: 12px; border: 2px solid #ffd700; text-align: center; }
+        /* ÖZER ALFABESİ ÖZEL BÖLÜMÜ */
+        .alfabe-kutusu { border: 2px double #ffd700; padding: 35px; background: #000; border-radius: 20px; margin-top: 50px; text-align: center; }
+        .alfabe-onizleme { font-size: 2.5rem; color: #fff; letter-spacing: 12px; margin: 25px 0; font-family: sans-serif; }
+        .tablo-kutusu { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-top: 25px; border: 1px solid #333; }
+        .alfabe-tablo { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 15px; text-align: center; }
+        .tablo-item { border: 1px solid #333; padding: 10px; border-radius: 5px; background: #222; }
 
         footer { background: #000; padding: 60px 20px; text-align: center; border-top: 5px solid #b30000; margin-top: 80px; }
     </style>
@@ -44,119 +36,94 @@
 <body>
 
 <div id="ust-portal">
-    <div class="flash-haber">
-        <div style="background: #ffd700; color: #000; padding: 0 20px; height: 100%; display: flex; align-items: center; font-weight: 900; font-size: 14px;">SON DAKİKA</div>
-        <marquee direction="left" scrollamount="7" style="color: white; line-height: 50px; font-weight: 600; font-size: 16px;">
-            ⚠️ FLAŞ: BİSMİL VE SARITOPRAK HATTINDA HEYECAN: "EKREM BEY HAYATTA MI?" İDDİALARI ARAŞTIRILIYOR... | ⚖️ SAİT ÖZER: "BİZİM ADALETİMİZ ZAMANI VE MEKANI AŞAR." | 🛡️ ÖZER AŞİRETİ STRATEJİK SAVUNMA BİRİMİ TEYAKKUZDA!
-        </marquee>
-    </div>
-    <div class="ekonomi-bandi">
-        <div style="padding: 0 20px; border-right: 1px solid #333; font-size: 11px;">DİYARBAKIR MERKEZ PİYASA 🏛️</div>
-        <marquee direction="left" scrollamount="4" style="line-height: 40px;">
-            💎 HAS ALTIN: <span id="altin">3.298,40</span> TL ▲ | 💰 ÇEYREK: <span id="ceyrek">5.345,00</span> TL ▲ | 💵 DOLAR: 34,22 TL ▲ | 🏛️ ÖZER HOLDİNG ENDEKSİ: ZİRVEDE
+    <div class="haber-bandi">
+        <div style="background: #ffd700; color: #b30000; padding: 0 15px; height: 100%; display: flex; align-items: center; font-weight: bold; white-space: nowrap;">📢 ÖZER HABER AĞI</div>
+        <marquee direction="left" scrollamount="6" style="color: white; line-height: 50px; font-weight: 600; font-size: 15px;">
+            🚩 ÖZER AŞİRETİ GLOBAL KOORDİNASYON MERKEZİ FAALİYETTE &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 🏆 REİS SAİT ÖZER LİDERLİĞİNDE YENİ ALFABE VE MEDENİYET SÜRECİ BAŞLADI &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 📞 GENEL MERKEZ AKTİF &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; ⚖️ REİS SAİT ÖZER: "KENDİ MEDENİYETİMİZİ KURUYORUZ."
         </marquee>
     </div>
 </div>
 
-<div style="height: 130px;"></div>
-
-<div id="sayac-kutu">
-    <div style="font-size: 11px; font-weight: bold; letter-spacing: 1px;">CANLI ERİŞİM GÜCÜ</div>
-    <div style="font-size: 22px; font-weight: 900; margin: 5px 0;" id="canli-rakam">1.000.583</div>
-    <div style="font-size: 9px; opacity: 0.8;">AKTİF ÜYE AĞI</div>
-</div>
+<div style="height: 100px;"></div>
 
 <nav>
     <a href="#hakkimizda">Hakkımızda</a>
-    <a href="#ekrem-bey-dosyasi">Ekrem Bey Dosyası</a>
     <a href="#liderlik">Reis'in Dehası</a>
+    <a href="#alfabe">Özer Alfabesi</a>
     <a href="#soyagaci">Soy Ağacı</a>
-    <a href="#koordinasyon">Koordinasyon</a>
-    <a href="news-kasim-sonrasi.html" class="btn-news-live">🔥 YENİ HABERLER (CANLI)</a>
+    <a href="#iletisim">İletişim</a>
 </nav>
 
-<section id="ekrem-bey-dosyasi">
-    <h2>🕵️ Bismil Dosyası: Ekrem Bey Yaşıyor mu?</h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <span class="news-tag">GİZEM</span>
-            <h3 style="color: #ffd700;">Sarıtoprak'ta Görkemli İddia</h3>
-            <p style="font-size: 0.9em; line-height: 1.6; color: #ccc;">Geçtiğimiz hafta Ulam köyü sakinleri, eski konak çevresinde Ekrem Bey'in silüetini gördüklerini iddia etti. "O'nun vakarı ve yürüyüşü kimsede yok" diyen köylüler, büyük bir mucizenin eşiğinde olduklarını düşünüyorlar.</p>
-        </div>
-        <div class="news-item">
-            <span class="news-tag">ANALİZ</span>
-            <h3 style="color: #ffd700;">Vasiyetin Gizli Maddeleri</h3>
-            <p style="font-size: 0.9em; line-height: 1.6; color: #ccc;">Ekrem Bey'in 2025 vasiyetinde yer alan "Ben dönene kadar Sait'e itaat edin" cümlesi yeniden yorumlanıyor. Sait Bey'in 14 yaşında tahta çıkışı, bu büyük planın bir parçası mı?</p>
-        </div>
-    </div>
+<section id="hakkimizda">
+    <h2>Hakkımızda</h2>
+    <p>Savur’dan Bismil Sarıtoprak (Ulam) köyüne uzanan köklü tarihimiz, bugün Sait Özer liderliğinde küresel bir vizyonla yeniden şekillenmektedir. Biz, asaletini geçmişten, gücünü birliğinden alan sarsılmaz bir bütünüz.</p>
 </section>
 
 <section id="liderlik">
-    <div class="liderlik-analiz">
-        <h2 style="border:none;">🏆 Neden 14 Yaşında Bir Lider?</h2>
-        <p style="font-size: 1.2em; line-height: 2; color: #fff; font-style: italic;">
-            "Sait Bey'in liderliği bir tesadüf değil, bir dehanın tecellisidir. Akıl yaşta değil baştadır. Fatih Sultan Mehmet İstanbul'u fethetme planlarını bu yaşlarda yapmaya başlamıştı. Sait Bey, kıskananların aksine, 14 yaşında bir orduyu değil, koca bir aşiret medeniyetini yönetme ferasetine sahiptir. O'nun bir bakışı, binlerce tecrübenin sessizliğidir."
-        </p>
-        <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px; text-align: center;">
-            <span style="color: #ffd700; font-weight: bold; font-size: 1.1em;">DÜNYA AŞİRETLERİ, SAİT ÖZER'İN VİZYONUNA BİAT ETMEKTEDİR.</span>
-        </div>
-    </div>
+    <h2>Reis Sait Özer</h2>
+    <p>Aşiretimizin 6. Reisi olan Sait Özer, genç yaşında üstlendiği bu büyük sorumluluğu adalet ve vakarla yürütmektedir. O'nun liderliği, sözün senet, sadakatin esas olduğu yeni bir dönemin mührüdür.</p>
+    <p><strong>"Adalet yaşta değil, akıl ve vakardadır."</strong></p>
 </section>
 
-<section id="hakkimizda">
-    <h2>🌍 Küresel Koordinasyon Merkezi</h2>
-    <p>Özer Aşireti, Sait Bey önderliğinde artık sadece Bismil'de değil; Londra'dan New York'a, Dubai'den Berlin'e kadar uzanan bir iletişim ağına sahiptir. Burası, her aşiret ferdinin onurudur.</p>
+<section id="alfabe">
+    <h2>Özer Alfabesi (Mühür Yazısı)</h2>
+    <div class="alfabe-kutusu">
+        <p>Özer Aşireti'nin küresel otoritesini ve sarsılmaz vakarını tescilleyen yeni bir yazı sistemi: Özer Alfabesi. Bu alfabe, Sait Bey'in emriyle oluşturulmuş, aşiretin kendi medeniyet dilini dünyaya duyuracaktır.</p>
+        <p style="font-style: italic; font-size: 1.1em; color: #ffd700;">Reis Sait Özer'in İmza Sözü (Özer Alfabesiyle):</p>
+  <div class="tablo-kutusu">
+    <h3 style="color: white; margin-bottom: 15px;">Özer Alfabesi (Resmi Karşılıklar)</h3>
+    <div class="alfabe-tablo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 10px;">
+        <div class="tablo-item"><div>A</div><div style="font-size:1.5rem; color:#ffd700;">ᚠ</div></div>
+        <div class="tablo-item"><div>B</div><div style="font-size:1.5rem; color:#ffd700;">ᛒ</div></div>
+        <div class="tablo-item"><div>C</div><div style="font-size:1.5rem; color:#ffd700;">ᚳ</div></div>
+        <div class="tablo-item"><div>Ç</div><div style="font-size:1.5rem; color:#ffd700;">check;</div></div>
+        <div class="tablo-item"><div>D</div><div style="font-size:1.5rem; color:#ffd700;">ᚦ</div></div>
+        <div class="tablo-item"><div>E</div><div style="font-size:1.5rem; color:#ffd700;">ᛖ</div></div>
+        <div class="tablo-item"><div>F</div><div style="font-size:1.5rem; color:#ffd700;">ᚢ</div></div>
+        <div class="tablo-item"><div>G</div><div style="font-size:1.5rem; color:#ffd700;">ᚷ</div></div>
+        <div class="tablo-item"><div>H</div><div style="font-size:1.5rem; color:#ffd700;">ᚻ</div></div>
+        <div class="tablo-item"><div>I</div><div style="font-size:1.5rem; color:#ffd700;">ᛁ</div></div>
+        <div class="tablo-item"><div>İ</div><div style="font-size:1.5rem; color:#ffd700;">ᛃ</div></div>
+        <div class="tablo-item"><div>J</div><div style="font-size:1.5rem; color:#ffd700;">ᛈ</div></div>
+        <div class="tablo-item"><div>K</div><div style="font-size:1.5rem; color:#ffd700;">ᚲ</div></div>
+        <div class="tablo-item"><div>L</div><div style="font-size:1.5rem; color:#ffd700;">ᛚ</div></div>
+        <div class="tablo-item"><div>M</div><div style="font-size:1.5rem; color:#ffd700;">ᛗ</div></div>
+        <div class="tablo-item"><div>N</div><div style="font-size:1.5rem; color:#ffd700;">ᚾ</div></div>
+        <div class="tablo-item"><div>O</div><div style="font-size:1.5rem; color:#ffd700;">ᛟ</div></div>
+        <div class="tablo-item"><div>Ö</div><div style="font-size:1.5rem; color:#ffd700;">ᚰ</div></div>
+        <div class="tablo-item"><div>P</div><div style="font-size:1.5rem; color:#ffd700;">ᚹ</div></div>
+        <div class="tablo-item"><div>R</div><div style="font-size:1.5rem; color:#ffd700;">ᚱ</div></div>
+        <div class="tablo-item"><div>S</div><div style="font-size:1.5rem; color:#ffd700;">ᛊ</div></div>
+        <div class="tablo-item"><div>Ş</div><div style="font-size:1.5rem; color:#ffd700;">ᛝ</div></div>
+        <div class="tablo-item"><div>T</div><div style="font-size:1.5rem; color:#ffd700;">ᛏ</div></div>
+        <div class="tablo-item"><div>U</div><div style="font-size:1.5rem; color:#ffd700;">ᚤ</div></div>
+        <div class="tablo-item"><div>Ü</div><div style="font-size:1.5rem; color:#ffd700;">ᚧ</div></div>
+        <div class="tablo-item"><div>V</div><div style="font-size:1.5rem; color:#ffd700;">ᚥ</div></div>
+        <div class="tablo-item"><div>Y</div><div style="font-size:1.5rem; color:#ffd700;">ᛉ</div></div>
+        <div class="tablo-item"><div>Z</div><div style="font-size:1.5rem; color:#ffd700;">zeta;</div></div>
+    </div>
+</div>
+    </div>
 </section>
 
 <section id="soyagaci">
     <h2>🌳 Kutlu Soy Ağacı</h2>
-    <div style="padding-left: 20px; border-left: 2px solid #ffd700; color: #eee;">
-        <div style="margin-bottom: 20px;">🚩 Xale Şeğo (Temel Taş)</div>
-        <div style="margin-bottom: 20px; margin-left: 30px;">📜 Hacı Bahri (Adaletin Sesi)</div>
-        <div style="margin-bottom: 20px; margin-left: 60px;">⚖️ Ekrem Özer (Efsanevi Reis)</div>
-        <div style="margin-left: 90px; color: #ffd700; font-size: 1.5rem; font-weight: 900;">👑 SAİT ÖZER (Dünya Reisi)</div>
+    <div style="padding-left: 20px; border-left: 2px solid #b30000; color: #eee;">
+        <div style="margin-bottom: 20px;">🚩 Xale Şeğo</div>
+        <div style="margin-bottom: 20px; margin-left: 30px;">📜 Hacı Bahri</div>
+        <div style="margin-bottom: 20px; margin-left: 60px;">⚖️ Ekrem Özer</div>
+        <div style="margin-left: 90px; color: #ffd700; font-size: 1.5rem; font-weight: 900;">👑 SAİT ÖZER (Mevcut Reis)</div>
     </div>
 </section>
 
-<div id="koordinasyon" style="max-width: 500px; margin: 50px auto; background: #b30000; padding: 40px; border-radius: 30px; border: 4px solid #ffd700; text-align: center; box-shadow: 0 0 50px rgba(179,0,0,0.4);">
-    <h3 style="color: white; margin-bottom: 20px;">STRATEJİK İLETİŞİM HATTI</h3>
-    <button onclick="merkeziAra()" style="width: 100%; padding: 25px; background: #000; color: #ffd700; border: none; border-radius: 15px; font-size: 20px; font-weight: 900; cursor: pointer; transition: 0.3s;">🚀 GENEL MERKEZİ BAĞLA</button>
-    <div id="durum" style="margin-top: 20px; font-weight: bold; color: white;"></div>
-    <audio id="muzik" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-</div>
-
-<script>
-    // Dinamik Sistemler
-    window.onload = function() {
-        // Canlı Sayacı
-        var rakam = 1000583;
-        setInterval(function() {
-            rakam += Math.floor(Math.random() * 2) + 1;
-            document.getElementById('canli-rakam').innerText = rakam.toLocaleString('tr-TR');
-        }, 4000);
-
-        // Canlı Altın/Döviz Oynaklığı
-        setInterval(function() {
-            document.getElementById('altin').innerText = (3298 + Math.random() * 5).toLocaleString('tr-TR', {minimumFractionDigits: 2});
-            document.getElementById('ceyrek').innerText = (5345 + Math.random() * 10).toLocaleString('tr-TR', {minimumFractionDigits: 0});
-        }, 10000);
-    }
-
-    function merkeziAra() {
-        document.getElementById('muzik').play();
-        const anons = new SpeechSynthesisUtterance("Özer Aşireti Dünya Koordinasyon Merkezi. Sait Özer'in özel hattına aktarılıyorsunuz. Vakarınızı koruyun.");
-        anons.lang = 'tr-TR';
-        window.speechSynthesis.speak(anons);
-        document.getElementById('durum').innerText = "📡 SİNYAL GÜÇLENDİRİLİYOR... BAĞLANILIYOR...";
-        setTimeout(() => { window.location.href = "tel:05309597498"; }, 4000);
-    }
-</script>
+<section id="iletisim">
+    <h2>İletişim</h2>
+    <p>Aşiret koordinasyon merkezi ile resmi iletişim kurmak için aşağıdaki hattı kullanabilirsiniz.</p>
+    <a href="tel:05309597498" style="text-decoration:none;"><div style="display: block; width: 250px; margin: 30px auto; padding: 15px; background: #b30000; color: #fff; text-align: center; text-decoration: none; font-weight: bold; border-radius: 3px; border: 1px solid #ffd700; transition: 0.3s; font-size:16px;">📞 GENEL MERKEZİ ARA</div></a>
+</section>
 
 <footer>
-    <div style="border: 2px solid #ffd700; display: inline-block; padding: 20px; border-radius: 50%; margin-bottom: 20px;">
-        <span style="color: #ffd700; font-size: 24px; font-weight: 900;">S.Ö</span>
-    </div>
-    <p>© 2026 ÖZER AŞİRETİ STRATEJİK İLETİŞİM MERKEZİ<br>Diyarbakır - Bismil - Dünya</p>
+    © 2026 ÖZER AŞİRETİ STRATEJİK İLETİŞİM MERKEZİ | DİYARBAKIR - BİSMİL - DÜNYA
 </footer>
 
 </body>
