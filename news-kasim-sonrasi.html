@@ -1385,87 +1385,119 @@ Kapı içeriden kilitliyken Said Özer nereye kayboldu?
             <div style="padding: 8px 0; border-bottom: 1px solid #ccc; font-weight: bold;">Nurullah Özer</div>
             <div style="padding: 8px 0; border-bottom: 1px solid #ccc; font-weight: bold;">Umran Özer</div>
         </div>
-
-    </div>
-</div>
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özer Aşireti - Divan Beyanatı ve Malumatı</title>
+    <title>Özer Aşireti - Divan Beyanatı</title>
     <style>
+        /* Genel Töre Nizamı */
         body {
             background-color: #ffffff; /* Beyaz arka plan */
             color: #000000; /* Siyah yazı */
             font-family: 'Georgia', serif;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
         }
+
+        /* Ana Konak Konteyneri */
         .divan-konak {
+            width: 100%;
             max-width: 800px;
-            padding: 50px;
+            margin: 20px auto;
+            padding: 30px 20px;
             border: 2px solid #000000;
-            background-color: #ffffff;
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
+
+        /* Başlıklar */
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #cc0000; /* Kırmızı başlık */
             text-align: center;
+            margin-top: 0;
             margin-bottom: 5px;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
+
         .ust-etiket {
             text-align: center;
             font-size: 1.1rem;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             letter-spacing: 1px;
         }
+
         .ayrac {
             height: 1px;
             background-color: #000000;
-            width: 300px;
-            margin: 25px auto;
+            width: 60%;
+            margin: 20px auto;
         }
-        .huzun-kısmı {
-            font-size: 1.3rem;
-            line-height: 1.9;
-            text-align: justify;
-            margin-bottom: 30px;
-        }
-        .fısıltı-kutusu {
-            border-left: 3px solid #cc0000;
-            padding-left: 20px;
-            margin: 30px 0;
-            font-style: italic;
-            background-color: #fafafa;
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
-        .fısıltı-baslik {
+
+        /* Son Dakika Kutusu */
+        .son-dakika-kutusu {
+            background-color: #cc0000;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
             font-weight: bold;
-            color: #cc0000;
-            font-style: normal;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.5;
         }
-        .fısıltı-metin {
+
+        /* Haber ve Gelişmeler Metni */
+        .haber-metni {
             font-size: 1.2rem;
             line-height: 1.8;
             text-align: justify;
+            margin-bottom: 20px;
         }
+
+        /* Dedikodu ve Çevre Beylerin Fısıltıları */
+        .fisilti-bolumu {
+            border-left: 3px solid #cc0000;
+            padding-left: 15px;
+            margin: 25px 0;
+            font-style: italic;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .fisilti-baslik {
+            font-weight: bold;
+            color: #cc0000;
+            font-style: normal;
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        /* Vakar Sözü */
         .vakar-sozu {
             text-align: center;
             font-weight: bold;
             font-size: 1.2rem;
-            margin-top: 40px;
+            color: #cc0000;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* Ekran Boyutuna Göre Ayar (Mobil Uyumluluk) */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .haber-metni { font-size: 1.1rem; }
+            .divan-konak { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -1473,30 +1505,46 @@ Kapı içeriden kilitliyken Said Özer nereye kayboldu?
 
     <div class="divan-konak">
         <h1>SAİT ÖZER</h1>
-        <div class="ust-etiket">Özer Aşireti Reisliği Divan Beyanıdır</div>
+        <div class="ust-etiket">Özer Aşireti Divan Resmi Beyanıdır</div>
         
         <div class="ayrac"></div>
         
-        <!-- Hüzün Dolu Ana Beyanat -->
-        <div class="huzun-kısmı">
-            Özer aşiretinin sarsılmaz direği, ömrünü töreye ve soyumuzun haysiyetine adamış ulu çınarımız Sait Bey, amansız bir hastalık nedeniyle yatağa düşmüştür. Ne yazık ki ulu reisimiz artık ayağa kalkamamaktadır. Tabiplerin ve hekimlerin ortak beyanıyla, fani dünya üzerindeki sayılı günlerinin azaldığı ve vakti şerifin yaklaştığı kesinleşmiştir. Konakta derin bir hüzün ve sükut hakimdir; dualarımız ve vakarımız bu zor günlerde en büyük sığınağımızdır.
+        <!-- Görseldeki Son Dakika Kısmı -->
+        <div class="son-dakika-kutusu">
+            SON DAKİKA:<br>
+            Çekimler 01 Mart 2026 Saat 16:00'da Ertelendi
+        </div>
+        
+        <!-- Detaylı Durum ve Hüzün Metni -->
+        <div class="haber-metni">
+            Özer aşiretinin ulu çınarı Sait Bey amansız bir hastalığa yakalanmış ve yatağa düşmüştür. Tabiplerin ittifakıyla bildirilen raporlar doğrultusunda, kendisinin artık yataktan kalkamadığı ve fani ömrünün azaldığı öğrenilmiştir. Vaktin daralması konakta derin bir hüzne sebep olurken; asıl vazifemiz olan dirayet ve feraset, bu zor günlerde sancağımızı ayakta tutmaktadır.
         </div>
 
-        <!-- Çevrede Dönen Fısıltılar ve Dedikodular -->
-        <div class="fısıltı-kutusu">
-            <div class="fısıltı-baslik">Çevre Aşiretlerin ve Beylerin Fısıltıları:</div>
-            <div class="fısıltı-metin">
-                Sait Bey’in yatağa düşmesiyle birlikte, çevre obalarda ve komşu beyliklerde gizli fısıltılar başlamıştır. Çevredeki bazı beyler, ulu çınarımızın vaktinin daraldığını duyduklarından beri sinsi bir merak içine düşmüşlerdir. Kapalı kapılar ardında, "Özer aşiretinin yeni reisi kim olacak? Sait Bey'den sonra o ağır mührü kim taşıyacak, postu kim dolduracak?" diyerek dedikodu üretmekte, aşiretin geleceğini tartmaktadırlar. Kimi kendi çıkarının peşine düşmüş, kimi ise bu büyük gücün zayıflayacağı vehmine kapılmıştır.
+        <div class="haber-metni">
+            Bugün saatler 16:00'yı gösterdiğinde planlanan tüm hazırlıklar tamamlanmış, kameralar kurulmuş ve oyuncular yerini almıştı. Ancak tam bu esnada Sait Bey'in acil ve kritik bir toplantıya katılması gerektiği bilgisi ulaştı. Programda son anda yapılan bu değişiklik üzerine, yapım ekibi hızlıca bir değerlendirme toplantısı gerçekleştirdi. Toplantının uzaması nedeniyle çekimlerin resmi olarak ileri bir tarihe ertelendiği duyuruldu.
+        </div>
+
+        <!-- Çevredeki Beylerin Dedikoduları -->
+        <div class="fisilti-bolumu">
+            <div class="fisilti-baslik">Çevre Beylerin ve Obaların Fısıltıları:</div>
+            <div class="haber-metni" style="font-style: italic; margin-bottom: 0;">
+                Ulu reisimiz Sait Bey'in yatağa düştüğü haberi çevre obalara yayılır yayılmaz, komşu beyler kapalı kapılar ardında fısıldaşmaya başlamıştır. "Özer aşiretinin yeni reisi kim olacak? Sait Bey'den sonra o ağır mührü ve postu kim devralacak?" diyerek sinsi hesaplar yapmakta ve dedikodular yaymaktadırlar. Bazı çevreler bu durumu bir zayıflık fırsatı olarak görse de, asıl kudretin kimde olduğunu hesaba katmamaktadırlar.
             </div>
         </div>
 
-        <div class="vakar-sozu">
-            "Çevre beyler fısıldaşsa da, Özer töresinde yeni reisin kim olacağı akıl, tedbir ve kudretle çoktan bellidir."
+        <div class="haber-metni" style="font-weight: bold; text-align: center; color: #000000;">
+            Said Bey Savaşa Hazırlanıyor
         </div>
-        
+
         <div class="ayrac"></div>
+        
+        <div class="vakar-sozu">
+            "Çevre beyler fısıldaşsa da, Özer töresinde güç, irade ve basiret daima baki kalır."
+        </div>
     </div>
 
 </body>
 </html>
+
+
 
