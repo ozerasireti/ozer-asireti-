@@ -132,3 +132,293 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEVKALADE ACİL KODLU TEBLİĞ | Özer Aşireti Genel Merkezi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+        :root {
+            --bg-body: #050505;
+            --bg-card: #0c0c0e;
+            --primary-red: #8b0000;
+            --gold-accent: #c5a059;
+            --text-light: #dcdcdc;
+            --text-muted: #808080;
+            --border-line: #1a1a1f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-light);
+            font-family: 'Merriweather', serif;
+            line-height: 1.9;
+            padding: 40px 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-top: 6px solid var(--primary-red);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            padding: 50px 40px;
+            position: relative;
+        }
+
+        .official-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-line);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .header-sub {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #ffffff;
+            font-weight: 900;
+            line-height: 1.3;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .meta-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-line);
+            border-bottom: 1px dashed var(--border-line);
+            padding: 10px 0;
+            margin-bottom: 35px;
+            font-style: italic;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #ffffff;
+            border-left: 4px solid var(--primary-red);
+            padding-left: 20px;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            background: linear-gradient(90deg, rgba(139,0,0,0.1) 0%, transparent 100%);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-accent);
+            font-size: 1.35rem;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 8px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            margin-bottom: 22px;
+            color: #cccccc;
+            text-align: justify;
+            text-indent: 30px;
+        }
+
+        .medical-report-box {
+            background-color: #070708;
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            padding: 25px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .report-title {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-red);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        blockquote {
+            background: rgba(197, 160, 89, 0.04);
+            border-left: 3px solid var(--gold-accent);
+            margin: 35px 0;
+            padding: 25px;
+            font-style: italic;
+            color: #ffffff;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--gold-accent);
+            font-style: normal;
+            font-family: 'Cinzel', serif;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .atmosphere-box {
+            border: 1px solid var(--border-line);
+            padding: 20px;
+            background-color: #09090b;
+            margin-top: 30px;
+        }
+
+        .signature-block {
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 2px solid var(--border-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .seal-mark {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-accent);
+            letter-spacing: 4px;
+            opacity: 0.8;
+        }
+
+        .sign-info {
+            text-align: right;
+        }
+
+        .sign-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sign-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .footer-official {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #555555;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px 20px; }
+            .header-title { font-size: 1.6rem; }
+            .lead-paragraph { font-size: 1.1rem; }
+            .signature-block { flex-direction: column; align-items: center; gap: 20px; }
+            .sign-info { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="official-header">
+        <div class="header-sub">Özer Aşireti Stratejik İletişim ve Sevk Karargâhı</div>
+        <h1 class="header-title">SARITOPRAK’TA SESSİZ SİS: REİS SAİD ÖZER’İN SOL UZVUNDA TIBBİ HASAR TESCİLLENDİ</h1>
+    </header>
+
+    <div class="meta-bar">
+        <span>KOD: FEVKALADE ACİL / DUYURU NO: 2026/08-C</span>
+        <span>📍 Bismil / Sarıtoprak (Ulam) Genel Merkezi</span>
+        <span>31 Ağustos 2026</span>
+    </div>
+
+    <div class="lead-paragraph">
+        Savur’dan Bismil Ovası’na uzanan kadim coğrafyada derin bir matem ve sarsıcı bir sessizlik hâkim. Özer Aşireti’nin iradesini omuzlayan Reis Said Özer’in sol kolunda, yürütülen aralıksız stratejik mesai ve ağır idari yükün neticesinde kalıcı felç tablosu geliştiği resmi sıhhi heyetçe beyan edilmiştir.
+    </div>
+
+    <p>
+        Bismil Sarıtoprak (Ulam) Genel Merkezi’nde gece geç saatlere kadar devam eden divan toplantıları, aşiret içi temsil yetkilerinin yeniden tanzim edilmesi süreçleri ve bölgedeki hassas temasların sevk-idaresi esnasında, Reislik Makamı’nda aniden başlayan tıbbi kriz karargâhı alarma geçirdi. İlk anlarda geçici bir uyuşma olarak değerlendirilen tablo, kısa süre içerisinde sol uzvun tamamen hissizleşmesi ve fonksiyon kaybıyla neticelendi.
+    </p>
+
+    <div class="medical-report-box">
+        <div class="report-title">Sıhhi Heyet Son Durum Değerlendirmesi</div>
+        <p style="text-indent: 0; font-size: 0.95rem; color: #b0b0b0; margin-bottom: 0;">
+            "Reis Said Özer Beyefendi’ye yapılan detaylı nörolojik tetkikler, motor nöron iletim hatlarındaki şiddetli tahribatı doğrulamıştır. Aşırı fiziksel yorgunluk, kesintisiz kriz yönetimi ve yüksek idari strese bağlı olarak gelişen nöro-vasküler blokaj neticesinde sol kolda motor fonksiyonlar tamamen durmuştur. Gelişen tablonun klinik açıdan kalıcı nitelikte olduğu tescil edilmiştir."
+        </p>
+    </div>
+
+    <h2>KUDRETİN VE HÜZNÜN HARMANLANDIĞI DİVAN</h2>
+
+    <p>
+        Acı haberin Sarıtoprak Karargâhı koridorlarında duyulmasıyla birlikte, karargâhta görevli kurmaylar, aşiret büyükleri ve hizmet erleri derin bir kedere boğuldu. Ancak yaşanan bu büyük sağlık krizine ve bedenindeki ağır hasara rağmen Reis Said Özer, divan salonunu terk etmeyerek iradesinin eğilmezliğini bir kez daha ortaya koydu.
+    </p>
+
+    <p>
+        Çevresindekilerin ısrarlı istirahat ve hekim tavsiyelerine karşılık, sol elindeki hissizliğe bakmaksızın idari kararları bizzat imzalamaya devam eden Reis Said Özer’in vakur duruşu, Sarıtoprak Divanı’nda gözyaşları ve derin bir saygıyla karşılandı.
+    </p>
+
+    <blockquote>
+        "Cenab-ı Hak bir uzvumuzdan hissiyatı çekip alsa da, kalbimizden adaleti, aklımızdan devlet ve töre sadakatini söküp alamaz. Bir elle sancağı, bir elle adalet terazisini tutmaya ant içmiştik; şimdi tek elle ikisini birden taşımak vakti gelmiştir. Özer Aşireti’nin iradesi sekteye uğramaz, yolumuzdan bir milim dahi saptırılamaz."
+        <span class="quote-author">— REİS SAİD ÖZER</span>
+    </blockquote>
+
+    <h2>SAVUR VE BİSMİL HATTINDA BEKLEYİŞ VE DUALAR</h2>
+
+    <div class="atmosphere-box">
+        <p style="text-indent: 0; margin-bottom: 0; font-style: italic; color: #a0a0a0;">
+            Karargâh dışındaki atmosfer ise kelimelerle tarif edilemeyecek kadar ağırdır. Haber dalga dalga yayıldıkça; Savur’un kadim mahallelerinden Bismil’in köylerine kadar yüzlerce aile mensubu, bölge ileri gelenleri ve dostlar araç konvoylarıyla Sarıtoprak Köyü’ne akın etmeye başladı. Avluda toplanan kalabalık, Reislik Makamı’nın metanetine sessiz gözyaşlarıyla eşlik ederken, divan odasından yükselen Kur'an-ı Kerim tilaveti ovadaki sessizliği bozmaktadır.
+        </p>
+    </div>
+
+    <h2>İDARİ MEKANİZMA KESİNTİSİZ DEVAM EDECEKTİR</h2>
+
+    <p>
+        Stratejik İletişim Merkezi’nden yapılan son tebliğde; Reis Said Özer’in sağlık durumunun yakından takip edildiği, ancak aşiretin genel idaresinde, karargâh kararlarında veya daha önce duyurulan vekalet fesih süreçlerinde hiçbir duraksama yaşanmayacağı kesin bir dille altı çizilerek ifade edildi. Yönetim ve karar erki tamamen Reis Said Özer’in tekil iradesi altındadır.
+    </p>
+
+    <div class="signature-block">
+        <div class="seal-mark">ᛋᚠᛁᛏ ᛟᚰᛖᚱ</div>
+        <div class="sign-info">
+            <div class="sign-title">ÖZER AŞİRETİ GENEL BAŞKANI</div>
+            <div class="sign-name">REİS SAİD ÖZER</div>
+        </div>
+    </div>
+
+    <div class="footer-official">
+        © 2026 ÖZER AŞİRETİ RESMİ İLETİŞİM VE STRATEJİ BAŞKANLIĞI | DİYARBAKIR
+    </div>
+
+</div>
+
+</body>
+</html>
+
