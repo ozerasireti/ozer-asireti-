@@ -3,389 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÖZER AŞİRETİ | Resmi Web Portalı</title>
+    <title>Özel Aşireti | Resmi Web Portalı</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; color: #333; line-height: 1.6; }
+        
+        /* ÜST MENÜ (NAVBAR) */
+        header { background-color: #b30000; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: #f2a900; }
 
-        :root {
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --red-accent: #900c3f;
-            --bg-main: #0a0a0c;
-            --bg-card: #121216;
-            --text-main: #e0e0e0;
-            --text-muted: #8a8a93;
-            --border: rgba(212, 175, 55, 0.2);
-        }
+        /* HERO BÖLÜMÜ */
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/1200/400'); background-size: cover; background-position: center; color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 38px; margin-bottom: 10px; }
+        .hero p { font-size: 18px; color: #ddd; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+        /* İÇERİK KONTEYNERİ */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        h2 { color: #b30000; margin-bottom: 15px; border-bottom: 2px solid #b30000; padding-bottom: 10px; }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+        /* HABER KARTLARI */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .news-card { border: 1px solid #eee; border-radius: 10px; overflow: hidden; background: #fafafa; }
+        .news-card img { width: 100%; height: 180px; object-fit: cover; }
+        .news-content { padding: 15px; }
+        .news-content h3 { font-size: 16px; margin-bottom: 8px; color: #111; }
+        .news-content p { font-size: 13px; color: #666; }
 
-        /* HEADER & HERO */
-        header {
-            position: relative;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            background: radial-gradient(circle at center, #1a080a 0%, var(--bg-main) 70%);
-            border-bottom: 1px solid var(--border);
-        }
+        /* BULUT SANTRAL MODÜLÜ */
+        .santral-box { max-width: 450px; margin: 20px auto; padding: 25px; border: 2px solid #b30000; border-radius: 15px; text-align: center; background: #fff; }
+        .santral-btn { width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
+        .santral-btn:hover { background: #800000; }
 
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            color: var(--gold);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            margin-bottom: 10px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-
-        .urgent-banner {
-            background: rgba(144, 12, 63, 0.2);
-            border: 1px solid var(--red-accent);
-            padding: 15px 30px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            color: #ff4d4d;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 5px rgba(144, 12, 63, 0.4); }
-            to { box-shadow: 0 0 20px rgba(144, 12, 63, 0.8); }
-        }
-
-        /* STICKY NAV */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
-            padding: 15px 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        .btn-news {
-            color: var(--gold) !important;
-            border: 1px solid var(--gold);
-            padding: 5px 15px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .btn-news:hover {
-            background: var(--gold);
-            color: #000 !important;
-        }
-
-        /* MAIN CONTAINER */
-        .container {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        /* SECTIONS */
-        section {
-            margin-bottom: 80px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-        }
-
-        .section-header div {
-            width: 60px;
-            height: 2px;
-            background: var(--gold);
-            margin: 10px auto 0;
-        }
-
-        /* CARDS & GRID */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 35px;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-        }
-
-        /* REIS LİDERLİK BÖLÜMÜ */
-        .leader-card {
-            background: linear-gradient(145deg, #16161e 0%, var(--bg-card) 100%);
-            border-left: 4px solid var(--gold);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quote {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold-light);
-            font-style: italic;
-            margin-top: 20px;
-            padding-left: 15px;
-            border-left: 2px solid var(--gold);
-        }
-
-        /* MÜHÜR VE ALFABE */
-        .seal-box {
-            text-align: center;
-            background: #000;
-            border: 1px double var(--gold);
-            padding: 40px;
-            border-radius: 8px;
-        }
-
-        .runes {
-            font-size: 3.5rem;
-            letter-spacing: 15px;
-            color: #fff;
-            margin: 20px 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-        }
-
-        /* SOY AĞACI */
-        .lineage {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .lineage::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gold);
-        }
-
-        .lineage-node {
-            background: var(--bg-card);
-            padding: 15px 20px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .lineage-node.active {
-            border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-
-        .lineage-node .title {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 20px;
-            text-align: center;
-            background: #050507;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .footer-monogram {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            .hero-title { font-size: 2.2rem; }
-            nav { gap: 15px; flex-wrap: wrap; }
-            .runes { font-size: 2.2rem; letter-spacing: 8px; }
-        }
+        /* ALT BİLGİ (FOOTER) */
+        footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 50px; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="hero-title">ÖZER AŞİRETİ</div>
-    <div class="hero-subtitle">Sarıtoprak (Ulam) Genel Merkezi</div>
-    
-    <div class="urgent-banner">
-        <span>🚩</span>
-        <span>ACİL TOPLANTI EMRİ: Reis Sait Özer, tüm birimleri Sarıtoprak Genel Merkezi'nde toplantıya çağırmıştır.</span>
+    <!-- ÜST MENÜ -->
+    <header>
+        <div class="logo">👑 ÖZEL AŞİRETİ</div>
+        <nav>
+            <a href="#hakkimizda">Hakkımızda</a>
+            <a href="#haberler">Haberler</a>
+            <a href="#iletisim">İletişim & Santral</a>
+        </nav>
+    </header>
+
+    <!-- ANASAYFA / KARŞILAMA -->
+    <div class="hero">
+        <h1>Özel Aşireti Resmi Portalı</h1>
+        <p>Birlik, Beraberlik ve Stratejik Koordinasyon Merkezi</p>
     </div>
-</header>
 
-<nav>
-    <a href="#vizyon">Aşiret Vizyonu</a>
-    <a href="#liderlik">Reislik Makamı</a>
-    <a href="#mhur">Mühür Yazısı</a>
-    <a href="#soyluk">Soy Ağacı</a>
-    <a href="news-kasim-sonrasi.html" class="btn-news">Haberler</a>
-</nav>
+    <div class="container">
+        
+        <!-- HAKKIMIZDA BÖLÜMÜ -->
+        <section id="hakkimizda">
+            <h2>Hakkımızda</h2>
+            <p>Özel Aşireti, köklü geçmişi, kültürel değerleri ve dayanışma ruhuyla bölgesinde saygın bir yere sahiptir. Birlik ve beraberliği pekiştirmek, aşiret mensupları arasındaki iletişimi güçlendirmek ve geleceğe daha sağlam adımlarla ilerlemek amacıyla çalışmalarımızı sürdürüyoruz.</p>
+        </section>
 
-<div class="container">
-
-    <section id="vizyon">
-        <div class="section-header">
-            <h2>Köklü Miras & Adalet</h2>
-            <div></div>
-        </div>
-        <div class="grid-2">
-            <div class="card">
-                <h3 style="color: var(--gold); margin-bottom: 15px;">Diyarbakır'ın Vakarı</h3>
-                <p>Savur'dan Bismil Sarıtoprak'a uzanan köklü geçmişimizle Doğu'nun adalet, gelenek ve misafirperverlik sancağını gururla taşıyoruz. Bizim için asalet; toprağa, töreye ve devlete olan değişmez bağlılıktır.</p>
-            </div>
-            <div class="card">
-                <h3 style="color: var(--gold); margin-bottom: 15px;">Birlik ve Nüfuz</h3>
-                <p>Asırların biriktirdiği ortak hafıza ve dayanışma ruhuyla, Sarıtoprak Koordiansyon Hattı üzerinden aşiretimizin adaletini ve birliğini geleceğe kararlılıkla taşıyoruz.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="liderlik">
-        <div class="section-header">
-            <h2>Liderlik Makamı</h2>
-            <div></div>
-        </div>
-        <div class="card leader-card">
-            <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fff;">Reis Sait Özer</h3>
-            <p style="color: var(--text-muted); margin-top: 5px;">Aşiret İradesi ve Stratejik Sevk Lideri</p>
-            <p style="margin-top: 20px;">Sait Bey, genç yaşta omuzladığı bu kutlu sancağı üstün bir feraset, sarsılmaz bir akıl ve stratejik bir deha ile taşımaktadır. Geleneğin gücünü geleceğin vizyonuyla birleştiren reisimiz liderliğinde yolumuza kararlılıkla devam ediyoruz.</p>
-            <div class="quote">
-                "Adalet yaşta değil, akıl ve vakardadır."
-            </div>
-        </div>
-    </section>
-
-    <section id="mhur">
-        <div class="section-header">
-            <h2>Özer Alfabesi & Tescilli Mühür</h2>
-            <div></div>
-        </div>
-        <div class="seal-box">
-            <p style="color: var(--text-muted);">Sait Bey'in emriyle tescillenen aşiretimize özel mühür ve haberleşme dili:</p>
-            <div class="runes">ᛋᚠᛁᛏ ᛟᚰᛖᚱ</div>
-            <p style="color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 3px;">"SÖZÜMÜZ MÜHÜRDÜR"</p>
-        </div>
-    </section>
-
-    <section id="soyluk">
-        <div class="section-header">
-            <h2>Kutlu Soy Ağacı</h2>
-            <div></div>
-        </div>
-        <div class="lineage">
-            <div class="lineage-node">
-                <span style="font-size: 1.2rem;">🚩</span>
-                <div>
-                    <div class="title">Xale Şeğo</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Aşiret Büyüğü</div>
+        <!-- HABERLER BÖLÜMÜ -->
+        <section id="haberler">
+            <h2>Son Haberler ve Duyurular</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://picsum.photos/400/200?random=1" alt="Haber 1">
+                    <div class="news-content">
+                        <h3>Aşiret İletişim Portalı Yayına Girdi</h3>
+                        <p>Genel merkez koordinasyonunu güçlendirmek amacıyla yeni dijital santral ve haber portalımız hizmete açılmıştır.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://picsum.photos/400/200?random=2" alt="Haber 2">
+                    <div class="news-content">
+                        <h3>Genel Merkez Birlik Buluşması</h3>
+                        <p>Aşiret büyüklerimiz ve mensuplarımızın katılımıyla gerçekleşen koordinasyon toplantımız başarıyla tamamlandı.</p>
+                    </div>
                 </div>
             </div>
-            <div class="lineage-node">
-                <span style="font-size: 1.2rem;">📜</span>
-                <div>
-                    <div class="title">Hacı Bahri</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Gelenek Temsilcisi</div>
-                </div>
-            </div>
-            <div class="lineage-node">
-                <span style="font-size: 1.2rem;">⚖️</span>
-                <div>
-                    <div class="title">Ekrem Özer</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Adalet Muhafızı</div>
-                </div>
-            </div>
-            <div class="lineage-node active">
-                <span style="font-size: 1.4rem;">👑</span>
-                <div>
-                    <div class="title" style="font-size: 1.2rem; color: #fff;">SAİT ÖZER</div>
-                    <div style="font-size: 0.85rem; color: var(--gold);">Reis / Genel Başkan</div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-</div>
+        <!-- İLETİŞİM & BULUT SANTRAL BÖLÜMÜ -->
+        <section id="iletisim">
+            <h2>İletişim Koordinasyon Merkezi</h2>
+            <p style="text-align: center; color: #555;">Genel Merkez ile doğrudan iletişime geçmek için aşağıdaki santral butonunu kullanabilirsiniz.</p>
+            
+            <div class="santral-box">
+                <h3 style="color: #b30000; margin-bottom: 5px;">STRATEJİK SANTRAL HATTI</h3>
+                <span style="font-size: 12px; color: #777;">Özel Aşireti Genel Merkezi</span>
 
-<footer>
-    <div class="footer-monogram">S.Ö</div>
-    <p>© 2026 ÖZER AŞİRETİ STRATEJİK İLETİŞİM MERKEZİ</p>
-    <p style="margin-top: 5px; font-size: 0.75rem; color: #555;">Diyarbakır - Bismil - Sarıtoprak (Ulam)</p>
-</footer>
+                <!-- Müzik Dosyası (İstediğiniz MP3 linkini yazın) -->
+                <audio id="santral-muzik" loop>
+                    <source src="BURAYA_FON_MUZIGI_LINKINI_YAZIN.mp3" type="audio/mpeg">
+                </audio>
 
+                <button onclick="merkeziAra()" class="santral-btn">📞 GENEL MERKEZİ BAĞLA</button>
+                <div id="santral-durum" style="margin-top: 15px; color: #b30000; font-style: italic; font-size: 14px;"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Özel Aşireti | Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <!-- BULUT SANTRAL JAVASCRIPT KODU -->
+    <script>
+        function merkeziAra() {
+            const durum = document.getElementById('santral-durum');
+            const muzik = document.getElementById('santral-muzik');
+            const anonsMetni = "Sayın bekleyen kişi, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
+            
+            // Müziği başlat (%30 ses seviyesi)
+            muzik.volume = 0.3; 
+            muzik.play().catch(e => console.log("Müzik linki eklenmediğinde sadece anons çalar."));
+
+            // Sesli Anons
+            window.speechSynthesis.cancel();
+            const anons = new SpeechSynthesisUtterance(anonsMetni);
+            anons.lang = 'tr-TR';
+            anons.rate = 0.75; // Yavaş ve resmi ton
+            anons.pitch = 0.85;
+
+            anons.onstart = function() {
+                durum.innerText = "🔊 " + anonsMetni;
+            };
+
+            anons.onend = function() {
+                durum.innerText = "📞 Hat bağlanıyor, aranıyor...";
+                setTimeout(() => {
+                    // GERÇEK NUMARAYI BURAYA YAZIN
+                    window.location.href = "tel:05320000000"; 
+                }, 1000);
+            };
+
+            window.speechSynthesis.speak(anons);
+        }
+    </script>
 </body>
 </html>
