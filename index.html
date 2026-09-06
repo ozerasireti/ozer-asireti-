@@ -3,132 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özer Aşireti | Resmi Web Portalı</title>
+    <title>T.C. Özer Aşireti Genel Merkezi | Resmi Web Portalı</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f6f9; color: #333; line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Times New Roman', Georgia, serif; }
+        body { background-color: #f7f7f7; color: #1a1a1a; line-height: 1.7; }
         
-        /* ÜST MENÜ (NAVBAR) */
-        header { background-color: #b30000; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: #f2a900; }
+        /* RESMİ ÜST BANT */
+        .top-bar { background-color: #800000; color: #d4af37; padding: 8px 5%; font-size: 13px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #d4af37; font-family: sans-serif; }
+        
+        /* ANA HEADER & LOGO */
+        header { background-color: #5c0000; color: white; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-bottom: 3px solid #d4af37; }
+        .logo-box { display: flex; align-items: center; gap: 15px; }
+        .logo-symbol { font-size: 32px; color: #d4af37; }
+        .logo-text h1 { font-size: 20px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #ffffff; }
+        .logo-text span { font-size: 11px; color: #d4af37; text-transform: uppercase; letter-spacing: 2px; font-family: sans-serif; display: block; }
+        
+        nav a { color: #ffffff; text-decoration: none; margin-left: 25px; font-size: 15px; font-weight: 600; font-family: sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav a:hover { color: #d4af37; }
 
-        /* HERO BÖLÜMÜ (ARKA PLAN BAYRAK) */
+        /* HERO / BANNER BÖLÜMÜ */
         .hero { 
-            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://upload.wikimedia.org/wikipedia/commons/3/35/Flag_of_Kurdistan.svg'); 
+            background: linear-gradient(rgba(40,0,0,0.75), rgba(40,0,0,0.75)), url('https://upload.wikimedia.org/wikipedia/commons/3/35/Flag_of_Kurdistan.svg'); 
             background-size: cover; 
             background-position: center; 
             color: white; 
             text-align: center; 
-            padding: 100px 20px; 
+            padding: 110px 20px; 
+            border-bottom: 4px solid #d4af37;
         }
-        .hero h1 { font-size: 42px; margin-bottom: 10px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
-        .hero p { font-size: 20px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); }
+        .hero h2 { font-size: 36px; margin-bottom: 12px; font-weight: normal; letter-spacing: 1.5px; text-transform: uppercase; }
+        .hero p { font-size: 17px; color: #e6e6e6; font-family: sans-serif; max-width: 800px; margin: 0 auto; letter-spacing: 0.5px; }
 
-        /* İÇERİK KONTEYNERİ */
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        h2 { color: #b30000; margin-bottom: 15px; border-bottom: 2px solid #b30000; padding-bottom: 10px; }
+        /* MİMARİ KONTEYNER */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        /* RESMİ PANEL / SEKSİYONLAR */
+        .official-panel { background: #ffffff; border: 1px solid #dcdcdc; border-top: 4px solid #800000; border-radius: 4px; padding: 35px; margin-bottom: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .section-title { color: #800000; font-size: 22px; font-weight: bold; margin-bottom: 20px; border-bottom: 1px solid #e5e5e5; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: space-between; }
+        .section-title::after { content: "🏛️"; font-size: 18px; opacity: 0.7; }
 
-        /* HABER KARTLARI */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .news-card { border: 1px solid #eee; border-radius: 10px; overflow: hidden; background: #fafafa; }
-        .news-card img { width: 100%; height: 180px; object-fit: cover; }
-        .news-content { padding: 15px; }
-        .news-content h3 { font-size: 16px; margin-bottom: 8px; color: #111; }
-        .news-content p { font-size: 13px; color: #666; }
+        /* KURUMSAL DUYURU LİSTESİ (RESMİ FORMAT) */
+        .announcement-list { list-style: none; margin-top: 15px; font-family: sans-serif; }
+        .announcement-item { padding: 15px 0; border-bottom: 1px dashed #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
+        .announcement-item:last-child { border-bottom: none; }
+        .announcement-date { font-size: 12px; background: #800000; color: #fff; padding: 4px 10px; border-radius: 2px; font-weight: bold; }
+        .announcement-text { font-size: 15px; color: #2c2c2c; font-weight: 500; text-decoration: none; flex: 1; margin-left: 15px; }
+        .announcement-text:hover { color: #800000; }
 
-        .btn-link { display: inline-block; margin-top: 20px; padding: 12px 25px; background: #b30000; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; transition: 0.3s; }
-        .btn-link:hover { background: #800000; }
+        .btn-official { display: inline-block; margin-top: 25px; padding: 12px 30px; background: #800000; color: #ffffff; text-decoration: none; font-family: sans-serif; font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 2px; border: 1px solid #5c0000; transition: background 0.3s; }
+        .btn-official:hover { background: #5c0000; }
 
-        /* BULUT SANTRAL MODÜLÜ */
-        .santral-box { max-width: 450px; margin: 20px auto; padding: 25px; border: 2px solid #b30000; border-radius: 15px; text-align: center; background: #fff; }
-        .santral-btn { width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
-        .santral-btn:hover { background: #800000; }
+        /* KURUMSAL SANTRAL KUTUSU */
+        .santral-container { max-width: 500px; margin: 20px auto; padding: 30px; border: 1px solid #d4af37; background: #faf9f6; text-align: center; position: relative; border-radius: 2px; }
+        .santral-header { font-size: 18px; color: #800000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .santral-sub { font-size: 12px; color: #666; font-family: sans-serif; text-transform: uppercase; margin-bottom: 20px; display: block; }
+        
+        .santral-btn { width: 100%; padding: 16px; background: #800000; color: #ffffff; border: 1px solid #5c0000; font-family: sans-serif; font-size: 14px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .santral-btn:hover { background: #5c0000; }
 
-        /* ALT BİLGİ (FOOTER) */
-        footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 50px; font-size: 14px; }
+        /* FOOTER */
+        footer { background: #1a1a1a; color: #888888; text-align: center; padding: 30px 20px; font-family: sans-serif; font-size: 12px; border-top: 3px solid #800000; }
+        footer p { margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <!-- ÜST MENÜ -->
+    <!-- ÜST BİLGİ BANTI -->
+    <div class="top-bar">
+        <span>T.C. ÖZER AŞİRETİ GENEL MERKEZİ KOORDİNASYON PORTALI</span>
+        <span>RESMİ BİLDİRİM HATTI</span>
+    </div>
+
+    <!-- HEADER / MENÜ -->
     <header>
-        <div class="logo">👑 ÖZER AŞİRETİ</div>
+        <div class="logo-box">
+            <div class="logo-symbol">⚖️</div>
+            <div class="logo-text">
+                <h1>Özer Aşireti</h1>
+                <span>Genel Merkez Başkanlığı</span>
+            </div>
+        </div>
         <nav>
             <a href="#hakkimizda">Hakkımızda</a>
-            <!-- BELİRTTİĞİNİZ HABERLER SAYFASI -->
-            <a href="news-kasim-sonrasi.html">Haberler</a>
+            <a href="news-kasim-sonrasi.html">Resmi Duyurular</a>
             <a href="#iletisim">İletişim & Santral</a>
         </nav>
     </header>
 
-    <!-- ANASAYFA / KARŞILAMA -->
+    <!-- BANNER -->
     <div class="hero">
-        <h1>Özer Aşireti Resmi Portalı</h1>
-        <p>Birlik, Beraberlik ve Stratejik Koordinasyon Merkezi</p>
+        <h2>Özer Aşireti Genel Merkezi</h2>
+        <p>Birlik, Beraberlik ve Stratejik İletişim Koordinasyon Başkanlığı</p>
     </div>
 
     <div class="container">
         
-        <!-- HAKKIMIZDA BÖLÜMÜ -->
-        <section id="hakkimizda">
-            <h2>Hakkımızda</h2>
-            <p>Özer Aşireti, köklü geçmişi, kültürel değerleri ve dayanışma ruhuyla bölgesinde saygın bir yere sahiptir. Birlik ve beraberliği pekiştirmek, aşiret mensupları arasındaki iletişimi güçlendirmek ve geleceğe daha sağlam adımlarla ilerlemek amacıyla çalışmalarımızı sürdürüyoruz.</p>
-        </section>
+        <!-- HAKKIMIZDA (RESMİ METİN) -->
+        <div class="official-panel" id="hakkimizda">
+            <div class="section-title">Kurumsal Yapı ve Tarihçe</div>
+            <p style="text-indent: 30px; margin-bottom: 15px; text-align: justify; color: #2b2b2b; font-size: 17px;">
+                Özer Aşireti Genel Merkez Başkanlığı, köklü tarihi mirası ve kültürel değerleri korumak; aşiret mensupları arasındaki sosyal dayanışmayı ve koordinasyonu en üst düzeyde sağlamak amacıyla faaliyetlerini yürütmektedir. 
+            </p>
+            <p style="text-indent: 30px; text-align: justify; color: #2b2b2b; font-size: 17px;">
+                Genel merkezimiz, bölgesel barış, birlik ve kültürel aktarım ilkesi doğrultusunda tüm idari ve iletişim süreçlerini resmi bir disiplin içinde sevk ve idare etmektedir.
+            </p>
+        </div>
 
-        <!-- ÖZET HABERLER BÖLÜMÜ -->
-        <section>
-            <h2>Son Haberler ve Duyurular</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <img src="https://picsum.photos/400/200?random=1" alt="Haber 1">
-                    <div class="news-content">
-                        <h3>Aşiret İletişim Portalı Yayına Girdi</h3>
-                        <p>Genel merkez koordinasyonunu güçlendirmek amacıyla yeni dijital santral ve haber portalımız hizmete açılmıştır.</p>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://picsum.photos/400/200?random=2" alt="Haber 2">
-                    <div class="news-content">
-                        <h3>Genel Merkez Birlik Buluşması</h3>
-                        <p>Aşiret büyüklerimiz ve mensuplarımızın katılımıyla gerçekleşen koordinasyon toplantımız başarıyla tamamlandı.</p>
-                    </div>
-                </div>
+        <!-- RESMİ DUYURULAR / HABERLER (LİSTE FORMATINDA) -->
+        <div class="official-panel">
+            <div class="section-title">Son Resmi Duyurular</div>
+            <ul class="announcement-list">
+                <li class="announcement-item">
+                    <span class="announcement-date">DUYURU #01</span>
+                    <a href="news-kasim-sonrasi.html" class="announcement-text">Özer Aşireti Dijital Santral ve İletişim Portalı Resmi Olarak Hizmete Açılmıştır.</a>
+                </li>
+                <li class="announcement-item">
+                    <span class="announcement-date">DUYURU #02</span>
+                    <a href="news-kasim-sonrasi.html" class="announcement-text">Genel Merkez Heyeti Yıllık İdari Koordinasyon Toplantısı Bildirisi.</a>
+                </li>
+            </ul>
+            <div style="text-align: right;">
+                <a href="news-kasim-sonrasi.html" class="btn-official">Tüm Resmi Bildirileri İncele →</a>
             </div>
-            <div style="text-align: center;">
-                <!-- DOĞRUDAN BELİRTTİĞİNİZ SAYFAYA YÖNLENDİREN BUTON -->
-                <a href="news-kasim-sonrasi.html" class="btn-link">Tüm Haberleri İncele →</a>
-            </div>
-        </section>
+        </div>
 
-        <!-- İLETİŞİM & BULUT SANTRAL BÖLÜMÜ -->
-        <section id="iletisim">
-            <h2>İletişim Koordinasyon Merkezi</h2>
-            <p style="text-align: center; color: #555;">Genel Merkez ile doğrudan iletişime geçmek için aşağıdaki santral butonunu kullanabilirsiniz.</p>
+        <!-- SANTRAL MODÜLÜ -->
+        <div class="official-panel" id="iletisim">
+            <div class="section-title">Stratejik İletişim ve Santral Hattı</div>
+            <p style="text-align: center; color: #555; font-family: sans-serif; font-size: 14px; margin-bottom: 20px;">
+                Genel Merkez Başkanlığı ile doğrudan sesli bağlantı kurmak için aşağıdaki resmi santral aktarım butonunu kullanabilirsiniz.
+            </p>
             
-            <div class="santral-box">
-                <h3 style="color: #b30000; margin-bottom: 5px;">STRATEJİK SANTRAL HATTI</h3>
-                <span style="font-size: 12px; color: #777;">Özer Aşireti Genel Merkezi</span>
+            <div class="santral-container">
+                <div class="santral-header">Özer Aşireti Genel Merkez Santrali</div>
+                <span class="santral-sub">Resmi İletişim Aktarım Servisi</span>
 
-                <!-- Fon Müzik Dosyası -->
                 <audio id="santral-muzik" loop>
                     <source src="BURAYA_FON_MUZIGI_LINKINI_YAZIN.mp3" type="audio/mpeg">
                 </audio>
 
-                <button onclick="merkeziAra()" class="santral-btn">📞 GENEL MERKEZİ BAĞLA</button>
-                <div id="santral-durum" style="margin-top: 15px; color: #b30000; font-style: italic; font-size: 14px;"></div>
+                <button onclick="merkeziAra()" class="santral-btn">📞 GENEL MERKEZE BAĞLAN</button>
+                <div id="santral-durum" style="margin-top: 15px; color: #800000; font-family: sans-serif; font-style: italic; font-size: 13px; font-weight: bold;"></div>
             </div>
-        </section>
+        </div>
 
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Özer Aşireti | Tüm Hakları Saklıdır.</p>
+        <p>© 2026 ÖZER AŞİRETİ GENEL MERKEZ BAŞKANLIĞI | TÜM HAKLARI SAKLIDIR.</p>
+        <p style="color: #555; font-size: 11px;">Resmi İletişim Portalı - Bilgi İşlem Koordinatörlüğü</p>
     </footer>
 
-    <!-- BULUT SANTRAL JAVASCRIPT KODU -->
+    <!-- SANTRAL KODU -->
     <script>
         function merkeziAra() {
             const durum = document.getElementById('santral-durum');
@@ -136,7 +163,7 @@
             const anonsMetni = "Sayın bekleyen kişi, Özer Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
             
             muzik.volume = 0.3; 
-            muzik.play().catch(e => console.log("Müzik linki eklenmediğinde sadece anons çalar."));
+            muzik.play().catch(e => console.log("Müzik linki eklenmediğinde sadece anons çalışır."));
 
             window.speechSynthesis.cancel();
             const anons = new SpeechSynthesisUtterance(anonsMetni);
