@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özel Aşireti | Resmi Web Portalı</title>
+    <title>Özer Aşireti | Resmi Web Portalı</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f6f9; color: #333; line-height: 1.6; }
@@ -14,10 +14,17 @@
         nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #f2a900; }
 
-        /* HERO BÖLÜMÜ */
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/1200/400'); background-size: cover; background-position: center; color: white; text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: 38px; margin-bottom: 10px; }
-        .hero p { font-size: 18px; color: #ddd; }
+        /* HERO BÖLÜMÜ (ARKA PLAN BAYRAK) */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://upload.wikimedia.org/wikipedia/commons/3/35/Flag_of_Kurdistan.svg'); 
+            background-size: cover; 
+            background-position: center; 
+            color: white; 
+            text-align: center; 
+            padding: 100px 20px; 
+        }
+        .hero h1 { font-size: 42px; margin-bottom: 10px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+        .hero p { font-size: 20px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); }
 
         /* İÇERİK KONTEYNERİ */
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
@@ -32,6 +39,9 @@
         .news-content h3 { font-size: 16px; margin-bottom: 8px; color: #111; }
         .news-content p { font-size: 13px; color: #666; }
 
+        .btn-link { display: inline-block; margin-top: 20px; padding: 12px 25px; background: #b30000; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; transition: 0.3s; }
+        .btn-link:hover { background: #800000; }
+
         /* BULUT SANTRAL MODÜLÜ */
         .santral-box { max-width: 450px; margin: 20px auto; padding: 25px; border: 2px solid #b30000; border-radius: 15px; text-align: center; background: #fff; }
         .santral-btn { width: 100%; padding: 18px; background: #b30000; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
@@ -45,17 +55,18 @@
 
     <!-- ÜST MENÜ -->
     <header>
-        <div class="logo">👑 ÖZEL AŞİRETİ</div>
+        <div class="logo">👑 ÖZER AŞİRETİ</div>
         <nav>
             <a href="#hakkimizda">Hakkımızda</a>
-            <a href="#haberler">Haberler</a>
+            <!-- BELİRTTİĞİNİZ HABERLER SAYFASI -->
+            <a href="news-kasim-sonrasi.html">Haberler</a>
             <a href="#iletisim">İletişim & Santral</a>
         </nav>
     </header>
 
     <!-- ANASAYFA / KARŞILAMA -->
     <div class="hero">
-        <h1>Özel Aşireti Resmi Portalı</h1>
+        <h1>Özer Aşireti Resmi Portalı</h1>
         <p>Birlik, Beraberlik ve Stratejik Koordinasyon Merkezi</p>
     </div>
 
@@ -64,11 +75,11 @@
         <!-- HAKKIMIZDA BÖLÜMÜ -->
         <section id="hakkimizda">
             <h2>Hakkımızda</h2>
-            <p>Özel Aşireti, köklü geçmişi, kültürel değerleri ve dayanışma ruhuyla bölgesinde saygın bir yere sahiptir. Birlik ve beraberliği pekiştirmek, aşiret mensupları arasındaki iletişimi güçlendirmek ve geleceğe daha sağlam adımlarla ilerlemek amacıyla çalışmalarımızı sürdürüyoruz.</p>
+            <p>Özer Aşireti, köklü geçmişi, kültürel değerleri ve dayanışma ruhuyla bölgesinde saygın bir yere sahiptir. Birlik ve beraberliği pekiştirmek, aşiret mensupları arasındaki iletişimi güçlendirmek ve geleceğe daha sağlam adımlarla ilerlemek amacıyla çalışmalarımızı sürdürüyoruz.</p>
         </section>
 
-        <!-- HABERLER BÖLÜMÜ -->
-        <section id="haberler">
+        <!-- ÖZET HABERLER BÖLÜMÜ -->
+        <section>
             <h2>Son Haberler ve Duyurular</h2>
             <div class="news-grid">
                 <div class="news-card">
@@ -86,6 +97,10 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center;">
+                <!-- DOĞRUDAN BELİRTTİĞİNİZ SAYFAYA YÖNLENDİREN BUTON -->
+                <a href="news-kasim-sonrasi.html" class="btn-link">Tüm Haberleri İncele →</a>
+            </div>
         </section>
 
         <!-- İLETİŞİM & BULUT SANTRAL BÖLÜMÜ -->
@@ -95,9 +110,9 @@
             
             <div class="santral-box">
                 <h3 style="color: #b30000; margin-bottom: 5px;">STRATEJİK SANTRAL HATTI</h3>
-                <span style="font-size: 12px; color: #777;">Özel Aşireti Genel Merkezi</span>
+                <span style="font-size: 12px; color: #777;">Özer Aşireti Genel Merkezi</span>
 
-                <!-- Müzik Dosyası (İstediğiniz MP3 linkini yazın) -->
+                <!-- Fon Müzik Dosyası -->
                 <audio id="santral-muzik" loop>
                     <source src="BURAYA_FON_MUZIGI_LINKINI_YAZIN.mp3" type="audio/mpeg">
                 </audio>
@@ -110,7 +125,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Özel Aşireti | Tüm Hakları Saklıdır.</p>
+        <p>&copy; 2026 Özer Aşireti | Tüm Hakları Saklıdır.</p>
     </footer>
 
     <!-- BULUT SANTRAL JAVASCRIPT KODU -->
@@ -118,17 +133,15 @@
         function merkeziAra() {
             const durum = document.getElementById('santral-durum');
             const muzik = document.getElementById('santral-muzik');
-            const anonsMetni = "Sayın bekleyen kişi, Özel Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
+            const anonsMetni = "Sayın bekleyen kişi, Özer Aşireti Genel Merkezine aktarılıyorsunuz. Lütfen bekleyiniz.";
             
-            // Müziği başlat (%30 ses seviyesi)
             muzik.volume = 0.3; 
             muzik.play().catch(e => console.log("Müzik linki eklenmediğinde sadece anons çalar."));
 
-            // Sesli Anons
             window.speechSynthesis.cancel();
             const anons = new SpeechSynthesisUtterance(anonsMetni);
             anons.lang = 'tr-TR';
-            anons.rate = 0.75; // Yavaş ve resmi ton
+            anons.rate = 0.75;
             anons.pitch = 0.85;
 
             anons.onstart = function() {
@@ -138,7 +151,6 @@
             anons.onend = function() {
                 durum.innerText = "📞 Hat bağlanıyor, aranıyor...";
                 setTimeout(() => {
-                    // GERÇEK NUMARAYI BURAYA YAZIN
                     window.location.href = "tel:05320000000"; 
                 }, 1000);
             };
