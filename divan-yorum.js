@@ -1,25 +1,4 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBg5Vam8LH4RCU4a1snvMHbg8COizlwo1c",
-  authDomain: "ozer-asireti-divan.firebaseapp.com",
-  projectId: "ozer-asireti-divan",
-  storageBucket: "ozer-asireti-divan.firebasestorage.app",
-  messagingSenderId: "834924082384",
-  appId: "1:834924082384:web:e7e28f0d2df7ce03215ad5",
-  measurementId: "G-MDYYG6GPSV"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-// divan-yorum.js — Üyelikli ve Veritabanlı Gerçek Yorum Sistemi
+// divan-yorum.js — Özer Aşireti Üyelikli ve Canlı Veritabanlı Yorum Sistemi
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
@@ -30,150 +9,156 @@ import {
     onSnapshot, serverTimestamp, deleteDoc, doc 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 1. BURAYA FIREBASE'DEN ALDIĞIN KENDİ BİLGİLERİNİ YAPIŞTIR BEYİM:
+// Firebase Bağlantı Ayarları (ozer-asireti-divan)
 const firebaseConfig = {
-    apiKey: "BURAYA_API_KEY_GELECEK",
+    apiKey: "AIzaSyBg5Vam8LH4RCU4a1snvMHbg8COizlwo1c",
     authDomain: "ozer-asireti-divan.firebaseapp.com",
     projectId: "ozer-asireti-divan",
-    storageBucket: "ozer-asireti-divan.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef"
+    storageBucket: "ozer-asireti-divan.firebasestorage.app",
+    messagingSenderId: "834924082384",
+    appId: "1:834924082384:web:e7e28f0d2df7ce03215ad5",
+    measurementId: "G-MDYYG6GPSV"
 };
 
-// Yönetici E-posta Adresin (Sadece bu hesap yorumları silebilir/denetleyebilir)
+// Yönetici E-posta Adresi (Siteye bu mail ile giriş yaptığında yorum silme yetkisi açılır)
 const YONETICI_EPOSTA = "said.ozer@ornek.com";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Hangi sayfada olduğumuzu otomatik algılar (index veya kasim-sonrasi)
-const sayfaKimligi = document.getElementById("divan-yorum-alani").dataset.sayfa || "genel";
+// Sayfadaki TÜM haber yorum kutularını bul
+const tumKutular = document.querySelectorAll(".divan-yorum-kutusu");
 
-const alan = document.getElementById("divan-yorum-alani");
+tumKutular.forEach((kutu) => {
+    const haberId = kutu.dataset.haberId || "genel";
 
-// Arayüz İskeleti
-alan.innerHTML = `
-    <div style="border-top: 2px solid #000; margin-top: 40px; padding-top: 25px; font-family: Arial, sans-serif;">
-        <h3 style="color: #cc0000; font-size: 20px; margin-bottom: 15px;">DİVAN YORUM VE DEĞERLENDİRME KÖŞESİ</h3>
-        
-        <!-- Üyelik / Giriş Alanı -->
-        <div id="uyelik-kutusu" style="background: #f9f9f9; border: 1px solid #ccc; padding: 18px; margin-bottom: 20px;">
-            <p style="font-size: 14px; color: #000; margin-bottom: 12px;">
-                <strong>Yorum yazabilmek için üye girişi yapmanız gerekmektedir.</strong>
-            </p>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
-                <input type="text" id="uye-ad" placeholder="Adınız Soyadınız (Kayıt için)" style="padding: 9px; border: 1px solid #999; flex: 1; min-width: 180px;">
-                <input type="email" id="uye-eposta" placeholder="E-posta Adresiniz" style="padding: 9px; border: 1px solid #999; flex: 1; min-width: 180px;">
-                <input type="password" id="uye-sifre" placeholder="Şifreniz (En az 6 karakter)" style="padding: 9px; border: 1px solid #999; flex: 1; min-width: 160px;">
+    kutu.innerHTML = `
+        <div style="border-top: 2px solid #000000; margin-top: 30px; padding-top: 20px; font-family: Arial, sans-serif;">
+            <h4 style="color: #b30000; font-size: 16px; margin-bottom: 12px; letter-spacing: 0.5px;">BU HABERE YORUM YAPIN</h4>
+            
+            <!-- Giriş Yapmamış Kullanıcılar İçin Üyelik Kutusu -->
+            <div class="uyelik-paneli" style="background: #f9f9f9; border: 1px solid #cccccc; padding: 15px; margin-bottom: 18px;">
+                <p style="font-size: 13px; color: #000000; margin-bottom: 10px; text-indent: 0;">
+                    <strong>Yorum yazabilmek için üye girişi yapmanız gerekmektedir.</strong>
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                    <input type="text" class="inp-ad" placeholder="Adınız Soyadınız (Yeni üyelik için)" style="padding: 8px; border: 1px solid #999999; flex: 1; min-width: 150px;">
+                    <input type="email" class="inp-eposta" placeholder="E-posta Adresiniz" style="padding: 8px; border: 1px solid #999999; flex: 1; min-width: 150px;">
+                    <input type="password" class="inp-sifre" placeholder="Şifreniz (En az 6 hane)" style="padding: 8px; border: 1px solid #999999; flex: 1; min-width: 140px;">
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="btn-giris" style="background: #000000; color: #ffffff; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold; font-size: 13px;">Giriş Yap</button>
+                    <button type="button" class="btn-kayit" style="background: #b30000; color: #ffffff; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold; font-size: 13px;">Üye Ol</button>
+                </div>
+                <p class="auth-hata" style="color: #b30000; font-size: 12px; margin-top: 8px; text-indent: 0;"></p>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button id="btn-giris" style="background: #000; color: #fff; border: none; padding: 10px 18px; cursor: pointer; font-weight: bold;">Giriş Yap</button>
-                <button id="btn-kayit" style="background: #cc0000; color: #fff; border: none; padding: 10px 18px; cursor: pointer; font-weight: bold;">Yeni Üyelik Oluştur</button>
+
+            <!-- Giriş Yapmış Kullanıcılar İçin Yorum Yazma Alanı -->
+            <div class="yorum-yazma-paneli" style="display: none; background: #ffffff; border: 1px solid #000000; padding: 15px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span class="kullanici-adi-etiket" style="font-size: 13px; font-weight: bold; color: #000000;"></span>
+                    <button type="button" class="btn-cikis" style="background: #555555; color: #ffffff; border: none; padding: 5px 10px; cursor: pointer; font-size: 11px;">Çıkış Yap</button>
+                </div>
+                <textarea class="txt-yorum" rows="3" placeholder="Bu haber hakkındaki görüşünüzü saygı çerçevesinde yazınız..." style="width: 100%; padding: 9px; border: 1px solid #999999; font-family: inherit; font-size: 14px; margin-bottom: 8px;"></textarea>
+                <button type="button" class="btn-gonder" style="background: #b30000; color: #ffffff; border: none; padding: 8px 18px; cursor: pointer; font-weight: bold; font-size: 13px;">Yorumu Gönder</button>
             </div>
-            <p id="auth-mesaj" style="color: #cc0000; font-size: 13px; margin-top: 8px;"></p>
+
+            <!-- Sadece Bu Habere Ait Yorumların Listesi -->
+            <div class="yorum-akisi"></div>
         </div>
+    `;
 
-        <!-- Giriş Yapılmışsa Görünecek Yorum Yazma Alanı -->
-        <div id="yorum-yazma-kutusu" style="display: none; background: #fff; border: 1px solid #000; padding: 18px; margin-bottom: 25px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span id="aktif-kullanici-bilgi" style="font-size: 14px; font-weight: bold; color: #000;"></span>
-                <button id="btn-cikis" style="background: #555; color: #fff; border: none; padding: 6px 12px; cursor: pointer; font-size: 12px;">Çıkış Yap</button>
-            </div>
-            <textarea id="yorum-metni" rows="3" placeholder="Düşüncelerinizi saygı çerçevesinde buraya yazınız..." style="width: 100%; padding: 10px; border: 1px solid #999; font-family: inherit; font-size: 15px; margin-bottom: 10px;"></textarea>
-            <button id="btn-yorum-gonder" style="background: #cc0000; color: #fff; border: none; padding: 10px 22px; cursor: pointer; font-weight: bold;">Yorumu Gönder</button>
-        </div>
+    // Yeni Üyelik Kaydı
+    kutu.querySelector(".btn-kayit").addEventListener("click", async () => {
+        const ad = kutu.querySelector(".inp-ad").value.trim();
+        const eposta = kutu.querySelector(".inp-eposta").value.trim();
+        const sifre = kutu.querySelector(".inp-sifre").value;
+        const hata = kutu.querySelector(".auth-hata");
 
-        <!-- Veritabanından Gelen Gerçek Yorumlar Listesi -->
-        <div id="yorumlar-listesi"></div>
-    </div>
-`;
-
-// Kayıt Olma İşlemi
-document.getElementById("btn-kayit").addEventListener("click", async () => {
-    const ad = document.getElementById("uye-ad").value.trim();
-    const eposta = document.getElementById("uye-eposta").value.trim();
-    const sifre = document.getElementById("uye-sifre").value;
-    const mesaj = document.getElementById("auth-mesaj");
-
-    if (!ad || !eposta || sifre.length < 6) {
-        mesaj.textContent = "Lütfen adınızı, e-postanızı ve en az 6 haneli şifrenizi giriniz.";
-        return;
-    }
-    try {
-        const userCred = await createUserWithEmailAndPassword(auth, eposta, sifre);
-        await updateProfile(userCred.user, { displayName: ad });
-        mesaj.textContent = "";
-    } catch (err) {
-        mesaj.textContent = "Kayıt hatası: " + err.message;
-    }
-});
-
-// Giriş Yapma İşlemi
-document.getElementById("btn-giris").addEventListener("click", async () => {
-    const eposta = document.getElementById("uye-eposta").value.trim();
-    const sifre = document.getElementById("uye-sifre").value;
-    const mesaj = document.getElementById("auth-mesaj");
-
-    try {
-        await signInWithEmailAndPassword(auth, eposta, sifre);
-        mesaj.textContent = "";
-    } catch (err) {
-        mesaj.textContent = "Giriş başarısız: E-posta veya şifre hatalı.";
-    }
-});
-
-// Çıkış Yapma
-document.getElementById("btn-cikis").addEventListener("click", () => signOut(auth));
-
-// Oturum Durumunu Dinle
-onAuthStateChanged(auth, (user) => {
-    const uyelikKutusu = document.getElementById("uyelik-kutusu");
-    const yorumKutusu = document.getElementById("yorum-yazma-kutusu");
-
-    if (user) {
-        uyelikKutusu.style.display = "none";
-        yorumKutusu.style.display = "block";
-        document.getElementById("aktif-kullanici-bilgi").textContent = 
-            "Üye: " + (user.displayName || user.email);
-    } else {
-        uyelikKutusu.style.display = "block";
-        yorumKutusu.style.display = "none";
-    }
-    yorumlariGetir(user);
-});
-
-// Veritabanına Yorum Kaydetme
-document.getElementById("btn-yorum-gonder").addEventListener("click", async () => {
-    const metin = document.getElementById("yorum-metni").value.trim();
-    const user = auth.currentUser;
-    if (!metin || !user) return;
-
-    await addDoc(collection(db, "yorumlar"), {
-        sayfa: sayfaKimligi,
-        yazarAd: user.displayName || "Üye",
-        yazarEposta: user.email,
-        yazarId: user.uid,
-        yorum: metin,
-        tarih: serverTimestamp()
+        if (!ad || !eposta || sifre.length < 6) {
+            hata.textContent = "Lütfen adınızı, e-postanızı ve en az 6 haneli şifrenizi giriniz.";
+            return;
+        }
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, eposta, sifre);
+            await updateProfile(cred.user, { displayName: ad });
+            hata.textContent = "";
+        } catch (err) {
+            hata.textContent = "Kayıt hatası: " + err.message;
+        }
     });
 
-    document.getElementById("yorum-metni").value = "";
+    // Üye Girişi
+    kutu.querySelector(".btn-giris").addEventListener("click", async () => {
+        const eposta = kutu.querySelector(".inp-eposta").value.trim();
+        const sifre = kutu.querySelector(".inp-sifre").value;
+        const hata = kutu.querySelector(".auth-hata");
+
+        try {
+            await signInWithEmailAndPassword(auth, eposta, sifre);
+            hata.textContent = "";
+        } catch (err) {
+            hata.textContent = "E-posta veya şifre hatalı.";
+        }
+    });
+
+    // Çıkış Yapma
+    kutu.querySelector(".btn-cikis").addEventListener("click", () => signOut(auth));
+
+    // Veritabanına Yorum Gönderme
+    kutu.querySelector(".btn-gonder").addEventListener("click", async () => {
+        const txt = kutu.querySelector(".txt-yorum");
+        const metin = txt.value.trim();
+        const user = auth.currentUser;
+        if (!metin || !user) return;
+
+        await addDoc(collection(db, "yorumlar"), {
+            haberId: haberId,
+            yazarAd: user.displayName || "Üye",
+            yazarEposta: user.email,
+            yazarId: user.uid,
+            yorum: metin,
+            tarih: serverTimestamp()
+        });
+
+        txt.value = "";
+    });
 });
 
-// Veritabanından Yorumları Canlı Çekme ve Yönetici Silme Yetkisi
-function yorumlariGetir(aktifKullanici) {
-    const liste = document.getElementById("yorumlar-listesi");
+// Oturum Açıldığında/Kapandığında Tüm Kutuları Güncelle
+onAuthStateChanged(auth, (user) => {
+    tumKutular.forEach((kutu) => {
+        const haberId = kutu.dataset.haberId || "genel";
+        const uyelikPaneli = kutu.querySelector(".uyelik-paneli");
+        const yazmaPaneli = kutu.querySelector(".yorum-yazma-paneli");
+
+        if (user) {
+            uyelikPaneli.style.display = "none";
+            yazmaPaneli.style.display = "block";
+            kutu.querySelector(".kullanici-adi-etiket").textContent = "Üye: " + (user.displayName || user.email);
+        } else {
+            uyelikPaneli.style.display = "block";
+            yazmaPaneli.style.display = "none";
+        }
+
+        habereOzelYorumlariGetir(kutu, haberId, user);
+    });
+});
+
+// Her Haberin Sadece Kendi Yorumlarını Veritabanından Canlı Çekme
+function habereOzelYorumlariGetir(kutu, haberId, aktifKullanici) {
+    const akis = kutu.querySelector(".yorum-akisi");
     const q = query(
         collection(db, "yorumlar"),
-        where("sayfa", "==", sayfaKimligi),
+        where("haberId", "==", haberId),
         orderBy("tarih", "desc")
     );
 
     onSnapshot(q, (snapshot) => {
-        liste.innerHTML = "";
+        akis.innerHTML = "";
         if (snapshot.empty) {
-            liste.innerHTML = "<p style='color:#555; font-size:14px;'>Henüz yorum yapılmamış. İlk yorumu siz yapabilirsiniz.</p>";
+            akis.innerHTML = "<p style='color:#666666; font-size:13px; text-indent:0;'>Bu habere henüz yorum yapılmamış. İlk yorumu siz yazabilirsiniz.</p>";
             return;
         }
 
@@ -183,25 +168,28 @@ function yorumlariGetir(aktifKullanici) {
             const yoneticiMi = aktifKullanici && aktifKullanici.email === YONETICI_EPOSTA;
 
             const kart = document.createElement("div");
-            kart.style.cssText = "border-bottom: 1px solid #ddd; padding: 14px 0;";
+            kart.style.cssText = "border-bottom: 1px solid #e0e0e0; padding: 12px 0;";
             kart.innerHTML = `
-                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
-                    <strong style="color:#000;">${veri.yazarAd}</strong>
-                    <span style="color:#666;">${tarihStr}</span>
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;">
+                    <strong style="color:#000000;">${veri.yazarAd}</strong>
+                    <span style="color:#666666;">${tarihStr}</span>
                 </div>
-                <p style="color:#000; font-size:15px; margin:0;">${veri.yorum}</p>
+                <p style="color:#000000; font-size:14px; margin:0; text-align:left; text-indent:0;">${veri.yorum}</p>
             `;
 
-            // Eğer sen kendi yönetici e-postanla giriş yaptıysan her yorumun altında "Sil" butonu çıkar
             if (yoneticiMi) {
                 const silBtn = document.createElement("button");
+                silBtn.type = "button";
                 silBtn.textContent = "Yorumu Sil (Yönetici)";
-                silBtn.style.cssText = "margin-top:8px; background:#cc0000; color:#fff; border:none; padding:4px 10px; font-size:11px; cursor:pointer;";
+                silBtn.style.cssText = "margin-top:6px; background:#b30000; color:#ffffff; border:none; padding:4px 9px; font-size:11px; cursor:pointer;";
                 silBtn.onclick = () => deleteDoc(doc(db, "yorumlar", belge.id));
                 kart.appendChild(silBtn);
             }
 
-            liste.appendChild(kart);
+            akis.appendChild(kart);
         });
+    }, (hata) => {
+        // İlk sorguda Firestore indeks uyarısı verirse tarayıcı konsolunda tek tıkla oluşturma linki çıkar
+        console.warn("Firestore sorgu uyarısı:", hata.message);
     });
 }
