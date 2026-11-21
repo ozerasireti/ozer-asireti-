@@ -132,7 +132,7 @@
             background: linear-gradient(135deg, var(--bordo-koyu), var(--bordo-ana));
             color: var(--beyaz);
             text-align: center;
-            padding: 70px 6% 80px;
+            padding: 65px 6% 75px;
             border-bottom: 3px solid var(--altin);
         }
 
@@ -147,7 +147,7 @@
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .page-hero h2 {
@@ -155,21 +155,21 @@
             font-weight: 800;
             letter-spacing: 2px;
             color: var(--altin);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .page-hero p {
-            max-width: 700px;
+            max-width: 720px;
             margin: 0 auto;
             color: rgba(255, 255, 255, 0.88);
             font-size: 15.5px;
         }
 
-        /* REİSLER KONTEYNER */
+        /* ANA KONTEYNER */
         .container {
-            max-width: 1180px;
-            margin: 55px auto 80px;
-            padding: 0 20px;
+            max-width: 1320px;
+            margin: 50px auto 80px;
+            padding: 0 24px;
         }
 
         /* MEVCUT REİS ÖZEL VİTRİN KARTI */
@@ -177,18 +177,18 @@
             background: linear-gradient(145deg, var(--bordo-koyu), var(--bordo-ana));
             border: 2px solid var(--altin);
             border-radius: 20px;
-            padding: 36px;
-            margin-bottom: 55px;
+            padding: 34px;
+            margin-bottom: 50px;
             display: flex;
             align-items: center;
-            gap: 36px;
+            gap: 34px;
             box-shadow: 0 18px 40px rgba(43, 7, 12, 0.22);
             color: var(--beyaz);
         }
 
         .current-photo-wrap {
-            width: 210px;
-            height: 250px;
+            width: 200px;
+            height: 245px;
             flex-shrink: 0;
             border-radius: 14px;
             overflow: hidden;
@@ -214,7 +214,7 @@
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .current-info h3 {
@@ -228,20 +228,25 @@
             color: var(--altin);
             font-weight: 700;
             font-size: 15px;
-            margin-bottom: 14px;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
         .current-info p {
-            color: rgba(255, 255, 255, 0.88);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 15px;
-            max-width: 680px;
+            max-width: 760px;
         }
 
-        /* 8 DÖNEM KRONOLOJİ IZGARASI */
+        /* İKİ SÜTUNLU ANA DÜZEN: SOLDA 8 REİS, SAĞDA TARİHÇE & HAKKIMIZDA */
+        .main-split {
+            display: grid;
+            grid-template-columns: 1fr 390px;
+            gap: 34px;
+            align-items: start;
+        }
+
         .section-title {
-            text-align: center;
-            margin-bottom: 38px;
+            margin-bottom: 28px;
         }
 
         .section-title span {
@@ -253,7 +258,7 @@
         }
 
         .section-title h3 {
-            font-size: 28px;
+            font-size: 26px;
             color: var(--bordo-koyu);
             margin-top: 4px;
         }
@@ -262,13 +267,14 @@
             width: 70px;
             height: 3px;
             background: var(--altin);
-            margin: 12px auto 0;
+            margin-top: 10px;
         }
 
+        /* REİS KARTLARI IZGARASI */
         .reis-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+            gap: 24px;
         }
 
         .reis-card {
@@ -283,7 +289,7 @@
         }
 
         .reis-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-5px);
             border-color: var(--altin);
         }
 
@@ -298,7 +304,7 @@
 
         .photo-frame {
             width: 100%;
-            height: 300px;
+            height: 280px;
             background: #2b070c;
             position: relative;
             overflow: hidden;
@@ -315,15 +321,15 @@
 
         .order-pill {
             position: absolute;
-            top: 14px;
-            left: 14px;
+            top: 12px;
+            left: 12px;
             background: rgba(43, 7, 12, 0.92);
             color: var(--altin);
             border: 1px solid var(--altin);
-            padding: 5px 12px;
+            padding: 4px 11px;
             border-radius: 6px;
             font-family: 'Cinzel', serif;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 800;
             letter-spacing: 1px;
         }
@@ -331,7 +337,7 @@
         /* 7. REİS AHMET ÖZER SORU İŞARETİ ÇERÇEVESİ */
         .question-frame {
             width: 100%;
-            height: 300px;
+            height: 280px;
             background: linear-gradient(145deg, #1f0508, #420911);
             display: flex;
             flex-direction: column;
@@ -339,11 +345,10 @@
             justify-content: center;
             border-bottom: 3px solid #b30000;
             position: relative;
-            color: var(--altin);
         }
 
         .question-mark {
-            font-size: 96px;
+            font-size: 92px;
             font-weight: 900;
             font-family: 'Cinzel', serif;
             color: #ff3333;
@@ -352,16 +357,16 @@
         }
 
         .question-sub {
-            margin-top: 10px;
+            margin-top: 8px;
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.72);
             font-weight: 700;
         }
 
         .card-body {
-            padding: 22px;
+            padding: 20px;
             text-align: center;
             flex: 1;
             display: flex;
@@ -370,26 +375,26 @@
         }
 
         .card-body h4 {
-            font-size: 20px;
+            font-size: 19px;
             color: var(--bordo-koyu);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: 800;
         }
 
         .card-body .role-label {
-            font-size: 12.5px;
+            font-size: 12px;
             color: var(--bordo-vurgu);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             margin-bottom: 12px;
         }
 
         .date-box {
             background: #f5f1ea;
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            color: var(--metin-koyu);
-            padding: 8px 12px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: var(--bordo-koyu);
+            padding: 8px 10px;
             border-radius: 8px;
             font-size: 13px;
             font-weight: 700;
@@ -400,12 +405,118 @@
             background: #ffebee;
             border: 1px solid #b30000;
             color: #990000;
-            padding: 12px;
+            padding: 11px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
-            line-height: 1.55;
-            margin-top: 8px;
+            line-height: 1.5;
+            margin-top: 6px;
+        }
+
+        /* SAĞ SÜTUN: HAKKIMIZDA VE TARİHSEL KRONOLOJİ */
+        .history-sidebar {
+            background: var(--beyaz);
+            border-radius: 18px;
+            padding: 30px 26px;
+            box-shadow: var(--golge);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-top: 6px solid var(--bordo-ana);
+            position: sticky;
+            top: 95px;
+        }
+
+        .history-sidebar h3 {
+            font-size: 21px;
+            color: var(--bordo-koyu);
+            margin-bottom: 6px;
+        }
+
+        .history-sidebar .sub-tag {
+            font-size: 11.5px;
+            color: var(--bordo-vurgu);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ece5d8;
+        }
+
+        .history-sidebar p {
+            font-size: 14px;
+            color: var(--metin-gri);
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .timeline-list {
+            border-left: 2px solid var(--altin);
+            padding-left: 16px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--bordo-ana);
+            border: 2px solid var(--altin);
+        }
+
+        .timeline-item strong {
+            display: block;
+            font-size: 13px;
+            color: var(--bordo-ana);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 2px;
+        }
+
+        .timeline-item span {
+            font-size: 13px;
+            color: var(--metin-koyu);
+            line-height: 1.5;
+            display: block;
+        }
+
+        .fetret-alert {
+            background: #fdf6f6;
+            border-left: 4px solid #b30000;
+            padding: 12px 14px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: #4a0d0d;
+            font-weight: 600;
+        }
+
+        .sidebar-seal {
+            margin-top: 20px;
+            padding-top: 14px;
+            border-top: 1px solid #ece5d8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--bordo-koyu);
+        }
+
+        .sidebar-seal span:last-child {
+            color: var(--altin);
+            background: var(--bordo-koyu);
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 2px;
         }
 
         /* FOOTER */
@@ -425,6 +536,15 @@
             margin-bottom: 10px;
         }
 
+        @media (max-width: 1050px) {
+            .main-split {
+                grid-template-columns: 1fr;
+            }
+            .history-sidebar {
+                position: static;
+            }
+        }
+
         @media (max-width: 768px) {
             .current-reis-banner {
                 flex-direction: column;
@@ -432,8 +552,8 @@
                 padding: 28px 20px;
             }
             .current-photo-wrap {
-                width: 190px;
-                height: 230px;
+                width: 185px;
+                height: 225px;
             }
         }
     </style>
@@ -460,9 +580,9 @@
 
     <!-- SAYFA BAŞLIĞI -->
     <section class="page-hero">
-        <div class="pill">Kadim Liderlik Silsilesi • 8 Dönem</div>
+        <div class="pill">1930’dan Günümüze Kadim Liderlik Silsilesi • 8 Dönem</div>
         <h2>ÖZER AŞİRETİ REİSLER KURULU</h2>
-        <p>Kuruluştan günümüze kadar Özer Aşireti’nin sancağını omuzlayan, töreyi yaşatan ve divana riyaset eden 8 reislik döneminin resmi kayıtlarıdır.</p>
+        <p>1930 yılından bugüne Özer Aşireti’nin sancağını omuzlayan reislerimiz, 2021 Fetret Dönemi ve 2025 yılında yeniden tesis edilen Reislik Makamı resmi tarihçesidir.</p>
     </section>
 
     <div class="container">
@@ -475,146 +595,189 @@
             <div class="current-info">
                 <span class="badge">8. DÖNEM • MEVCUT REİS</span>
                 <h3>REİS SAİD ÖZER</h3>
-                <div class="term-date">Görev Dönemi: 6. ve 8. Dönem Özer Aşireti Reisi (Görevde)</div>
+                <div class="term-date">Görev Dönemleri: 6. Dönem (7 Temmuz 2025 – 12 Aralık 2025) & 8. Dönem (19 Aralık 2025 – Günümüz)</div>
                 <p>
-                    Özer Aşireti tarihinde iki ayrı dönemde reislik makamına seçilerek sancağı devralan Reis Said Özer; kadim töreyi modern kurumsallaşma ve 2030 vizyonuyla birleştirerek Bismil Sarıtoprak (Ulam) Genel Merkezi’nden aşiretimizi sevk ve idare etmektedir.
+                    2021 yılında başlayan dört yıllık Fetret Dönemi’nin ardından, <strong>7 Temmuz 2025</strong> tarihinde babasının, dedesinin ve atalarının tahtını geri alarak Özer Aşireti’ni yeniden ihya eden Reis Said Özer; 19 Aralık 2025 Cuma günü itibarıyla 8. Dönem Reisi olarak sancağı ve divan iradesini kesintisiz biçimde sevk ve idare etmektedir.
                 </p>
             </div>
         </div>
 
-        <!-- 8 DÖNEM REİSLER KURULU LİSTESİ -->
-        <div class="section-title">
-            <span>Tarihi Silsile</span>
-            <h3>1. Dönemden 8. Döneme Reisler Kurulu</h3>
-            <div class="divider"></div>
-        </div>
+        <!-- ANA İKİ SÜTUNLU YAPI -->
+        <div class="main-split">
 
-        <div class="reis-grid">
-
-            <!-- 1. REİS: XALÊ ŞÊXO -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">1. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/1H0kNd_Xi1dUlnFdT9emiSUsvi6hYm0uy" alt="1. Reis Xalê Şêxo">
+            <!-- SOL TARAF: 8 DÖNEM REİSLER KURULU -->
+            <div>
+                <div class="section-title">
+                    <span>Resmi Şecere ve Görev Yılları</span>
+                    <h3>1. Dönemden 8. Döneme Reisler Kurulu</h3>
+                    <div class="divider"></div>
                 </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Xalê Şêxo</h4>
-                        <div class="role-label">Kurucu Dönem Reisi</div>
+
+                <div class="reis-grid">
+
+                    <!-- 1. REİS: XALÊ ŞÊXO -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">1. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/1H0kNd_Xi1dUlnFdT9emiSUsvi6hYm0uy" alt="1. Reis Xalê Şêxo">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Xalê Şêxo</h4>
+                                <div class="role-label">Kurucu Dönem Reisi</div>
+                            </div>
+                            <div class="date-box">Görev Yılları: 1930 – 1940</div>
+                        </div>
                     </div>
-                    <div class="date-box">Görev Dönemi: 1. Reislik Dönemi</div>
+
+                    <!-- 2. REİS: HACI BAHRİ ÖZER -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">2. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/1lNCkA_ieNvwhE89RLZRCu0pnoM2TFGE8" alt="2. Reis Hacı Bahri Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Hacı Bahri Özer</h4>
+                                <div class="role-label">Özer Aşireti Reisi</div>
+                            </div>
+                            <div class="date-box">Görev Yılları: 1940 – 1970</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. REİS: EKREM ÖZER -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">3. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/14VGC_RKyBZ1UqwttjJ1YnvxkI5vJxITQ" alt="3. Reis Ekrem Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Ekrem Özer</h4>
+                                <div class="role-label">Merhum Reis (1950 – 2007)</div>
+                            </div>
+                            <div class="date-box">Görev Yılları: 1970 – 2007</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. REİS: KEREM ÖZER -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">4. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/1FGxWgiqwPoIFcIvcxfefO1naz_DFqx2g" alt="4. Reis Kerem Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Kerem Özer</h4>
+                                <div class="role-label">Özer Aşireti Reisi</div>
+                            </div>
+                            <div class="date-box">Görev Yılları: 2007 – 2018</div>
+                        </div>
+                    </div>
+
+                    <!-- 5. REİS: HACI ABDULLAH ÖZER -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">5. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/1osfKimIiXErGGVP5ZvpJbpkRw2wk_onc" alt="5. Reis Hacı Abdullah Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Hacı Abdullah Özer</h4>
+                                <div class="role-label">Özer Aşireti Reisi</div>
+                            </div>
+                            <div class="date-box">Görev Yılları: 2018 – 2021</div>
+                        </div>
+                    </div>
+
+                    <!-- 6. REİS: SAİD ÖZER (İLK DÖNEM) -->
+                    <div class="reis-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">6. REİS</span>
+                            <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df" alt="6. Reis Said Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Reis Said Özer</h4>
+                                <div class="role-label">Yeniden Kuruluş Dönemi</div>
+                            </div>
+                            <div class="date-box">7 Temmuz 2025 – 12 Aralık 2025</div>
+                        </div>
+                    </div>
+
+                    <!-- 7. REİS: AHMET ÖZER (SORU İŞARETİ VE RESMİ NOT) -->
+                    <div class="reis-card deposed-card">
+                        <div class="question-frame">
+                            <span class="order-pill">7. DÖNEM</span>
+                            <div class="question-mark">?</div>
+                            <div class="question-sub">Görsel Kaydı Kaldırılmıştır</div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Ahmet Özer</h4>
+                                <div class="role-label" style="color: #b30000;">12 – 19 Aralık 2025</div>
+                            </div>
+                            <div class="deposed-note">
+                                Said Bey, onu bir ASİ olarak yönettiği için, destek makamından düşürüldüğü için fotoğrafı bırakılmamıştır.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. REİS: SAİD ÖZER (MEVCUT REİS) -->
+                    <div class="reis-card active-card">
+                        <div class="photo-frame">
+                            <span class="order-pill">8. REİS (GÖREVDE)</span>
+                            <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df" alt="8. Reis Said Özer">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4>Reis Said Özer</h4>
+                                <div class="role-label">Mevcut Genel Başkan</div>
+                            </div>
+                            <div class="date-box" style="background: var(--bordo-koyu); color: var(--altin);">
+                                19 Aralık 2025 Cuma – Günümüz
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- 2. REİS: HACI BAHRİ ÖZER -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">2. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/1lNCkA_ieNvwhE89RLZRCu0pnoM2TFGE8" alt="2. Reis Hacı Bahri Özer">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Hacı Bahri Özer</h4>
-                        <div class="role-label">Özer Aşireti Reisi</div>
-                    </div>
-                    <div class="date-box">Görev Dönemi: 2. Reislik Dönemi</div>
-                </div>
-            </div>
+            <!-- SAĞ TARAF: HAKKIMIZDA & TARİHSEL KRONOLOJİ AÇIKLAMASI -->
+            <aside class="history-sidebar">
+                <h3>Hakkımızda & Tarihçe</h3>
+                <span class="sub-tag">1930’dan Günümüze Yönetim Kronolojisi</span>
 
-            <!-- 3. REİS: EKREM ÖZER -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">3. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/14VGC_RKyBZ1UqwttjJ1YnvxkI5vJxITQ" alt="3. Reis Ekrem Özer">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Ekrem Özer</h4>
-                        <div class="role-label">Merhum Reis (1950 - 2007)</div>
-                    </div>
-                    <div class="date-box">Görev Dönemi: 3. Reislik Dönemi</div>
-                </div>
-            </div>
+                <p>
+                    Özer Aşireti’nin kurumsal yönetim silsilesi <strong>1930</strong> yılında 1. Reis <strong>Xalê Şêxo</strong> ile başlamış; ardından sırasıyla <strong>Hacı Bahri Özer</strong> (1940–1970), merhum <strong>Ekrem Özer</strong> (1970–2007), <strong>Kerem Özer</strong> (2007–2018) ve <strong>Hacı Abdullah Özer</strong> (2018–2021) dönemleriyle köklü bir devlet ve töre geleneği inşa edilmiştir.
+                </p>
 
-            <!-- 4. REİS: KEREM ÖZER -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">4. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/1FGxWgiqwPoIFcIvcxfefO1naz_DFqx2g" alt="4. Reis Kerem Özer">
+                <div class="fetret-alert">
+                    ⚠️ <strong>2021 – 2025 Fetret Dönemi:</strong> Hacı Abdullah Özer’in görevinin sona erdiği 2021 yılında aşiret idaresinde dört yıl süren bir Fetret Dönemi meydana gelmiştir.
                 </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Kerem Özer</h4>
-                        <div class="role-label">Özer Aşireti Reisi</div>
-                    </div>
-                    <div class="date-box">Görev Dönemi: 4. Reislik Dönemi</div>
-                </div>
-            </div>
 
-            <!-- 5. REİS: HACI ABDULLAH ÖZER -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">5. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/1osfKimIiXErGGVP5ZvpJbpkRw2wk_onc" alt="5. Reis Hacı Abdullah Özer">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Hacı Abdullah Özer</h4>
-                        <div class="role-label">Özer Aşireti Reisi</div>
+                <div class="timeline-list">
+                    <div class="timeline-item">
+                        <strong>7 Temmuz 2025 • Yeniden İhya (6. Dönem)</strong>
+                        <span>Reis <strong>Said Özer</strong>, babasının, dedesinin ve atalarının kadim makamını geri alarak kendi nizamını ve teşkilat yapısını yeniden kurmuş, 6. Dönem Reisi olarak sancağı devralmıştır.</span>
                     </div>
-                    <div class="date-box">Görev Dönemi: 5. Reislik Dönemi</div>
-                </div>
-            </div>
 
-            <!-- 6. REİS: SAİD ÖZER (İLK DÖNEM) -->
-            <div class="reis-card">
-                <div class="photo-frame">
-                    <span class="order-pill">6. REİS</span>
-                    <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df" alt="6. Reis Said Özer">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Said Özer</h4>
-                        <div class="role-label">İlk Reislik Dönemi</div>
+                    <div class="timeline-item">
+                        <strong>12 Aralık 2025 • Seçim Süreci (7. Dönem)</strong>
+                        <span>12 Aralık 2025 günü gerçekleştirilen seçimler neticesinde <strong>Ahmet Özer</strong> asilerin reisi olarak ilan edilmiştir.</span>
                     </div>
-                    <div class="date-box">Görev Dönemi: 6. Reislik Dönemi</div>
-                </div>
-            </div>
 
-            <!-- 7. REİS: AHMET ÖZER (SORU İŞARETİ VE RESMİ NOT) -->
-            <div class="reis-card deposed-card">
-                <div class="question-frame">
-                    <span class="order-pill">7. DÖNEM</span>
-                    <div class="question-mark">?</div>
-                    <div class="question-sub">Görsel Kaydı Kaldırılmıştır</div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Ahmet Özer</h4>
-                        <div class="role-label" style="color: #b30000;">Makamdan Düşürüldü</div>
-                    </div>
-                    <div class="deposed-note">
-                        Said Bey, onu bir ASİ olarak yönettiği ve destek makamından düşürüldüğü için fotoğrafı bırakılmamıştır.
+                    <div class="timeline-item">
+                        <strong>19 Aralık 2025 Cuma • Mutlak İade (8. Dönem)</strong>
+                        <span>Yalnızca bir hafta süren bu sürecin ardından <strong>19 Aralık 2025 Cuma</strong> günü Reis <strong>Said Özer</strong> meşru reisliğini ve divan makamını yeniden devralarak 8. Dönem Reisi olarak birliği tesis etmiştir.</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- 8. REİS: SAİD ÖZER (MEVCUT REİS) -->
-            <div class="reis-card active-card">
-                <div class="photo-frame">
-                    <span class="order-pill">8. REİS (GÖREVDE)</span>
-                    <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df" alt="8. Reis Said Özer">
+                <div class="sidebar-seal">
+                    <span>RESMİ DİVAN KAYDI</span>
+                    <span>ᛋᚠᛁᛏ ᛟᚰᛖᚱ</span>
                 </div>
-                <div class="card-body">
-                    <div>
-                        <h4>Reis Said Özer</h4>
-                        <div class="role-label">Mevcut Genel Başkan</div>
-                    </div>
-                    <div class="date-box" style="background: var(--bordo-koyu); color: var(--altin);">
-                        Görev Dönemi: 8. Dönem (Aktif)
-                    </div>
-                </div>
-            </div>
+            </aside>
 
         </div>
     </div>
