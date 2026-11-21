@@ -237,7 +237,7 @@
         }
 
         .btn-outline {
-            border: 1.5px solid rgba(255, 255, 255, 0.55);
+            border: 1.5px solid rgba(255, 255, 255, 0.65);
             color: var(--beyaz);
             padding: 14px 28px;
             border-radius: 10px;
@@ -250,7 +250,7 @@
         .btn-outline:hover {
             border-color: var(--altin);
             color: var(--altin);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* İSTATİSTİK / DEĞER ŞERİDİ */
@@ -276,6 +276,12 @@
             padding: 26px 22px;
             text-align: center;
             border-right: 1px solid #f0ece6;
+            text-decoration: none;
+            transition: background 0.25s ease;
+        }
+
+        .stat-card:hover {
+            background: #fcfaf6;
         }
 
         .stat-card:last-child { border-right: none; }
@@ -471,7 +477,7 @@
             color: var(--bordo-vurgu);
         }
 
-        /* DİVAN ARAÇLARI (MÜHÜR ÇEVİRİCİ & BELGE DOĞRULAMA) */
+        /* DİVAN ARAÇLARI */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -623,16 +629,6 @@
             min-height: 22px;
         }
 
-        /* ANA SAYFA YORUM ALANI KARTI */
-        .yorum-bolumu-kart {
-            background: var(--beyaz);
-            border-radius: 16px;
-            padding: 36px;
-            margin-top: 60px;
-            box-shadow: var(--golge);
-            border: 1px solid #ede8e0;
-        }
-
         /* FOOTER */
         footer {
             background: var(--bordo-koyu);
@@ -676,10 +672,10 @@
             </div>
         </a>
         <nav>
+            <a href="reisler-kurulu.html">👑 Reisler Kurulu</a>
             <a href="#miras">Miras & Tarihçe</a>
             <a href="#duyurular">Divan Duyuruları</a>
             <a href="#divan-araclari">Mühür & Doğrulama</a>
-            <a href="#divan-yorum">Divan Meydanı</a>
             <a href="#santral" class="nav-cta">📞 Santrale Bağlan</a>
         </nav>
     </header>
@@ -690,19 +686,19 @@
         <h2>Özer Aşireti Genel Merkezi</h2>
         <p>Kadim töremizden aldığımız güç, sarsılmaz adalet anlayışımız ve 2030 vizyonumuzla birliğimizi yarınlara taşıyoruz.</p>
         <div class="hero-actions">
-            <a href="news-kasim-sonrasi.html" class="btn-gold">📜 Tüm Resmi Tebliğleri Oku</a>
-            <a href="#divan-araclari" class="btn-outline">🔏 Özer Alfabesi & Mühür Aracı</a>
+            <a href="reisler-kurulu.html" class="btn-gold">👑 Reisler Kurulu (8 Dönem)</a>
+            <a href="news-kasim-sonrasi.html" class="btn-outline">📜 Tüm Resmi Tebliğleri Oku</a>
         </div>
     </section>
 
     <!-- DEĞERLER ŞERİDİ -->
     <div class="stats-bar">
         <div class="stats-grid">
-            <div class="stat-card">
+            <a href="reisler-kurulu.html" class="stat-card">
                 <div class="icon">👑</div>
-                <h4>Reislik Makamı</h4>
-                <span>Reis Said Özer İdaresinde</span>
-            </div>
+                <h4>Reisler Kurulu</h4>
+                <span>8 Dönem Liderlik Silsilesi →</span>
+            </a>
             <div class="stat-card">
                 <div class="icon">🛡️</div>
                 <h4>Kadim Töre</h4>
@@ -731,11 +727,12 @@
                 <div class="card">
                     <h4>Savur’dan Bismil Ovası’na Uzanan Emanet</h4>
                     <p>
-                        Özer Aşireti; 5. Reis Hacı Abdullah Özer’in koyduğu töresel ilkeler, merhum Ekrem Özer’in adalet çizgisi ve Kerem Özer’in idari tecrübesiyle yoğrulmuş köklü bir çınardır.
+                        Özer Aşireti; 1. Reis Xalê Şêxo’dan başlayarak Hacı Bahri Özer, merhum Ekrem Özer, Kerem Özer ve Hacı Abdullah Özer’in omuzladığı kadim töresel ilkelerle yoğrulmuş köklü bir çınardır.
                     </p>
                     <p>
-                        Bugün Bismil Sarıtoprak (Ulam) Genel Merkezi’nden sevk ve idare edilen divanımız; mensuplarımız arasındaki kardeşlik bağlarını pekiştirmek, gençlerimizin eğitim ve istihdamına önayak olmak ve bölgemizde barış ile huzurun teminatı kalmak için çalışmaktadır.
+                        Bugün 8. Dönem Reisi <strong>Said Özer</strong> idaresinde Bismil Sarıtoprak (Ulam) Genel Merkezi’nden sevk ve idare edilen divanımız; mensuplarımız arasındaki kardeşlik bağlarını pekiştirmek ve bölgemizde barış ile huzurun teminatı kalmak için çalışmaktadır.
                     </p>
+                    <a href="reisler-kurulu.html" class="news-link" style="margin-top: 6px;">👑 8 Dönemlik Reisler Kurulunu İncele →</a>
                 </div>
 
                 <div class="quote-box">
@@ -822,9 +819,8 @@
             </div>
         </section>
 
-        <!-- YENİ ÖZELLİK 1 & 2: ÖZER ALFABESİ ÇEVİRİCİ VE BİLDİRİ DOĞRULAMA -->
+        <!-- ÖZER ALFABESİ ÇEVİRİCİ VE BİLDİRİ DOĞRULAMA -->
         <section id="divan-araclari" class="tools-grid">
-            <!-- Özer Alfabesi Mühür Çevirici -->
             <div class="tool-card">
                 <h4>🔏 Özer Alfabesi Mühür Çevirici</h4>
                 <p>İsminizi veya bir kelimeyi yazarak kadim Özer Alfabesi (`ᛋᚠᛁᛏ ᛟᚰᛖᚱ`) karşılığını anında oluşturun.</p>
@@ -833,7 +829,6 @@
                 <button type="button" onclick="muhurKopyala()" class="btn-gold" style="width: 100%; text-align: center;">📋 Mührü Kopyala</button>
             </div>
 
-            <!-- Resmi Bildiri Doğrulama Sistemi -->
             <div class="tool-card">
                 <h4>🛡️ Resmi Bildiri Kod Doğrulama</h4>
                 <p>Genel Merkez bültenlerinin üstünde yer alan bildiri numarasını girerek belgenin orijinalliğini sorgulayın.</p>
@@ -843,7 +838,7 @@
             </div>
         </section>
 
-        <!-- YENİ ÖZELLİK 3: BÖLGESEL MERKEZLER -->
+        <!-- BÖLGESEL MERKEZLER -->
         <section class="centers-grid">
             <div class="center-box">
                 <strong>📍 Diyarbakır Merkez</strong>
@@ -876,17 +871,6 @@
             <div id="santral-durum"></div>
         </section>
 
-        <!-- ANA SAYFA CANLI DİVAN YORUM VE DEĞERLENDİRME ALANI -->
-        <section id="divan-yorum" class="yorum-bolumu-kart">
-            <div class="section-header" style="margin-bottom: 10px;">
-                <span>Üyelere Özel İletişim Köşesi</span>
-                <h3>Genel Merkez Divan Defteri</h3>
-                <div class="divider"></div>
-            </div>
-            <!-- Veritabanına Bağlı Gerçek Yorum Kutusu -->
-            <div class="divan-yorum-kutusu" data-haber-id="ana-sayfa-divan"></div>
-        </section>
-
     </div>
 
     <!-- FOOTER -->
@@ -898,7 +882,6 @@
 
     <!-- ANA SAYFA ÖZELLİK SCRİPTLERİ -->
     <script>
-        // 1. Canlı Diyarbakır Saati
         function saatiGuncelle() {
             const simdi = new Date();
             const saatMetni = simdi.toLocaleTimeString('tr-TR', { timeZone: 'Europe/Istanbul' });
@@ -907,7 +890,6 @@
         setInterval(saatiGuncelle, 1000);
         saatiGuncelle();
 
-        // 2. Özer Alfabesi Mühür Çevirici
         const ozerHarfleri = {
             'A': 'ᚠ', 'B': 'ᛒ', 'C': 'ᚲ', 'Ç': 'ᚳ', 'D': 'ᛞ', 'E': 'ᛖ', 'F': 'ᚠ',
             'G': 'ᚷ', 'Ğ': 'ᚸ', 'H': 'ᚺ', 'I': 'ᛁ', 'İ': 'ᛁ', 'J': 'ᛃ', 'K': 'ᚴ',
@@ -935,7 +917,6 @@
             alert("Mühür yazısı panoya kopyalandı: " + metin);
         }
 
-        // 3. Resmi Bildiri Doğrulama
         const onayliKodlar = {
             "2026/46": "Özer Aşireti 2030 Stratejik Planı (31 Ağustos 2026)",
             "2026/08-C": "Sarıtoprak Karargâhı Fevkalade Acil Tebliği (31 Ağustos 2026)",
@@ -962,7 +943,6 @@
             }
         }
 
-        // 4. Santral Sesli Aktarım
         function merkeziAra() {
             const durum = document.getElementById('santral-durum');
             const muzik = document.getElementById('santral-muzik');
@@ -991,8 +971,5 @@
             window.speechSynthesis.speak(anons);
         }
     </script>
-
-    <!-- GERÇEK VERİTABANLI YORUM SİSTEMİ -->
-    <script type="module" src="divan-yorum.js"></script>
 </body>
 </html>
