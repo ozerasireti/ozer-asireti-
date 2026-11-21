@@ -53,11 +53,11 @@
 
         .baslik-alani {
             max-width: 1200px;
-            margin: 0 auto 35px;
+            margin: 0 auto 30px;
             text-align: center;
             border: 2px solid #b30000;
             border-top: 8px solid #b30000;
-            padding: 35px 20px;
+            padding: 32px 20px;
             background-color: #ffffff;
         }
 
@@ -84,6 +84,66 @@
             max-width: 780px;
             margin: 0 auto;
             font-size: 16px;
+            color: #000000;
+        }
+
+        /* MEVCUT REİS ÖZEL VİTRİN KUTUSU */
+        .mevcut-reis-vitrin {
+            max-width: 1200px;
+            margin: 0 auto 35px;
+            border: 3px solid #b30000;
+            background-color: #fffafa;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .vitrin-resim {
+            width: 190px;
+            height: 235px;
+            border: 2px solid #000000;
+            flex-shrink: 0;
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+
+        .vitrin-resim img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        .vitrin-bilgi .etiket {
+            display: inline-block;
+            background-color: #b30000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 12px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .vitrin-bilgi h2 {
+            color: #b30000;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .vitrin-bilgi .donem-yazi {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .vitrin-bilgi p {
+            font-size: 15.5px;
             color: #000000;
         }
 
@@ -140,17 +200,14 @@
             align-items: center;
         }
 
-        .aktif-kart .donem-etiket {
-            background-color: #b30000;
-        }
-
+        .aktif-kart .donem-etiket,
         .asi-kart .donem-etiket {
             background-color: #b30000;
         }
 
         .resim-kutusu {
             width: 100%;
-            height: 270px;
+            height: 275px;
             background-color: #f4f4f4;
             border-bottom: 1.5px solid #000000;
             overflow: hidden;
@@ -169,7 +226,7 @@
 
         .soru-kutusu {
             width: 100%;
-            height: 270px;
+            height: 275px;
             background-color: #1a1a1a;
             border-bottom: 2px solid #b30000;
             display: flex;
@@ -310,6 +367,10 @@
             .ana-duzen {
                 grid-template-columns: 1fr;
             }
+            .mevcut-reis-vitrin {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -324,6 +385,23 @@
         <div class="ust-not">Özer Aşireti Genel Merkezi • Resmi Şecere Kayıtları</div>
         <h1>ÖZER AŞİRETİ REİSLER KURULU (8 DÖNEM)</h1>
         <p>1900 yılından günümüze kadar Özer Aşireti’nin sancağını taşıyan reislerimiz, 2018–2025 yıkılış ve Fetret Dönemi ile 2025 yılında yeniden ayağa kaldırılan Reislik Makamı resmi tarihçesidir.</p>
+    </div>
+
+    <!-- MEVCUT REİS SAİD ÖZER ÖZEL VİTRİNİ -->
+    <div class="mevcut-reis-vitrin">
+        <div class="vitrin-resim">
+            <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df"
+                 onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1AkBS6jV6eC80k0L35ffulauBK9kcw8Df&sz=w1000';"
+                 alt="Reis Said Özer">
+        </div>
+        <div class="vitrin-bilgi">
+            <span class="etiket">8. DÖNEM • MEVCUT ÖZER AŞİRETİ REİSİ</span>
+            <h2>REİS SAİD ÖZER</h2>
+            <div class="donem-yazi">6. Dönem (7 Temmuz 2025 – 12 Aralık 2025) &amp; 8. Dönem (19 Aralık 2025 Cuma – Günümüz)</div>
+            <p>
+                Hacı Abdullah Özer (2018–2021) döneminde dağılıp unutulan ve 2021 yılında Fetret Dönemi’ne giren Özer Aşireti’ni, <strong>7 Temmuz 2025</strong> tarihinde atalarının makamını geri alarak yeniden ayağa kaldıran Reis Said Özer; 19 Aralık 2025 Cuma günü itibarıyla 8. Dönem Reisi olarak sancağı ve divan iradesini kesintisiz biçimde sevk ve idare etmektedir.
+            </p>
+        </div>
     </div>
 
     <div class="ana-duzen">
@@ -341,7 +419,9 @@
                         <span>RAHMETLİ</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1H0kNd_Xi1dUlnFdT9emiSUsvi6hYm0uy&sz=w800" alt="Xalê Şêxo">
+                        <img src="https://lh3.googleusercontent.com/d/1H0kNd_Xi1dUlnFdT9emiSUsvi6hYm0uy"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1H0kNd_Xi1dUlnFdT9emiSUsvi6hYm0uy&sz=w1000';"
+                             alt="Xalê Şêxo">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -359,7 +439,9 @@
                         <span>RAHMETLİ</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1lNCkA_ieNvwhE89RLZRCu0pnoM2TFGE8&sz=w800" alt="Hacı Bahri Özer">
+                        <img src="https://lh3.googleusercontent.com/d/1lNCkA_ieNvwhE89RLZRCu0pnoM2TFGE8"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1lNCkA_ieNvwhE89RLZRCu0pnoM2TFGE8&sz=w1000';"
+                             alt="Hacı Bahri Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -377,7 +459,9 @@
                         <span>RAHMETLİ</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=14VGC_RKyBZ1UqwttjJ1YnvxkI5vJxITQ&sz=w800" alt="Ekrem Özer">
+                        <img src="https://lh3.googleusercontent.com/d/14VGC_RKyBZ1UqwttjJ1YnvxkI5vJxITQ"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=14VGC_RKyBZ1UqwttjJ1YnvxkI5vJxITQ&sz=w1000';"
+                             alt="Ekrem Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -395,7 +479,9 @@
                         <span>11 YIL</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1FGxWgiqwPoIFcIvcxfefO1naz_DFqx2g&sz=w800" alt="Kerem Özer">
+                        <img src="https://lh3.googleusercontent.com/d/1FGxWgiqwPoIFcIvcxfefO1naz_DFqx2g"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1FGxWgiqwPoIFcIvcxfefO1naz_DFqx2g&sz=w1000';"
+                             alt="Kerem Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -413,7 +499,9 @@
                         <span>3 YIL</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1osfKimIiXErGGVP5ZvpJbpkRw2wk_onc&sz=w800" alt="Hacı Abdullah Özer">
+                        <img src="https://lh3.googleusercontent.com/d/1osfKimIiXErGGVP5ZvpJbpkRw2wk_onc"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1osfKimIiXErGGVP5ZvpJbpkRw2wk_onc&sz=w1000';"
+                             alt="Hacı Abdullah Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -431,7 +519,9 @@
                         <span>YENİDEN KURULUŞ</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1AkBS6jV6eC80k0L35ffulauBK9kcw8Df&sz=w800" alt="Reis Said Özer">
+                        <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1AkBS6jV6eC80k0L35ffulauBK9kcw8Df&sz=w1000';"
+                             alt="Reis Said Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
@@ -470,7 +560,9 @@
                         <span>MEVCUT REİS</span>
                     </div>
                     <div class="resim-kutusu">
-                        <img src="https://drive.google.com/thumbnail?id=1AkBS6jV6eC80k0L35ffulauBK9kcw8Df&sz=w800" alt="Reis Said Özer">
+                        <img src="https://lh3.googleusercontent.com/d/1AkBS6jV6eC80k0L35ffulauBK9kcw8Df"
+                             onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1AkBS6jV6eC80k0L35ffulauBK9kcw8Df&sz=w1000';"
+                             alt="Reis Said Özer">
                     </div>
                     <div class="kart-icerik">
                         <div>
