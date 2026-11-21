@@ -52,6 +52,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.25);
         }
 
@@ -116,7 +118,7 @@
 
         nav {
             display: flex;
-            gap: 28px;
+            gap: 24px;
             align-items: center;
         }
 
@@ -171,7 +173,7 @@
             background-size: cover;
             background-position: center;
             color: var(--beyaz);
-            padding: 115px 6% 130px;
+            padding: 110px 6% 125px;
             text-align: center;
             border-bottom: 3px solid var(--altin);
         }
@@ -224,6 +226,9 @@
             letter-spacing: 0.5px;
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
         }
 
         .btn-gold:hover {
@@ -466,6 +471,106 @@
             color: var(--bordo-vurgu);
         }
 
+        /* DİVAN ARAÇLARI (MÜHÜR ÇEVİRİCİ & BELGE DOĞRULAMA) */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-top: 65px;
+        }
+
+        .tool-card {
+            background: var(--beyaz);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--golge);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-top: 4px solid var(--bordo-ana);
+        }
+
+        .tool-card h4 {
+            color: var(--bordo-koyu);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .tool-card p {
+            font-size: 14px;
+            color: var(--metin-gri);
+            margin-bottom: 18px;
+        }
+
+        .tool-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d5cfc4;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+
+        .tool-input:focus {
+            outline: none;
+            border-color: var(--bordo-ana);
+        }
+
+        .runic-output {
+            background: var(--bordo-koyu);
+            color: var(--altin);
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 4px;
+            font-weight: bold;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            border: 1px solid var(--altin);
+        }
+
+        .verify-result {
+            margin-top: 12px;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* BÖLGE MERKEZLERİ */
+        .centers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 60px;
+        }
+
+        .center-box {
+            background: var(--beyaz);
+            border: 1px solid #ede8e0;
+            border-left: 4px solid var(--altin);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--golge);
+        }
+
+        .center-box strong {
+            color: var(--bordo-ana);
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .center-box span {
+            font-size: 13px;
+            color: var(--metin-gri);
+        }
+
         /* SANTRAL & İLETİŞİM ALANI */
         .santral-wrapper {
             background: linear-gradient(135deg, var(--bordo-koyu), var(--bordo-ana));
@@ -518,6 +623,16 @@
             min-height: 22px;
         }
 
+        /* ANA SAYFA YORUM ALANI KARTI */
+        .yorum-bolumu-kart {
+            background: var(--beyaz);
+            border-radius: 16px;
+            padding: 36px;
+            margin-top: 60px;
+            box-shadow: var(--golge);
+            border: 1px solid #ede8e0;
+        }
+
         /* FOOTER */
         footer {
             background: var(--bordo-koyu);
@@ -544,9 +659,10 @@
 </head>
 <body>
 
-    <!-- ÜST ŞERİT -->
+    <!-- ÜST ŞERİT & CANLI DİYARBAKIR SAATİ -->
     <div class="top-strip">
         <span>📍 DİYARBAKIR • BİSMİL • SARITOPRAK (ULAM) GENEL MERKEZİ</span>
+        <span id="diyarbakir-saat" style="color: #fff; font-weight: 600;">🕒 Diyarbakır: --:--:--</span>
         <span class="muhur-badge">ᛋᚠᛁᛏ ᛟᚰᛖᚱ</span>
     </div>
 
@@ -562,6 +678,8 @@
         <nav>
             <a href="#miras">Miras & Tarihçe</a>
             <a href="#duyurular">Divan Duyuruları</a>
+            <a href="#divan-araclari">Mühür & Doğrulama</a>
+            <a href="#divan-yorum">Divan Meydanı</a>
             <a href="#santral" class="nav-cta">📞 Santrale Bağlan</a>
         </nav>
     </header>
@@ -573,7 +691,7 @@
         <p>Kadim töremizden aldığımız güç, sarsılmaz adalet anlayışımız ve 2030 vizyonumuzla birliğimizi yarınlara taşıyoruz.</p>
         <div class="hero-actions">
             <a href="news-kasim-sonrasi.html" class="btn-gold">📜 Tüm Resmi Tebliğleri Oku</a>
-            <a href="#miras" class="btn-outline">🏛️ Aşiret Vizyonunu Keşfet</a>
+            <a href="#divan-araclari" class="btn-outline">🔏 Özer Alfabesi & Mühür Aracı</a>
         </div>
     </section>
 
@@ -646,11 +764,29 @@
             <div class="news-grid">
                 <div class="news-card">
                     <div>
+                        <span class="news-tag">Anma & Taziye</span>
+                        <h5>Merhume Mine Özer’in 9. Sene-i Devriyesi</h5>
+                        <p>21 Kasım 2026 tarihinde Beşire Özer’in hanesinde düzenlenecek Kur’an-ı Kerim tilaveti ve hayır yemeği daveti.</p>
+                    </div>
+                    <a href="news-kasim-sonrasi.html#mine-ozer-anma" class="news-link">Duyuruyu İncele →</a>
+                </div>
+
+                <div class="news-card">
+                    <div>
+                        <span class="news-tag">Tarihi Toplantı</span>
+                        <h5>27 Ocak Diyarbakır Zirvesi</h5>
+                        <p>Büyük Aşiretler Kurulu Toplantısı ve Diyarbakır’da gerçekleştirilecek kritik divan oturumu.</p>
+                    </div>
+                    <a href="news-kasim-sonrasi.html#diyarbakir-zirvesi" class="news-link">Detayları Oku →</a>
+                </div>
+
+                <div class="news-card">
+                    <div>
                         <span class="news-tag">İdari Karar</span>
                         <h5>Vekâlet Yetkilerinin Reislik Makamında Toplanması</h5>
                         <p>Aşiret içi düzenin ve karar mekanizmalarının tek merkezden yürütülmesi adına alınan resmi fesih kararı.</p>
                     </div>
-                    <a href="news-kasim-sonrasi.html" class="news-link">Bildiriyi İncele →</a>
+                    <a href="news-kasim-sonrasi.html#vekalet-geri-alindi" class="news-link">Bildiriyi İncele →</a>
                 </div>
 
                 <div class="news-card">
@@ -659,7 +795,7 @@
                         <h5>Özer Aşireti 2030 Stratejik Eylem Planı İlan Edildi</h5>
                         <p>Gençlik bursları, adalet meclisleri ve Özer Alfabesi entegrasyonunu kapsayan yeni dönem yol haritası.</p>
                     </div>
-                    <a href="news-kasim-sonrasi.html" class="news-link">Vizyonu Oku →</a>
+                    <a href="news-kasim-sonrasi.html#stratejik-plan-2030" class="news-link">Vizyonu Oku →</a>
                 </div>
 
                 <div class="news-card">
@@ -668,12 +804,62 @@
                         <h5>Geleneksel Yıllık İstişare ve Dayanışma Meclisi</h5>
                         <p>Aile büyüklerimiz, temsilcilerimiz ve gençlerimizin katılımıyla gerçekleşen büyük birlik buluşması.</p>
                     </div>
-                    <a href="news-kasim-sonrasi.html" class="news-link">Detaylara Bak →</a>
+                    <a href="news-kasim-sonrasi.html#istisare-yemegi-2026" class="news-link">Detaylara Bak →</a>
+                </div>
+
+                <div class="news-card">
+                    <div>
+                        <span class="news-tag">Özel Kayıt</span>
+                        <h5>Sarıtoprak ve Diyarbakır Hattında Gizemli Benzerlik</h5>
+                        <p>Bismil köyleri üçgeni ile Selahaddin Eyyubi Camisi hattında yaşanan sıra dışı tanıklık notları.</p>
+                    </div>
+                    <a href="news-kasim-sonrasi.html#saritoprak-gizemi" class="news-link">Kaydı Oku →</a>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 30px;">
                 <a href="news-kasim-sonrasi.html" class="btn-gold">Tüm Arşiv ve Bültenlere Git</a>
+            </div>
+        </section>
+
+        <!-- YENİ ÖZELLİK 1 & 2: ÖZER ALFABESİ ÇEVİRİCİ VE BİLDİRİ DOĞRULAMA -->
+        <section id="divan-araclari" class="tools-grid">
+            <!-- Özer Alfabesi Mühür Çevirici -->
+            <div class="tool-card">
+                <h4>🔏 Özer Alfabesi Mühür Çevirici</h4>
+                <p>İsminizi veya bir kelimeyi yazarak kadim Özer Alfabesi (`ᛋᚠᛁᛏ ᛟᚰᛖᚱ`) karşılığını anında oluşturun.</p>
+                <input type="text" id="alfabe-giris" class="tool-input" placeholder="Örn: Said Özer veya Diyarbakır..." oninput="ozerAlfabesineCevir()">
+                <div id="alfabe-cikti" class="runic-output">ᛋᚠᛁᛏ ᛟᚰᛖᚱ</div>
+                <button type="button" onclick="muhurKopyala()" class="btn-gold" style="width: 100%; text-align: center;">📋 Mührü Kopyala</button>
+            </div>
+
+            <!-- Resmi Bildiri Doğrulama Sistemi -->
+            <div class="tool-card">
+                <h4>🛡️ Resmi Bildiri Kod Doğrulama</h4>
+                <p>Genel Merkez bültenlerinin üstünde yer alan bildiri numarasını girerek belgenin orijinalliğini sorgulayın.</p>
+                <input type="text" id="belge-kodu" class="tool-input" placeholder="Örn: 2026/46 veya 2026/09-04">
+                <button type="button" onclick="belgeDogrula()" class="btn-gold" style="width: 100%; text-align: center;">🔍 Bildiriyi Doğrula</button>
+                <div id="dogrulama-sonuc" class="verify-result"></div>
+            </div>
+        </section>
+
+        <!-- YENİ ÖZELLİK 3: BÖLGESEL MERKEZLER -->
+        <section class="centers-grid">
+            <div class="center-box">
+                <strong>📍 Diyarbakır Merkez</strong>
+                <span>Divan İstişare ve Toplantı Salonu</span>
+            </div>
+            <div class="center-box">
+                <strong>📍 Bismil / Sarıtoprak (Ulam)</strong>
+                <span>Genel Merkez Karargâhı ve Konak</span>
+            </div>
+            <div class="center-box">
+                <strong>📍 Savur Hattı</strong>
+                <span>Kadim Aile Mirası ve Tarihi Merkez</span>
+            </div>
+            <div class="center-box">
+                <strong>📍 Hacıosman & Kartaltepe</strong>
+                <span>Bismil Ovası Yerleşim ve Koordinasyon</span>
             </div>
         </section>
 
@@ -690,6 +876,17 @@
             <div id="santral-durum"></div>
         </section>
 
+        <!-- ANA SAYFA CANLI DİVAN YORUM VE DEĞERLENDİRME ALANI -->
+        <section id="divan-yorum" class="yorum-bolumu-kart">
+            <div class="section-header" style="margin-bottom: 10px;">
+                <span>Üyelere Özel İletişim Köşesi</span>
+                <h3>Genel Merkez Divan Defteri</h3>
+                <div class="divider"></div>
+            </div>
+            <!-- Veritabanına Bağlı Gerçek Yorum Kutusu -->
+            <div class="divan-yorum-kutusu" data-haber-id="ana-sayfa-divan"></div>
+        </section>
+
     </div>
 
     <!-- FOOTER -->
@@ -699,8 +896,73 @@
         <p style="margin-top: 6px; font-size: 11px; opacity: 0.6;">Stratejik İletişim ve Dijital Divan Koordinatörlüğü</p>
     </footer>
 
-    <!-- SANTRAL JAVASCRIPT -->
+    <!-- ANA SAYFA ÖZELLİK SCRİPTLERİ -->
     <script>
+        // 1. Canlı Diyarbakır Saati
+        function saatiGuncelle() {
+            const simdi = new Date();
+            const saatMetni = simdi.toLocaleTimeString('tr-TR', { timeZone: 'Europe/Istanbul' });
+            document.getElementById('diyarbakir-saat').textContent = "🕒 Diyarbakır: " + saatMetni;
+        }
+        setInterval(saatiGuncelle, 1000);
+        saatiGuncelle();
+
+        // 2. Özer Alfabesi Mühür Çevirici
+        const ozerHarfleri = {
+            'A': 'ᚠ', 'B': 'ᛒ', 'C': 'ᚲ', 'Ç': 'ᚳ', 'D': 'ᛞ', 'E': 'ᛖ', 'F': 'ᚠ',
+            'G': 'ᚷ', 'Ğ': 'ᚸ', 'H': 'ᚺ', 'I': 'ᛁ', 'İ': 'ᛁ', 'J': 'ᛃ', 'K': 'ᚴ',
+            'L': 'ᛚ', 'M': 'ᛗ', 'N': 'ᚾ', 'O': 'ᛟ', 'Ö': 'ᛟ', 'P': 'ᛈ', 'R': 'ᚱ',
+            'S': 'ᛋ', 'Ş': 'ᛊ', 'T': 'ᛏ', 'U': 'ᚢ', 'Ü': 'ᛣ', 'V': 'ᚡ', 'Y': 'ᛦ', 'Z': 'ᚰ', ' ': ' '
+        };
+
+        function ozerAlfabesineCevir() {
+            const giris = document.getElementById('alfabe-giris').value.toLocaleUpperCase('tr-TR');
+            const cikti = document.getElementById('alfabe-cikti');
+            if (!giris.trim()) {
+                cikti.textContent = "ᛋᚠᛁᛏ ᛟᚰᛖᚱ";
+                return;
+            }
+            let sonuc = "";
+            for (let harf of giris) {
+                sonuc += ozerHarfleri[harf] || harf;
+            }
+            cikti.textContent = sonuc;
+        }
+
+        function muhurKopyala() {
+            const metin = document.getElementById('alfabe-cikti').textContent;
+            navigator.clipboard.writeText(metin);
+            alert("Mühür yazısı panoya kopyalandı: " + metin);
+        }
+
+        // 3. Resmi Bildiri Doğrulama
+        const onayliKodlar = {
+            "2026/46": "Özer Aşireti 2030 Stratejik Planı (31 Ağustos 2026)",
+            "2026/08-C": "Sarıtoprak Karargâhı Fevkalade Acil Tebliği (31 Ağustos 2026)",
+            "2026/09-03": "Genel Merkez İdari Tahkikat Bildirisi (6 Eylül 2026)",
+            "2026/09-04": "Yıllık İstişare ve Dayanışma Yemeği Daveti (6 Eylül 2026)",
+            "27-OCAK": "Diyarbakır Büyük Aşiretler Kurulu Zirve Bülteni"
+        };
+
+        function belgeDogrula() {
+            const kod = document.getElementById('belge-kodu').value.trim().toUpperCase();
+            const sonucKutusu = document.getElementById('dogrulama-sonuc');
+            sonucKutusu.style.display = "block";
+
+            if (onayliKodlar[kod]) {
+                sonucKutusu.style.background = "#e8f5e9";
+                sonucKutusu.style.color = "#1b5e20";
+                sonucKutusu.style.border = "1px solid #2e7d32";
+                sonucKutusu.textContent = "✅ ONAYLI BELGE: " + onayliKodlar[kod];
+            } else {
+                sonucKutusu.style.background = "#ffebee";
+                sonucKutusu.style.color = "#b71c1c";
+                sonucKutusu.style.border = "1px solid #c62828";
+                sonucKutusu.textContent = "⚠️ Kayıtlarda bu numaraya ait resmi bildiri bulunamadı.";
+            }
+        }
+
+        // 4. Santral Sesli Aktarım
         function merkeziAra() {
             const durum = document.getElementById('santral-durum');
             const muzik = document.getElementById('santral-muzik');
@@ -729,5 +991,8 @@
             window.speechSynthesis.speak(anons);
         }
     </script>
+
+    <!-- GERÇEK VERİTABANLI YORUM SİSTEMİ -->
+    <script type="module" src="divan-yorum.js"></script>
 </body>
 </html>
